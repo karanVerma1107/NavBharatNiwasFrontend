@@ -1,0 +1,98 @@
+.search-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2vmax;
+    text-align: center;
+  }
+  
+  .heading {
+    font-size: 2.5vmax;
+    color: #2e3c52;
+    margin-bottom: 2vmax;
+  }
+  
+  .input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1vmax;
+    margin-bottom: 2vmax;
+  }
+  
+  .search-input {
+    width: 20vmax;
+    height: 3vmax;
+    padding: 0.5vmax;
+    font-size: 1vmax;  /* Reduced font size */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    color: #2e3c52;
+  }
+  
+  .find-button {
+    padding: 0.5vmax 1.5vmax;
+    font-size: 1.6vmax;
+    background-color: #2e3c52;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .find-button:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+  }
+  
+  .find-button.loading {
+    background-color: black;
+    color: white;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 1.4vmax;
+    margin-top: 2vmax;
+  }
+  
+  .application-details {
+    margin-top: 2vmax;
+    font-size: 1.6vmax;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #2e3c52;
+    text-align: left;
+  }
+  
+  .approve-button,
+.reject-button {
+  padding: 0.7vmax 1.5vmax;
+  font-size: 1.5vmax;
+  color: white;
+  margin: 0vmax 1vmax;
+  gap: 1vmax;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.approve-button {
+  background-color: green;
+}
+
+.approve-button:hover {
+  background-color: darkgreen;
+}
+
+.reject-button {
+  background-color: red;
+}
+
+.reject-button:hover {
+  background-color: darkred;
+}

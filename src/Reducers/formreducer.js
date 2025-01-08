@@ -1,0 +1,286 @@
+import { SUBMIT_ISALLOW_REQ,
+    SUBMIT_ISALLOW_SUCCESS,
+    SUBMIT_ISALLOW_FAIL,
+    GET_LATEST_ISALLOW_REQ,
+    GET_LATEST_ISALLOW_FAIL,
+    GET_LATEST_ISALLOW_SUCCESS,
+    FILL_LUCKYDRAW_REQ,
+    FILL_LUCKYDRAW_SUCCESS,
+    FILL_LUCKYDRAW_FAIL,
+    GET_APPLICATIONS_REQ,
+    GET_APPLICATIONS_SUCCESS,
+    GET_APPLICATIONS_FAIL,
+    GET_LUCKYDRAW_BY_ID_REQ,
+    GET_LUCKYDRAW_BY_ID_SUCCESS,
+    GET_LUCKYDRAW_BY_ID_FAIL,
+    UPDATE_LUCKYDRAW_STATUS_REQ,
+    UPDATE_LUCKYDRAW_STATUS_SUCCESS,
+    UPDATE_LUCKYDRAW_STATUS_FAIL,
+    GET_ALL_LUCKYDRAW_FAIL,
+    GET_ALL_LUCKYDRAW_REQ,
+    GET_ALL_LUCKYDRAW_SUCCESS
+ } from "../Constant/formConstant";
+
+ // Initial state for the reducer
+const initialState = {
+    loading: false,
+    message : null,
+    error: null
+};
+
+// The reducer function to handle the actions
+export const formReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case SUBMIT_ISALLOW_REQ:
+            return {
+                ...state,
+                loading: true,  // Set loading to true when the request is initiated
+            };
+
+        case SUBMIT_ISALLOW_SUCCESS:
+            return {
+                ...state,
+                loading: false,  // Set loading to false once the data is fetched
+                message: action.payload.message,  // Store the fetched data in the state
+                error: null,  // Clear any previous error
+            };
+
+        case SUBMIT_ISALLOW_FAIL:
+            return {
+                ...state,
+                loading: false,  // Set loading to false if the request failed
+                isAllowData: null,  // Clear any previous data
+                error: action.payload,  // Store the error message in the state
+            };
+
+        default:
+            return state;
+    }
+};
+
+
+// Initial state for the reducer
+const initialState1 = {
+    loading: false,
+    permit: null,
+    error: null
+};
+
+// The reducer function to handle the actions
+export const getIsAllowReducer = (state = initialState1, action) => {
+    switch (action.type) {
+        case GET_LATEST_ISALLOW_REQ:
+            return {
+                ...state,
+                loading: true,  // Set loading to true when the request is initiated
+            };
+
+        case GET_LATEST_ISALLOW_SUCCESS:
+            return {
+                ...state,
+                loading: false,  // Set loading to false once the data is fetched
+                permit: action.payload.isAllow,  // Store the fetched data in the state
+                error: null,  // Clear any previous error
+            };
+
+        case GET_LATEST_ISALLOW_FAIL:
+            return {
+                ...state,
+                loading: false,  // Set loading to false if the request failed
+                permit: null,  // Clear any previous data
+                error: action.payload,  // Store the error message in the state
+            };
+
+        default:
+            return state;
+    }
+};
+
+
+
+
+
+const initialState2 = {
+    isProcessing: false,   // Loading state renamed to 'isProcessing'
+    messageContent: '',    // Message state renamed to 'messageContent'
+    errorContent: '',      // Error state renamed to 'errorContent'
+};
+
+export const fillLuckyDrawReducer = (state = initialState2, action) => {
+    switch (action.type) {
+        case FILL_LUCKYDRAW_REQ:
+            return {
+                ...state,
+                isProcessing: true,   // Set loading to true when request is made
+            };
+
+        case FILL_LUCKYDRAW_SUCCESS:
+            return {
+                ...state,
+                isProcessing: false,  // Set loading to false on success
+                messageContent: action.payload.message, // Store success message
+            };
+
+        case FILL_LUCKYDRAW_FAIL:
+            return {
+                ...state,
+                isProcessing: false,  // Set loading to false on failure
+                errorContent: action.payload,   // Store error message
+            };
+
+        default:
+            return state;
+    }
+};
+
+
+const initialState3 = {
+    applications: [],   // Array to hold applications data
+    loading: false,     // Indicates loading state
+    error: null         // To store any errors
+};
+
+export const applicationsReducer = (state = initialState3, action) => {
+    switch (action.type) {
+        case GET_APPLICATIONS_REQ:
+            return {
+                ...state,
+                loading: true,  // Set loading to true when the request starts
+                error: null     // Clear any previous errors
+            };
+
+        case GET_APPLICATIONS_SUCCESS:
+            return {
+                ...state,
+                loading: false,         // Set loading to false once request is done
+                appli: action.payload.formFilled, // Store the fetched applications data
+                error: null             // Clear any errors
+            };
+
+        case GET_APPLICATIONS_FAIL:
+            return {
+                ...state,
+                loading: false,  // Set loading to false when there's an error
+                error: action.payload // Store the error message
+            };
+
+        default:
+            return state;
+    }
+};
+
+const initialState4 = {
+    appli: [],   // Array to hold applications data
+    loading: false,     // Indicates loading state
+    error: null         // To store any errors
+};
+
+export const luckydrawReducer = (state = initialState4, action) => {
+    switch (action.type) {
+        case GET_LUCKYDRAW_BY_ID_REQ:
+            return {
+                ...state,
+                loading: true,  // Set loading to true when the request starts
+                error: null     // Clear any previous errors
+            };
+
+        case GET_LUCKYDRAW_BY_ID_SUCCESS:
+            return {
+                ...state,
+                loading: false,         // Set loading to false once request is done
+                appli: action.payload.luckyDraw, // Store the fetched applications data
+                error: null             // Clear any errors
+            };
+
+        case GET_LUCKYDRAW_BY_ID_FAIL:
+            return {
+                ...state,
+                loading: false,  // Set loading to false when there's an error
+                error: action.payload // Store the error message
+            };
+
+        default:
+            return state;
+    }
+};
+
+
+
+const initialState5 = {
+    message: null,   // Array to hold applications data
+    processing: false,     // Indicates loading state
+    fault: null         // To store any errors
+};
+
+export const statusUpdateReducer = (state = initialState5, action) => {
+    switch (action.type) {
+        case UPDATE_LUCKYDRAW_STATUS_REQ:
+            return {
+                ...state,
+                processing: true,  // Set loading to true when the request starts
+                fault: null     // Clear any previous errors
+            };
+
+        case UPDATE_LUCKYDRAW_STATUS_SUCCESS:
+            return {
+                ...state,
+                processing: false,         // Set loading to false once request is done
+                message: action.payload.message, // Store the fetched applications data
+                fault: null             // Clear any errors
+            };
+
+        case UPDATE_LUCKYDRAW_STATUS_FAIL:
+            return {
+                ...state,
+                processing: false,  // Set loading to false when there's an error
+                fault: action.payload // Store the error message
+            };
+
+        default:
+            return state;
+    }
+};
+
+
+
+
+
+const initialState6 = {
+    loading: false,
+    luckyDraws: [],
+    totalLuckyDraws: 0,
+    totalPages: 0,
+    currentPage: 0,
+    error: null,
+  };
+  
+export const getluckyDrawReducer = (state = initialState6, action) => {
+    switch (action.type) {
+      case GET_ALL_LUCKYDRAW_REQ:
+        return {
+          ...state,
+          loading: true,
+          error: null,
+        };
+        
+      case GET_ALL_LUCKYDRAW_SUCCESS:
+        return {
+          ...state,
+          loading: false,
+          luckyDraws: action.payload.luckyDraws,   // List of lucky draws fetched
+          totalLuckyDraws: action.payload.totalLuckyDraws,   // Total number of lucky draws
+          totalPages: action.payload.totalPages,  // Total number of pages based on pagination
+          currentPage: action.payload.currentPage, // Current page number
+        };
+        
+      case GET_ALL_LUCKYDRAW_FAIL:
+        return {
+          ...state,
+          loading: false,
+          error: action.payload,  // Store the error message in case of failure
+        };
+  
+      default:
+        return state;
+    }
+  };

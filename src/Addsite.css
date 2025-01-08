@@ -1,0 +1,79 @@
+.addsite-container {
+    width: 100%;
+    margin: 5vmax auto;
+    padding: 2vmax;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Lato', sans-serif;
+  }
+  
+  h2 {
+    font-size: 1.8vmax;
+    color: black;
+    margin-bottom: 2vmax;
+  }
+  
+  .form-group {
+    margin-bottom: 2vmax;
+    text-align: left;
+  }
+  
+  label {
+    display: block;
+    font-size: 1.5vmax;
+    color: black;
+    margin-bottom: 0.5vmax;
+  }
+  
+  input[type="text"],
+  textarea,
+  input[type="file"],
+  select {
+    width: 80%; /* Reduced width */
+    padding: 1vmax;
+    font-size: 1.5vmax;
+    border: 1px solid #ccc;
+    border-radius: 0.5vmax;
+  }
+  
+  textarea {
+    height: 10vmax;
+    white-space: pre-wrap; /* Preserve spaces and line breaks */
+  }
+  
+  input[type="checkbox"] {
+    transform: scale(1.5);
+    margin-left: 1vmax;
+  }
+  
+  .submit-button {
+    width: 50%; /* Reduced width */
+    padding: 1vmax; /* Reduced padding */
+    font-size: 1.2vmax; /* Reduced font size */
+    color: white;
+    background-color: black;
+    border: none;
+    border-radius: 0.5vmax;
+    cursor: pointer;
+  }
+  
+  .submit-button:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 1.5vmax;
+    margin-bottom: 2vmax;
+  }
+  
+  .success-message {
+    color: green;
+    font-size: 1.5vmax;
+    margin-bottom: 2vmax;
+  }
+
+  .carousel-container {
+    margin: 2vmax 0vmax;
+  }

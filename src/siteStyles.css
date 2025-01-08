@@ -1,0 +1,87 @@
+/* Basic site container styling */
+.site-container {
+    margin-top: 1.2vmax;
+    width: 100%;
+    height: auto;
+    color: white;
+    display: flex;
+    flex-direction: row; /* Default to row for larger screens */
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Flexbox layout for large screens, column layout for small screens */
+.site-content {
+    width: 42vmax;
+    height: 34vmax;
+    display: flex;
+    flex-direction: row; /* Default layout for larger screens */
+}
+
+.site-image {
+    width: 42vmax;
+    height: 34vmax;
+}
+
+.site-details {
+    width: 46vmax;
+    height: auto;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column; /* Stack elements inside site-details for small screens */
+}
+
+.site-details h2 {
+    font-size: 2vmax;
+    margin-bottom: 1vmax;
+    font-family: 'Verdana', sans-serif;
+}
+
+.site-description {
+    font-size: 1.1vmax;
+    line-height: 1.5;
+    text-align: left;
+    color: rgb(15, 15, 15);
+    white-space: pre-line; /* Preserves line breaks */
+    margin-top: 1vmax;
+}
+
+.bold-text {
+    font-weight: bolder;
+    font-size: 1.1vmax;
+  }
+  
+
+/* Responsive behavior: stack the content for tablets and phones */
+@media (max-width: 768px) {
+    .site-container {
+        flex-direction: column; /* Change the container's direction to column for small screens */
+        align-items: flex-start; /* Align items to the start (left) */
+    }
+
+    .site-content {
+        flex-direction: column; /* Stack the content vertically for small screens */
+        width: 100%;
+    }
+
+    .site-image {
+        width: 100%;
+        height: auto;
+    }
+
+    .site-details {
+        width: 100%;
+        margin-top: 2vmax;
+    }
+
+    .site-description {
+        font-size: 1.9vmax;
+        margin: 0 1.3vmax;
+    }
+
+    .bold-text {
+        font-weight: bolder;
+        font-size: 1.9vmax;
+      }
+}

@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&display=swap');
+
+
+
+.parent {
+    width: 96%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1vmax;
+    
+  }
+  
+  .status-sites {
+    width: 100%;
+    height: 28vmax;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.5);
+border-radius: 2vmax;
+background-color:#e2e3e4;
+    padding: 1vmax;
+    margin: 2vmax 0;
+  }
+  
+  .site-card {
+    display: flex;
+    flex-direction: row;
+   
+    margin-bottom: 1vmax;
+  }
+  
+  .imgSite {
+    width: 39vmax;
+    height: 27vmax;
+    margin: 0vmax 1vmax;
+    
+  }
+  
+  .imgSite img {
+    width: 33vmax;
+    height: 26vmax;
+    object-fit: cover;
+  }
+  
+  .details {
+    width: 39vmax;
+    height: 28vmax;
+    margin: 0vmax 1vmax;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .details h1 {
+    font-size: 2.5vmax;
+    color: black;
+    font-family: 'Kanit', sans-serif;
+    margin-bottom: 1vmax;
+  }
+
+  .details h3{
+    font-size: 1.5vmax;
+    color: black;
+    font-family: 'Kanit', sans-serif;
+    margin-bottom: 1vmax;
+  }
+  
+  .details p{
+    font-size: 1.1vmax;
+    color: #0b0b0b;
+  }
+
+  .unique-button {
+    background-color: #2e3c52; /* Green background */
+    border: none;
+    color: white; /* White text */
+    padding: 1vmax 2vmax; /* Some padding */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.5vmax; /* Set font size */
+    margin: 1vmax 0;
+    cursor: pointer;
+    border-radius: 0.5vmax; /* Rounded corners */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
+  }
+  
+  .unique-button:hover {
+    background-color: #0f0f0f; /* Darker green on hover */
+    transform: scale(1.05); /* Slightly larger on hover */
+  }
+
+
+  /* Responsive styles for phone screens */
+  @media (max-width: 768px) {
+    .status-sites {
+      flex-direction: column;
+      height: auto;
+    }
+  
+    .site-card {
+      flex-direction: column;
+    }
+
+   
+
+   
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 1vmax;
+  }
+  
+  .pagination button {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    padding: 0.5vmax 1vmax;
+    margin: 0 0.5vmax;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 1.3vmax; /* Set font size to 1.3vmax */
+  }
+  
+  .pagination button.active {
+    background-color: black;
+    color: white;
+  }
+  
+  .pagination button:disabled {
+    background-color: grey;
+    cursor: not-allowed;
+  }
+  
+  .pagination button:hover:not(:disabled) {
+    background-color: black;
+    color: white;
+  }

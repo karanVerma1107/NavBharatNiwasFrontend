@@ -1,0 +1,31 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 1vmax;
+  }
+  
+  .pagination button {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    padding: 0.5vmax 1vmax;
+    margin: 0 0.5vmax;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 1.2vmax; /* Set font size to 1.3vmax */
+  }
+  
+  .pagination button.active {
+    background-color: black;
+    color: white;
+  }
+  
+  .pagination button:disabled {
+    background-color: grey;
+    cursor: not-allowed;
+  }
+  
+  .pagination button:hover:not(:disabled) {
+    background-color: black;
+    color: white;
+  }

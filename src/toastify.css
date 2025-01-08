@@ -1,0 +1,21 @@
+.Toastify__toast {
+    background-color: #1c1c1c; /* Dark background for the toast */
+    color: white; /* White text color */
+}
+
+.Toastify__toast-body {
+    color: white; /* White text color */
+}
+
+.Toastify__progress-bar {
+    background-color: gray; /* Gray color for the progress bar */
+}
+
+.Toastify__close-button {
+    color: white; /* White color for the close button */
+}
+
+.Toastify__close-button:hover,
+.Toastify__close-button:focus {
+    color: gray; /* Gray color for the close button on hover and focus */
+}

@@ -1,0 +1,102 @@
+.header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 5.9vmax;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-bottom: 1.5px solid black;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Denser and gray box shadow */
+    background-color: white; /* Ensure the header has a background color */
+    z-index: 1000; /* Ensure the header is above other content */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.logo-img {
+    width: 100%;
+    height: auto;
+}
+
+.rightSide {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 10vmax;
+    padding: 0 1vmax; /* Add padding for spacing */
+    margin-right: 1.1vmax;
+}
+
+.hamburger-container {
+    display: flex;
+    align-items: center;
+}
+
+.hamburger-icon {
+    font-size: 2vmax; /* Adjust the size of the icon */
+    color: #2e3c52;
+}
+
+.vertical-line {
+    height: 2.2vmax; /* Adjust the height of the vertical line */
+    width: 1px;
+    background-color: black;
+    margin: 0 1vmax; /* Add space on both sides of the vertical line */
+}
+
+.login-container {
+    display: flex;
+    align-items: center;
+}
+
+.login-button {
+    padding: 0.5vmax 1vmax;
+    font-size: 1.3vmax;
+    background-color: #2e3c52;
+    color: white;
+    border: none;
+    border-radius: 0.29vmax;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: #333;
+    transform: scale(1.05);
+}
+
+.login-button:active {
+    background-color: #555;
+    transform: scale(1);
+}
+
+/* Media query to ensure rightSide remains as it is on smaller screens */
+@media (max-width: 768px) {
+    .rightSide {
+        width: auto; /* Ensure the rightSide div remains as it is */
+        padding: 0 0.5vmax; /* Adjust padding for smaller screens */
+    }
+
+    .hamburger-icon {
+        font-size: 3vmax; /* Adjust the size of the icon for smaller screens */
+    }
+
+    .vertical-line {
+        height: 3vmax; /* Adjust the height of the vertical line for smaller screens */
+    }
+
+    .login-button {
+        font-size: 1.8vmax; /* Adjust the font size of the login button for smaller screens */
+        border-radius: 0.48vmax;
+    }
+
+    
+}

@@ -1,0 +1,88 @@
+/* General form container styles */
+.lucky-draw-form {
+    width:40vmax;  /* Increased the width of the form */
+    margin: 2vmax auto;
+    padding: 1vmax;
+    background-color: #c6cbd2;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.form-heading {
+    text-align: center;
+    font-size: 1.75vmax; /* Main heading font size */
+    margin-bottom: 1vmax;
+    color: #090909;
+}
+
+/* Form label */
+.label {
+    font-size: 1.4vmax;
+    margin-bottom: 0.5vmax;
+    display: block;
+    color: #0d0d0d;
+}
+
+/* Form input fields */
+.input-field {
+    width: 100%;  /* Keeps the input fields at 100% of the form's width */
+    padding: 0.8rem;
+    margin-bottom: 1vmax;
+    border: 1px solid #4a5c73;
+    border-radius: 5px;
+    background-color: #3d4f69;
+    color: rgb(9, 9, 9);
+    font-size: 1.25vmax;
+}
+
+.input-field:focus {
+    border-color: #2e3c52;
+    outline: none;
+}
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    padding: 1rem;
+    background-color: #2e3c52;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.3vmax;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #1f2b3a;
+}
+
+/* Form Group container */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+/* Form actions (submit button container) */
+.form-actions {
+    text-align: center;
+}
+
+/* Error or Loading Message */
+.form-status {
+    text-align: center;
+    color: #e74c3c;
+    font-size: 1.25vmax;
+    margin-top: 1rem;
+}
+
+.form-status.success {
+    color: #2ecc71;
+}
+
+/* Modal Image styling (optional) */
+.modal-image {
+    max-width: 100%;
+    height: auto;
+}

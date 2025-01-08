@@ -1,0 +1,130 @@
+.auth-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* Black transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.auth-form {
+    position: relative;
+    background-color: #2e3c52; /* Dark background for the form */
+    padding: 2vmax;
+    border-radius: 0.5vmax;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 25vmax; /* Reduced width */
+    color: white; /* White text color */
+}
+
+.auth-form h1 {
+    font-size: 2.2vmax;
+    margin-bottom: 1.5vmax;
+    color: white;
+}
+
+.auth-form input {
+    width: calc(100% - 1vmax); /* Adjust width to account for margin */
+    padding: 0.8vmax;
+    margin-bottom: 1.5vmax;
+    margin-right: 1vmax; /* Add margin-right */
+    border: 1px solid gray;
+    border-radius: 0.3vmax;
+    font-size: 1vmax;
+    background-color: #333; /* Darker background for inputs */
+    color: white; /* White text color for inputs */
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-form input::placeholder {
+    color: #bbb; /* Lighter placeholder color */
+}
+
+.auth-form input:focus {
+    border-color: white;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.auth-form button {
+    width: 80%; /* Reduced width */
+    padding: 0.8vmax;
+    margin-bottom: 1vmax;
+    border: none;
+    border-radius: 0.3vmax;
+    font-size: 1vmax;
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.auth-form button:hover {
+    background-color: gray;
+    color: black;
+    transform: scale(1.05);
+}
+
+.auth-form button:active {
+    background-color: #555;
+    color: black;
+    transform: scale(1);
+}
+
+.toggle-button {
+    background-color: transparent;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1vmax;
+    margin-top: 1vmax;
+}
+
+.toggle-button:hover {
+    color: gray;
+}
+
+.close-icon {
+    position: absolute;
+    top: 1vmax;
+    right: 1vmax;
+    font-size: 2vmax;
+    color: white;
+    cursor: pointer;
+}
+
+.close-icon:hover {
+    color: gray;
+}
+
+
+/* Media query for phone and tablet views */
+@media (max-width: 768px) {
+    .auth-form {
+        width: 35vmax; /* Increase width for smaller screens */
+        padding: 3vmax; /* Increase padding for smaller screens */
+    }
+
+    .auth-form h1 {
+        font-size: 3vmax; /* Increase font size for smaller screens */
+    }
+
+    .auth-form input {
+        padding: 1vmax; /* Increase padding for inputs */
+        font-size: 1.2vmax; /* Increase font size for inputs */
+    }
+
+    .auth-form button {
+        padding: 1vmax; /* Increase padding for buttons */
+        font-size: 1.2vmax; /* Increase font size for buttons */
+    }
+
+    .close-icon {
+        font-size: 3vmax; /* Increase size of close icon */
+    }
+}

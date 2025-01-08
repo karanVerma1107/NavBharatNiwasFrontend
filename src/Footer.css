@@ -1,0 +1,54 @@
+/* Footer container */
+.footer-container {
+    min-height: 17vmax;         /* Minimum height of the footer */
+    background-color:  #2c3e50;   /* Black background color */
+    display: flex;       
+    flex-direction: row;      
+    justify-content: space-between;   /* Space between left and right sections */
+    align-items: center;       /* Center content vertically */
+    color: white;              /* White text for contrast */
+    margin-top: 1vmax;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+    padding: 1vmax;
+  }
+  
+  /* Left section of the footer */
+  .left {
+    width: 50%;                /* Occupy 50% of the width */
+    /* Aqua background for the left section */
+    padding: 0.5vmax;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  /* Right section of the footer */
+  .right {
+    width: 40%;                /* Occupy 40% of the width */
+     /* Blanched almond background for the right section */
+    padding: 0.5vmax;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .left a{
+    color: aliceblue;
+  }
+
+
+  /* Responsive adjustments for smaller screens */
+  @media screen and (max-width: 768px) {
+    .footer-container {
+      flex-direction: column;  /* Stack the left and right sections vertically */
+      align-items: flex-start; /* Align items to the start */
+    }
+  
+    .left, .right {
+      width: 100%;             /* Each section will occupy the full width */
+      margin-bottom: 1vmax;    /* Add space between the sections */
+    }
+  }
+  

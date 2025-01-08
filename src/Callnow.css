@@ -1,0 +1,45 @@
+.call-now-container {
+    position: fixed;
+    bottom: 10vmax;
+    right: 2vmax;
+    width: 16vmax;
+    padding: 1vmax;
+    background-color: #333434;
+    color: white;
+    border-radius: 1vmax 0 0 1vmax; /* Rounded corners on the left side */
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(3, 3, 3, 0.5);
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .call-now-container:hover {
+    background-color: #656565;
+    transform: scale(1.05);
+  }
+  
+  .call-icon {
+    margin-right: 0.5vmax;
+    font-size: 1.7vmax;
+  }
+  
+  .call-now-container h3 {
+    font-size: 1.5vmax;
+    margin: 0;
+  }
+  
+  .call-now-container p {
+    font-size: 1.2vmax;
+    margin: 0;
+  }
+
+
+
+  @media(max-width:500px){
+    .call-now-container{
+      bottom: 61vmax;
+    }
+  }

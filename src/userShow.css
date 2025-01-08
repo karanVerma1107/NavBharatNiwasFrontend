@@ -1,0 +1,95 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+.user-show-container {
+  height: 33vmax; /* Adjust the height as needed */
+  width: 42vmax; /* Fixed width */
+  position: fixed; /* Absolute positioning */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  border-radius: 2.3vmax;
+  transform: translate(-50%, -50%); /* Adjust for perfect centering */
+  margin-top: 5vmax; /* 5vmax margin from the top */
+  z-index: 1000; /* Ensure it's above other content */
+  overflow-y: auto; /* Scrollable */
+  background-color: #2e3c52; /* Black background */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5); /* Box shadow */
+  padding: 1vmax; /* Padding inside the container */
+  font-family: 'Lato', sans-serif; /* Apply Google Font */
+}
+
+
+
+
+
+
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5vmax;
+
+    cursor: pointer;
+    color: white;
+  }
+
+.user-info {
+  color: white; /* White font color */
+  margin: 3vmax 0.3vmax; /* Space between user info and list */
+}
+
+.user-info p {
+  margin: 0.9vmax 0; /* Margin for user info paragraphs */
+  font-size: 1.3vmax; /* Font size */
+}
+
+.user-id {
+  cursor: pointer; /* Pointer cursor for clickable user ID */
+  text-decoration: underline; /* Underline for clickable user ID */
+}
+
+.bold-text {
+    font-weight: bolder; /* Make text bold */
+    font-size: 1.1vmax;
+  }
+
+.user-show-container ul {
+  list-style-type: none; /* Remove default list styling */
+  padding: 2vmax 0 0 0; /* Add padding from the top */
+  margin: 0; /* Remove default margin */
+}
+
+.user-show-container li {
+  margin-bottom: 2vmax; /* Space between list items */
+  border-bottom: 1px solid white; /* Border bottom for list items */
+  padding: 1vmax 0; /* Padding for list items */
+}
+
+.user-show-container h3 {
+  font-size: 1.1vmax; /* Reduced font size */
+  color: white; /* White font color */
+  margin: 0; /* Remove default margin */
+}
+
+/* Media query for screens below 768px width */
+@media (max-width: 768px) {
+    .user-show-container {
+      width: 45vmax; /* Increase width */
+      height: 39vmax;
+    }
+  
+    .user-show-container p,
+    .user-show-container h3 {
+      font-size: 1.5vmax; /* Increase font size */
+    }
+  
+    .close-button {
+      font-size: 2vmax; /* Increase font size of close button */
+    }
+
+    .user-info p {
+      font-size: 1.6vmax; /* Increase font size */
+    }
+  }

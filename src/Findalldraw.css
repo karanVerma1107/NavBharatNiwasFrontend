@@ -1,0 +1,145 @@
+/* General Layout */
+.findalldraw-container {
+    padding: 3vmax;
+    background-color: white;
+    color: #2c3e52;
+    width: 100%;
+    text-align: left;
+    font-family: 'Arial', sans-serif;
+}
+
+.heading {
+    text-align: center;
+    font-size: 2vmax;  /* Adjusted for maximum readability */
+    margin-bottom: 2vmax;
+    color: #2c3e52;
+}
+
+/* Display for Lucky Draws */
+.lucky-draws-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20vmax, 1fr));
+    gap: 3vmax;
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    margin-top: 2vmax;
+}
+
+.lucky-draw-item {
+    background-color: #ecf0f1;
+    border-radius: 1vmax;
+    padding: 2vmax;
+    cursor: pointer;
+    width: 100%;
+    box-shadow: 0 0.5vmax 1vmax rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+}
+
+.lucky-draw-img {
+    width: 10vmax;  /* Width in vmax */
+    height: 12vmax; /* Height in vmax */
+    object-fit: cover;
+    border-radius: 1vmax;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.lucky-draw-img:hover {
+    transform: scale(1.05);
+}
+
+.lucky-draw-name,
+.lucky-draw-info {
+    margin: 1vmax 0;
+    font-weight: 900;
+    align-self: flex-start;
+    font-size: 1.6vmax;  /* Font size not exceeding 1.6vmax */
+}
+
+/* Pagination Controls */
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4vmax;
+}
+
+.pagination-btn {
+    background-color: #2c3e52;
+    color: white;
+    padding: 1vmax 2vmax;
+    border: none;
+    border-radius: 0.5vmax;
+    cursor: pointer;
+    margin: 0 1vmax;
+    font-size: 1.4vmax; /* Font size adjusted for pagination buttons */
+    transition: background-color 0.3s ease;
+}
+
+.pagination-btn:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+}
+
+.pagination-btn:hover {
+    background-color: #34495e;
+}
+
+.pagination-text {
+    font-size: 1.5vmax;
+    color: #2c3e52;
+}
+
+/* Loading & Error */
+.loading-text, .error-text {
+    text-align: center;
+    font-size: 1.6vmax;
+    color: #e74c3c;
+}
+
+/* Modal Styles */
+.image-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.image-modal-content {
+    position: relative;
+    background-color: white;
+    padding: 3vmax;
+    border-radius: 1vmax;
+    max-width: 90%;
+    max-height: 90%;
+    text-align: center;
+    overflow: hidden;
+}
+
+.image-modal-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: 1vmax;
+    right: 1vmax;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 1vmax;
+    border-radius: 0.5vmax;
+    cursor: pointer;
+}

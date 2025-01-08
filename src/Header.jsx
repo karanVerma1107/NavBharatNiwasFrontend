@@ -1,0 +1,72 @@
+import React, { useEffect, useState } from 'react'
+import './header.css'
+import pic from './logoimg - Copy.jpg'
+import { FaBars, FaUser } from 'react-icons/fa' // Importing hamburger icon from react-icons
+import Auth from './Auth'
+import { getUserFromToken } from './Actions/authActions';
+import Loading from './Loading'
+import UserShow from './userShow'
+import { useDispatch, useSelector } from 'react-redux'
+
+const Header = () => {
+  const [showLogin, setShowLogin] = useState(false);
+  const [showUserShow, setShowUserShow] = useState(false) // State to toggle UserShow
+
+  const {loading, user, auth, error} = useSelector(state=>state.user);
+  
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUserFromToken())
+  }, [dispatch])
+
+  const openLogin = () => {
+    setShowLogin(!showLogin)
+  }
+
+
+  const closeLogin = () => {
+    setShowLogin(false)
+    setTimeout(() => {
+      window.location.reload()
+      setTimeout(() => {
+        window.location.reload()
+      }, 1000) // Refresh the page again after 1 second
+    }, 2000) // Refresh the page after 2 seconds
+  }
+
+
+  const toggleUserShow = () => {
+    setShowUserShow(!showUserShow)
+  }
+
+  return (
+    <>
+      <div className="header">
+        <div className="logo">
+          <img src={pic} alt="Logo" className="logo-img" style={{ height: '5.7vmax', width: '16vmax' }} />
+        </div>
+
+        <div className="rightSide">
+          <div className="hamburger-container">
+            <FaBars className="hamburger-icon" />
+          </div>
+          <div className="vertical-line"></div>
+          <div className="login-container">
+            {auth ? (
+              <FaUser className="user-icon" style={{fontSize:'1.9vmax', cursor:'pointer'}}  onClick={toggleUserShow}/>
+            ) : (
+              <button className="login-button" onClick={openLogin}>Login</button>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {showLogin && <Auth closeLogin={closeLogin} />}
+      {showUserShow && <UserShow toggleUserShow={toggleUserShow}/>} {/* Conditionally render UserShow */}
+      
+    </>
+  )
+}
+
+export default Header
