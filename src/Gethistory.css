@@ -1,0 +1,88 @@
+/* General container styling */
+.history-container {
+    width: 40vmax;
+    height: auto;
+    padding: 2vmax;
+    background-color:  #dfe9f7;
+    border-radius: 10px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);  /* Shadow for a cute effect */
+    justify-content: center;
+    text-align: center;
+    z-index: 1000;
+    /* Center the container vertically and horizontally */
+    position: fixed; /* Fixed position so it stays centered even when scrolling */
+    top: 50%; /* Position 50% from the top of the screen */
+    left: 50%; /* Position 50% from the left of the screen */
+    transform: translate(-50%, -50%); /* Offset the positioning by half its width/height */
+  }
+  
+  /* Close button styling */
+  .close-button {
+    align-self: flex-end;
+    background-color: #2c3e52;
+    color: white;
+    font-size: 1.5vmax;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .close-button:hover {
+    background-color: black;
+  }
+  
+  /* Title styling */
+  .title {
+    font-size: 1.7vmax;
+    font-weight: bold;
+    margin-bottom: 2vmax;
+  }
+  
+  /* Results container styling */
+  .results-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vmax;
+  }
+  
+  .result-item {
+    background-color: #fbfcfd;
+    padding: 1.2vmax;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+  }
+  
+  .form-name {
+    font-size: 1.5vmax;
+    flex: 1;
+    color: black;
+    margin: 0;
+  }
+  
+  .view-button {
+    background-color: #2c3e52;
+    color: white;
+    padding: 0.8vmax 1.2vmax;
+    font-size: 1.4vmax;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .view-button:hover {
+    background-color: #8d8b8b;
+  }
+  
+  /* Error and loading messages styling */
+  p {
+    font-size: 1.3vmax;
+    color: white;
+  }
+  

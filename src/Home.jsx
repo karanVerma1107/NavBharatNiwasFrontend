@@ -180,6 +180,11 @@ const Home = () => {
 <ShowStatusSites status="upcoming"/>
 </div>
 
+<div className='ongoing' style={{margin:"1vmax 0vmax", width:'100%', height:'auto', display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center', padding:'1vmax'}}>
+<h2 style={{fontSize:'2.3vmax', textDecoration:'underline'}}>Delivered projects</h2>
+<ShowStatusSites status="testimonial"/>
+</div>
+
 
 <div className="about-us-container">
   <div className="about-us-content">

@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getLuckyDraws } from './Actions/formAction';
 import './Findalldraw.css'; // Import the CSS file for styling
 import ImageShowFull from './imageShowFull';
+import { passToresult } from './Actions/formAction';
+import { toast } from 'react-toastify';
 
 const Findalldraw = () => {
     const dispatch = useDispatch();
@@ -11,6 +13,8 @@ const Findalldraw = () => {
     const [currentPage, setCurrentPage] = useState(1);
 
     const { loading, error, luckyDraws, totalPages } = useSelector(state => state.getalldraws);
+
+    const {Loading, Message, Error} = useSelector(state=>state.passResult);
 
     // For the modal functionality
     const [modalImage, setModalImage] = useState(null);
@@ -33,9 +37,29 @@ const Findalldraw = () => {
         }
     };
 
+
+    const handlePassToResult = (id) => {
+        dispatch(passToresult(id));
+    };
+
     const goto = (id)=>{
         window.open(`/draw/${id}`, '_blank');
       }
+
+
+
+
+      // Display toast notifications when Message or Error changes
+    useEffect(() => {
+        if (Message) {
+            toast.success(Message); // Show success message as toast
+        }
+        if (Error) {
+            toast.error(Error); // Show error message as toast
+        }
+    }, [Message, Error]);
+
+
 
     // Fetch Lucky Draws when the component mounts or when the page changes
     useEffect(() => {
@@ -62,6 +86,16 @@ const Findalldraw = () => {
                         <h3 className="lucky-draw-name">{luckyDraw.name}</h3>
                         <p className="lucky-draw-info">Father's Name: {luckyDraw.fatherName}</p>
                         <p className="lucky-draw-info">Address: {luckyDraw.address}</p>
+
+                        <button
+                            className="pass-to-result-btn"
+                            onClick={(e) => {
+                                e.stopPropagation(); // Prevent triggering the image click action
+                                handlePassToResult(luckyDraw._id);
+                            }}
+                        >
+                            Pass to Result
+                        </button>
                     </div>
                 ))}
             </div>

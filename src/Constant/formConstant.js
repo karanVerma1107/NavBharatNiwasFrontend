@@ -34,3 +34,22 @@ export const UPDATE_LUCKYDRAW_STATUS_FAIL = 'UPDATE_LUCKYDRAW_STATUS_FAIL';
 export const GET_ALL_LUCKYDRAW_REQ = 'GET_ALL_LUCKYDRAW_REQ';
 export const GET_ALL_LUCKYDRAW_SUCCESS = 'GET_ALL_LUCKYDRAW_SUCCESS';
 export const GET_ALL_LUCKYDRAW_FAIL = 'GET_ALL_LUCKYDRAW_FAIL';
+// constants.js
+
+// Constants for pushing ID to result
+export const PUSH_TO_RESULT_REQ = 'PUSH_TO_RESULT_REQ';
+export const PUSH_TO_RESULT_SUCCESS = 'PUSH_TO_RESULT_SUCCESS';
+export const PUSH_TO_RESULT_FAIL = 'PUSH_TO_RESULT_FAIL';
+
+
+// Constants for fetching history
+export const GET_HISTORY_REQ = 'GET_HISTORY_REQ';
+export const GET_HISTORY_SUCCESS = 'GET_HISTORY_SUCCESS';
+export const GET_HISTORY_FAIL = 'GET_HISTORY_FAIL';
+
+
+
+// Constants for fetching result
+export const GET_RESULT_REQ = 'GET_RESULT_REQ';
+export const GET_RESULT_SUCCESS = 'GET_RESULT_SUCCESS';
+export const GET_RESULT_FAIL = 'GET_RESULT_FAIL';

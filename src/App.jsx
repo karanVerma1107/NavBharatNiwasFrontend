@@ -9,6 +9,7 @@ import Footer from './Footer'
 import FormRelated from './FormRelated'
 import Site from './Site'
 import Form from './Form'
+import Result from './Result'
 
 function App() {
  
@@ -24,6 +25,7 @@ function App() {
           <Route path='/form-related' element={<FormRelated/>}/>
           <Route path='/site/:id' element={<Site/>}/>
           <Route path='/draw/:id' element={<Form/>}/>
+          <Route path='/result/:formId' element={<Result/>}/>
          
         </Routes>
         <Footer/>

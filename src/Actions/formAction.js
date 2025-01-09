@@ -18,7 +18,16 @@ import { SUBMIT_ISALLOW_REQ,
     UPDATE_LUCKYDRAW_STATUS_FAIL,
     GET_ALL_LUCKYDRAW_REQ,
     GET_ALL_LUCKYDRAW_SUCCESS,
-    GET_ALL_LUCKYDRAW_FAIL
+    GET_ALL_LUCKYDRAW_FAIL,
+    PUSH_TO_RESULT_REQ,
+    PUSH_TO_RESULT_SUCCESS,
+    PUSH_TO_RESULT_FAIL,
+    GET_HISTORY_REQ,
+    GET_HISTORY_FAIL,
+    GET_HISTORY_SUCCESS,
+    GET_RESULT_REQ,
+    GET_RESULT_SUCCESS,
+    GET_RESULT_FAIL
  } from "../Constant/formConstant";
 
 import axiosInstance from "../../axiosInstance";
@@ -256,6 +265,79 @@ export const getLuckyDraws = (page) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: GET_ALL_LUCKYDRAW_FAIL,
+            payload: error.response ? error.response.data.message : error.message,
+        });
+    }
+};
+
+
+
+
+
+// Action to fetch all LuckyDraws with pagination
+export const passToresult = (id) => async (dispatch) => {
+    try {
+        dispatch({ type: PUSH_TO_RESULT_REQ });
+
+        const response = await axiosInstance.put(`/api/v1/pass/${id}`);
+        
+        dispatch({
+            type: PUSH_TO_RESULT_SUCCESS,
+            payload: response.data, // Contains luckyDraws, totalPages, etc.
+        });
+    } catch (error) {
+        dispatch({
+            type: PUSH_TO_RESULT_FAIL,
+            payload: error.response ? error.response.data.message : error.message,
+        });
+    }
+};
+
+
+
+
+
+
+// Action to fetch all LuckyDraws with pagination
+export const getresult = () => async (dispatch) => {
+    try {
+        dispatch({ type: GET_HISTORY_REQ });
+
+        const response = await axiosInstance.get(`/api/v1/history`);
+        
+        
+
+        dispatch({
+            type: GET_HISTORY_SUCCESS,
+            payload: response.data, // Contains luckyDraws, totalPages, etc.
+        });
+    } catch (error) {
+        dispatch({
+            type: GET_HISTORY_FAIL,
+            payload: error.response ? error.response.data.message : error.message,
+        });
+    }
+};
+
+
+
+
+// Action to fetch all LuckyDraws with pagination
+export const result = (formId) => async (dispatch) => {
+    try {
+        dispatch({ type: GET_RESULT_REQ });
+
+        const response = await axiosInstance.get(`/api/v1/result/${formId}`);
+        
+        console.log("result", response);
+
+        dispatch({
+            type: GET_RESULT_SUCCESS,
+            payload: response.data, // Contains luckyDraws, totalPages, etc.
+        });
+    } catch (error) {
+        dispatch({
+            type: GET_RESULT_FAIL,
             payload: error.response ? error.response.data.message : error.message,
         });
     }

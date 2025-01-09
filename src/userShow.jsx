@@ -3,6 +3,7 @@ import './userShow.css' // Import the CSS file for styling
 import { useSelector } from 'react-redux'
 import { FaClipboardList, FaFileAlt, FaReceipt, FaGift, FaPhone, FaPlus, FaEdit, FaCheck, FaQuestion, FaEye } from 'react-icons/fa'
 import Applications from './Applications'
+import Gethistory from './Gethistory'
 
 
 const UserShow = ({toggleUserShow}) => {
@@ -19,15 +20,25 @@ const UserShow = ({toggleUserShow}) => {
   }
 
   const [showApplications, setShowApplications] = useState(false);
+  const [showHistory, setShowHistory] = useState(false);  // New state for Gethistory
 
   const closeApp = () => {
     setShowApplications(false); // Function to close the Applications component
   };
 
-  const handleApplicationsClick = () => {
-    setShowApplications(true); // Open the Applications component
+  const closeHistory = () => {
+    setShowHistory(false); // Function to close the Gethistory component
   };
 
+  const handleApplicationsClick = () => {
+    setShowApplications(true); // Open the Applications component
+    setShowHistory(false); // Close the Gethistory component if it was open
+  };
+
+  const handleHistoryClick = () => {
+    setShowHistory(true); // Open the Gethistory component
+    setShowApplications(false); // Close the Applications component if it was open
+  };
 
   const closebutton = () => {
     toggleUserShow();
@@ -48,7 +59,7 @@ const UserShow = ({toggleUserShow}) => {
           <li><h3 onClick={handleApplicationsClick} style={{cursor:'pointer'}}><FaClipboardList /> My Applications</h3></li>
           <li><h3><FaFileAlt /> My EOIs</h3></li>
           <li><h3><FaReceipt /> My Receipts</h3></li>
-          <li><h3><FaGift /> Lucky Draw</h3></li>
+          <li><h3 onClick={handleHistoryClick} style={{cursor:'pointer'}}><FaGift /> Lucky Draw</h3></li>
           <li><h3><FaPhone /> Contact Us</h3></li>
         </ul>
         {user && user.role === 'admin' && (
@@ -66,6 +77,7 @@ const UserShow = ({toggleUserShow}) => {
       </div>
 
       {showApplications && <Applications closeApp={closeApp} />}
+      {showHistory && <Gethistory closeHistory={closeHistory} />}
     </>
   )
 }

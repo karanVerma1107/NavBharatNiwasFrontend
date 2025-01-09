@@ -1,0 +1,111 @@
+/* Main wrapper for the result container */
+.result-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 6.5vmax;
+    justify-content: flex-start; /* Changed from center to flex-start to stack items top to bottom */
+    min-height: 100vh;
+    background-color: #f5f5f5;
+    padding: 2vmax;
+    height: auto;
+    font-family: 'Arial', sans-serif;
+    color: #2c3e52;
+  }
+  
+  /* Loader and error messages */
+  .loading, .error-message, .info-message, .no-results {
+    font-size: 1.6vmax;
+    color: #e74c3c;
+    text-align: center;
+    margin-top: 2vmax;
+  }
+  
+  /* Column for displaying the lucky draw items */
+  .lucky-draws-column {
+    display: flex;
+    flex-direction: column; /* Arrange items in column */
+    gap: 2vmax;
+    width: 100%;
+    margin-top: 3vmax;
+    align-items: center; /* Center the items horizontally */
+  }
+  
+  /* Individual card for each lucky draw */
+  .lucky-draw-card {
+    background-color: white;
+    border-radius: 1vmax;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+    padding: 1.5vmax;
+    margin: 2vmax 0vmax;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 90%; /* Limit width for better alignment */
+    max-width: 500px; /* Max width for larger screens */
+  }
+  
+  .lucky-draw-card:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Image for each lucky draw */
+  .lucky-draw-image {
+    width: 12vmax;
+    height: 14vmax;
+    object-fit: cover;
+    border-radius: 1vmax;
+    transition: transform 0.3s ease;
+  }
+  
+  .lucky-draw-image:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Section holding the details of each lucky draw */
+  .lucky-draw-details {
+    margin-top: 1vmax;
+  }
+  
+  .lucky-draw-name {
+    font-size: 1.8vmax;
+    font-weight: bold;
+    color: #2c3e52;
+    margin-bottom: 1vmax;
+  }
+  
+  .lucky-draw-info {
+    font-size: 1.4vmax;
+    color: #7f8c8d;
+    margin: 0.5vmax 0;
+  }
+  
+  /* Button to pass to result */
+  .pass-to-result-btn {
+    background-color: #3498db;
+    color: white;
+    font-size: 1.4vmax;
+    border: none;
+    border-radius: 0.8vmax;
+    padding: 0.7vmax 2vmax;
+    cursor: pointer;
+    margin-top: 1vmax;
+    transition: background-color 0.3s ease;
+  }
+  
+  .pass-to-result-btn:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Message when no results are available */
+  .no-results {
+    font-size: 1.6vmax;
+    color: #95a5a6;
+    text-align: center;
+    margin-top: 2vmax;
+  }
+  

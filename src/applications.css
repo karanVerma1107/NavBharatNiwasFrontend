@@ -8,7 +8,7 @@
     top: 50%;            /* Center vertically */
     left: 50%;           /* Center horizontally */
     transform: translate(-50%, -50%);  /* Exact center alignment */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Shadow for a cute effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);  /* Shadow for a cute effect */
     z-index: 1001;       /* Ensure it's above other content */
     overflow-y: auto;    /* Make the content scrollable if needed */
   }
