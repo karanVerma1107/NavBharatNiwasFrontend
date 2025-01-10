@@ -5,7 +5,7 @@ import { TbClock24 } from "react-icons/tb";
 
 
 const Callnow = () => {
-  const phoneNumber = '+919696581944'; // Replace with the desired phone number
+  const phoneNumber = '+917531027943'; // Replace with the desired phone number
 
   const handleCall = () => {
     window.location.href = `tel:${phoneNumber}`;
