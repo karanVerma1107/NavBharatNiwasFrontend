@@ -27,7 +27,10 @@ import { SUBMIT_ISALLOW_REQ,
     GET_HISTORY_FAIL,
     GET_RESULT_REQ,
     GET_RESULT_SUCCESS,
-    GET_RESULT_FAIL
+    GET_RESULT_FAIL,
+    FILL_FAQ_FORM_REQ,
+    FILL_FAQ_FORM_SUCCESS,
+    FILL_FAQ_FORM_FAIL
  } from "../Constant/formConstant";
 
  // Initial state for the reducer
@@ -408,6 +411,45 @@ const initialState11 = {
           ...state,
           loading: false, // Loading finished
           error: action.payload, // Store error message from the action payload
+        };
+  
+      default:
+        return state;
+    }
+  };
+
+
+
+  const initialState12 = {
+    process: false,  // To track if the form is being submitted
+    text: null,        // To hold messages for success or failure
+    error: null,       // To store any errors that occur
+  };
+  
+  export const faqFormReducer = (state = initialState12, action) => {
+    switch (action.type) {
+      case FILL_FAQ_FORM_REQ:
+        return {
+          ...state,
+          process: true,        // Set the process flag to true when the request starts
+          text: null,  // A text message to show the user
+          error: '',            // Clear any previous error
+        };
+  
+      case FILL_FAQ_FORM_SUCCESS:
+        return {
+          ...state,
+          process: false,       // Set process flag to false when submission is complete
+          text: action.payload.message, // Success message
+          error: null,            // No error in case of success
+        };
+  
+      case FILL_FAQ_FORM_FAIL:
+        return {
+          ...state,
+          process: false,       // Set process flag to false when the submission fails
+          text: null ,             // Clear any success text
+          error: action.payload.error , // Set error message from the payload
         };
   
       default:

@@ -231,7 +231,7 @@ iframe {
   font-weight: 600;
 }
 
-.input-group input {
+.input-group input{
   width: 80%;
   padding: 1vmax;             /* Reduced padding */
   font-size: 1.4vmax;           /* Smaller font for inputs */

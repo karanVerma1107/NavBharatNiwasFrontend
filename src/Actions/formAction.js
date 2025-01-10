@@ -27,7 +27,10 @@ import { SUBMIT_ISALLOW_REQ,
     GET_HISTORY_SUCCESS,
     GET_RESULT_REQ,
     GET_RESULT_SUCCESS,
-    GET_RESULT_FAIL
+    GET_RESULT_FAIL,
+    FILL_FAQ_FORM_REQ,
+    FILL_FAQ_FORM_SUCCESS,
+    FILL_FAQ_FORM_FAIL
  } from "../Constant/formConstant";
 
 import axiosInstance from "../../axiosInstance";
@@ -99,6 +102,46 @@ export const updateLuckyDrawStatus = (id, action) => async (dispatch) => {
         // If the request fails, dispatch the fail action with the error message
         dispatch({
             type: UPDATE_LUCKYDRAW_STATUS_FAIL,
+            payload: error.response ? error.response.data.message : error.message, // Handle error message
+        });
+    }
+};
+
+
+
+
+export const faqform = (data) => async (dispatch) => {
+
+    console.log(data)
+    try {
+        // Dispatching request action to indicate API call is in progress
+        dispatch({
+            type: FILL_FAQ_FORM_REQ,
+        });
+
+        
+        // Define the config for the API request
+        const config = {
+            headers: {
+                'Content-Type': 'application/json', // Sending JSON data
+            },
+        };
+
+        // Make the API request to update the LuckyDraw status
+        const response = await axiosInstance.post('/api/v1/fill-form', data, config);
+
+        // If the request is successful, dispatch the success action
+        dispatch({
+            type: FILL_FAQ_FORM_SUCCESS,
+            payload: response.data,  // Store the response data (the updated LuckyDraw)
+        });
+
+    } catch (error) {
+        // If the request fails, dispatch the fail action with the error message
+        console.error('Error in faqform action:', error);
+
+        dispatch({
+            type: FILL_FAQ_FORM_FAIL,
             payload: error.response ? error.response.data.message : error.message, // Handle error message
         });
     }
