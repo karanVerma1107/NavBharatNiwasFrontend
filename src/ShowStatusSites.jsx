@@ -32,7 +32,7 @@ const ShowStatusSites = ({ status }) => {
   const navigate = useNavigate();
 
   const goto = (id)=>{
-    window.open(`/site/${id}`, '_blank');
+    window.open(`https://navbharatniwas.in/site/${id}`, '_blank');
   }
 
 

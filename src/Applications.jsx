@@ -12,7 +12,7 @@ const Applications = ({ closeApp }) => {
   }, [dispatch]);
 
 const goto = (id)=>{
-  window.open(`/draw/${id}`, '_blank');
+  window.open(`https://navbharatniwas.in/draw/${id}`, '_blank');
 }
 
   return (
