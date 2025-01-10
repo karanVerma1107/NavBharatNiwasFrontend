@@ -7,6 +7,7 @@ import { Carousel } from 'react-responsive-carousel';
 import ImageShowFull from './imageShowFull';
 import './siteStyles.css';  // We'll define styles in this file
 import { TiTick } from "react-icons/ti";
+import Loading from './Loading';
 
 const Site = () => {
   const { id } = useParams();
@@ -52,42 +53,47 @@ const Site = () => {
     dispatch(getSitebyID(id));
   }, [dispatch, id]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
-
   // Check if site is available before rendering the details
   if (!site) return <p>No site data available</p>;
 
   return (
     <>
-      <div style={{ marginTop: '6.6vmax' }}>
-        <h1 style={{ alignSelf: 'center', textAlign: 'center' }}>{site.name}</h1>
-      </div>
-      <div className="site-container">
-
-        {/* Image Section */}
-        <div className="site-image">
-          <Carousel showThumbs={false} infiniteLoop={true} autoPlay={true} interval={2500} showArrows={true} showStatus={false} showIndicators={true}>
-            {site.images.map((image, index) => (
-              <div key={index} onClick={() => openModal(image)}>
-                <img src={image} alt={`Slide ${index}`} style={{ width: '42vmax', height: '34vmax' }} />
-              </div>
-            ))}
-          </Carousel>
+      {loading ? (
+        // If loading is true, show the loading indicator with marginTop
+        <div style={{ marginTop: '6vmax' }}>
+          <Loading />
         </div>
+      ) : (
+        <>
+          <div style={{ marginTop: '6.6vmax' }}>
+            <h1 style={{ alignSelf: 'center', textAlign: 'center' }}>{site.name}</h1>
+          </div>
+          <div className="site-container">
+            {/* Image Section */}
+            <div className="site-image">
+              <Carousel showThumbs={false} infiniteLoop={true} autoPlay={true} interval={2500} showArrows={true} showStatus={false} showIndicators={true}>
+                {site.images.map((image, index) => (
+                  <div key={index} onClick={() => openModal(image)}>
+                    <img src={image} alt={`Slide ${index}`} style={{ width: '42vmax', height: '34vmax' }} />
+                  </div>
+                ))}
+              </Carousel>
+            </div>
 
-        {/* Details Section */}
-        <div className="site-details">
-          <p className="site-description" style={{ fontWeight: 'bolder' }}>{site.current}</p>
-          {site.formYes && <p className="site-description"><TiTick /> lucky draw</p>}
-          <p className="site-description">
-            {boldTextInsideQuotes(site.description)} {/* Apply bold styling to text inside quotes */}
-          </p>
-        </div>
+            {/* Details Section */}
+            <div className="site-details">
+              <p className="site-description" style={{ fontWeight: 'bolder' }}>{site.current}</p>
+              {site.formYes && <p className="site-description"><TiTick /> lucky draw</p>}
+              <p className="site-description">
+                {boldTextInsideQuotes(site.description)} {/* Apply bold styling to text inside quotes */}
+              </p>
+            </div>
 
-        {/* Modal for Image */}
-        {modalImage && <ImageShowFull image={modalImage} onClose={closeModal} />}
-      </div>
+            {/* Modal for Image */}
+            {modalImage && <ImageShowFull image={modalImage} onClose={closeModal} />}
+          </div>
+        </>
+      )}
     </>
   );
 };
