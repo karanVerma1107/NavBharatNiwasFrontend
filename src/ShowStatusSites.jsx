@@ -31,10 +31,6 @@ const ShowStatusSites = ({ status }) => {
 
   const navigate = useNavigate();
 
-  const goto = (id)=>{
-    window.open(`/site/${id}`, '_blank');
-  }
-
 
   useEffect(() => {
     switch (status) {
@@ -78,7 +74,7 @@ const ShowStatusSites = ({ status }) => {
   
       <div className='parent' style={{borderBottom:'1px solid gray'}} >
         {sites.map((site) => (
-          <div key={site._id} className="status-sites" onClick={() => goto(site._id)}  >
+          <div key={site._id} className="status-sites"   >
             <div className="site-card">
               <div className='imgSite'>
                 <Carousel showThumbs={false} infiniteLoop={true} autoPlay={true} interval={2500} showArrows={true} showStatus={false} showIndicators={false} >
@@ -93,7 +89,10 @@ const ShowStatusSites = ({ status }) => {
                 <h1>{site.name}</h1>
                 <h3><FaStarOfLife style={{fontSize:'0.9vmax'}}/> {site.current}</h3>
                 {site.formYes && <h3>  <TiTick/>  lucky draw</h3>}
-                <button className="unique-button">View portfolio</button>
+                <button className="unique-button"><a href={`/site/${site._id}`} target="_blank" rel="noopener noreferrer" style={{ color: 'white' }}>
+  View portfolio
+</a>
+</button>
                 <p >Posted on: {formatDate(site.createdAt)}</p>
                
               </div>

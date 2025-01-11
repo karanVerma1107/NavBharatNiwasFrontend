@@ -66,9 +66,9 @@ const UserShow = ({toggleUserShow}) => {
           <>
             <h3 style={{fontSize: '1.6vmax', color: 'white', marginBottom: '1.2vmax'}}>Advanced</h3>
             <ul>
-              <li><h3><a href="ADD-SITE" target="_blank" style={{color: 'white'}}><FaPlus /> Add a Site</a></h3></li>
+              <li><h3><a href="/ADD-SITE" target="_blank" style={{color: 'white'}}><FaPlus /> Add a Site</a></h3></li>
               <li><h3><FaEdit /> Edit a Site</h3></li>
-              <li><h3><FaCheck /><a href="form-related" target="_blank" style={{color: 'white'}}><FaPlus />Manage form</a></h3></li>
+              <li><h3><FaCheck /><a href="/form-related" target="_blank" style={{color: 'white'}}><FaPlus />Manage form</a></h3></li>
               
 
             </ul>

@@ -11,10 +11,6 @@ const Applications = ({ closeApp }) => {
     dispatch(getLatestIsAppli());
   }, [dispatch]);
 
-const goto = (id)=>{
-  window.open(`/draw/${id}`, '_blank');
-}
-
   return (
     <div className="applications-container">
       <button onClick={closeApp} className="close-button">X</button>
@@ -27,9 +23,17 @@ const goto = (id)=>{
         {appli && appli.length > 0 ? (
           <div className="applications-list">
             {appli.map((app) => (
-              <div key={app._id} className="application-item" onClick={()=>{goto(app._id)}} style={{cursor:'pointer'}}>
+              <div key={app._id} className="application-item"  style={{cursor:'pointer'}}>
                 <p><strong>Ticket:</strong> {app._id}</p>
                 <p><strong>Opening Date:</strong> {new Date(app.openingDate).toLocaleDateString()}</p>
+                <a
+                  href={`/draw/${app._id}`} 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="view-portfolio-link"
+                >
+                  View Ticket
+                </a>
               </div>
             ))}
           </div>

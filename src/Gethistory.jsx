@@ -8,11 +8,6 @@ const Gethistory = ({ closeHistory }) => {
   const dispatch = useDispatch();
 
 
-  const goto = (id)=>{
-    window.open(`/result/${id}`, '_blank');
-  }
-
-
   useEffect(() => {
     dispatch(getresult());
   }, [dispatch]);
@@ -30,9 +25,11 @@ const Gethistory = ({ closeHistory }) => {
           <p>No results found.</p>
         ) : (
           results.map((result, index) => (
-            <div key={index} className="result-item"  onClick={()=>{goto(result._id)}} >
+            <div key={index} className="result-item"   >
               <p className="form-name">{result.formName}</p>
-              <button className="view-button">View Result</button>
+              <button className="view-button"><a href={`/result/${result._id}`} target="_blank" rel="noopener noreferrer" style={{ color: 'white' }}>
+  View Result
+</a></button>
             </div>
           ))
         )}
