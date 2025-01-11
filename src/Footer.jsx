@@ -20,7 +20,7 @@ const Footer = () => {
     <div className="footer-container">
       <div className="left">
         <p>Company Info</p>
-         <img src={tp} alt="Logo" className="logo-img" style={{ height: '7.7vmax', width: '19vmax' }} />
+         <img src={tp} alt="Logo" className="logo-img" style={{ height: '9.7vmax', width: '21vmax' }} />
          <p><FaPhoneAlt/> Phone: <a href="+91 75310 27943">+91 75310 27943</a></p>
       <p><MdEmail/> Email: <a href="mailto:support@navbharatniwas.in">support@navbharatniwas.in</a></p>
       <p><HiOfficeBuilding/>  Address: Sector 63, Noida, Uttar Pradesh - 208003</p>
@@ -30,8 +30,8 @@ const Footer = () => {
       </div>
       <div className="right">
         <p>Follow Us</p>
-        <p><FaInstagramSquare/><a href='https://www.instagram.com/navbharatniwas/'>Instagram</a> </p>
-        <p><FaFacebook/> <a href='https://www.facebook.com/NavBharatNiwas'> FaceBook</a></p>
+        <p><FaInstagramSquare/><a href='https://www.instagram.com/navbharatniwas/' style={{color:'white'}}>Instagram</a> </p>
+        <p><FaFacebook/> <a href='https://www.facebook.com/NavBharatNiwas'  style={{color:'white'}}> FaceBook</a></p>
         <p><FaYoutube/> YouTube</p>
         <p><FaLinkedin/> Linkedin</p>
         <p><FaSquareXTwitter/> X</p>
