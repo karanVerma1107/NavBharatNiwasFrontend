@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { getresult } from './Actions/formAction';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import './Gethistory.css'; // Import the CSS file for styling
 
 const Gethistory = ({ closeHistory }) => {
@@ -27,7 +28,7 @@ const Gethistory = ({ closeHistory }) => {
           results.map((result, index) => (
             <div key={index} className="result-item"   >
               <p className="form-name">{result.formName}</p>
-              <button className="view-button"><a href={`/result/${result._id}`} target="_blank" rel="noopener noreferrer" style={{ color: 'white' }}>
+              <button className="view-button"><a href={`/result/${result._id}`} target="_blank"  style={{ color: 'white' }}>
   View Result
 </a></button>
             </div>

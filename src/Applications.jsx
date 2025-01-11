@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import './applications.css';  // Import the custom CSS file for styling
 import { getLatestIsAppli } from './Actions/formAction';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Applications = ({ closeApp }) => {

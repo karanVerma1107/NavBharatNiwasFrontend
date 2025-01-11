@@ -7,6 +7,7 @@ import { Carousel } from 'react-responsive-carousel';
 import ImageShowFull from './imageShowFull';
 import './showSiteStatus.css'
 import { FaStarOfLife,  } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 import { TiTick } from "react-icons/ti";
 import { useNavigate } from 'react-router-dom';
 
