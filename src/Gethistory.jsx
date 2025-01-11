@@ -9,7 +9,7 @@ const Gethistory = ({ closeHistory }) => {
 
 
   const goto = (id)=>{
-    window.open(`https://navbharatniwas.in/result/${id}`, '_blank');
+    window.open(`/result/${id}`, '_blank');
   }
 
 
