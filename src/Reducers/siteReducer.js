@@ -19,7 +19,10 @@ import {
     GET_SITE_BY_ID_FAIL,
     GET_FORM_BY_ID_REQUEST,
     GET_FORM_BY_ID_SUCCESS,
-    GET_FORM_BY_ID_FAIL
+    GET_FORM_BY_ID_FAIL,
+    GET_SEARCHED_SITE_SUCCESS,
+    GET_SEARCHED_SITE_REQ,
+    GET_SEARCHED_SITE_FAIL
 
 } from "../Constant/siteConstant";
 
@@ -250,3 +253,39 @@ const initialState4 = {
         return state;
     }
   };
+
+
+  const initialState0 = {
+    isLoading: false, // Changed from loading to isLoading
+    sites: [],
+    error: null,
+  };
+  
+  export const siteSearchReducer = (state = initialState0, action) => {
+    switch (action.type) {
+      case GET_SEARCHED_SITE_REQ:
+        return {
+          ...state,
+          isLoading: true,  // Changed from loading to isLoading
+          error: null,
+        };
+  
+      case GET_SEARCHED_SITE_SUCCESS:
+        return {
+          ...state,
+          isLoading: false,  // Changed from loading to isLoading
+          sites: action.payload,  // Update with the sites fetched
+        };
+  
+      case GET_SEARCHED_SITE_FAIL:
+        return {
+          ...state,
+          isLoading: false,  // Changed from loading to isLoading
+          error: action.payload,  // Set error message
+        };
+  
+      default:
+        return state;
+    }
+  };
+  

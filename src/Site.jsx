@@ -58,6 +58,7 @@ const Site = () => {
 
   return (
     <>
+<<<<<<< HEAD
       <div style={{ marginTop: '6.6vmax' }}>
         <h1 style={{ alignSelf: 'center', textAlign: 'center' }}>{site.name}</h1>
       </div>
@@ -69,6 +70,19 @@ const Site = () => {
           </div>
         ) : (
           <>
+=======
+      {loading ? (
+        // If loading is true, show the loading indicator with marginTop
+        <div style={{ marginTop: '6vmax' }}>
+          <Loading />
+        </div>
+      ) : (
+        <>
+          <div style={{ marginTop: '6.6vmax' }}>
+            <h1 style={{ alignSelf: 'center', textAlign: 'center' }}>{site.name}</h1>
+          </div>
+          <div className="site-container">
+>>>>>>> KaranF
             {/* Image Section */}
             <div className="site-image">
               <Carousel showThumbs={false} infiniteLoop={true} autoPlay={true} interval={2500} showArrows={true} showStatus={false} showIndicators={true}>
@@ -79,6 +93,7 @@ const Site = () => {
                 ))}
               </Carousel>
             </div>
+<<<<<<< HEAD
 
             {/* Details Section */}
             <div className="site-details">
@@ -94,6 +109,23 @@ const Site = () => {
           </>
         )}
       </div>
+=======
+
+            {/* Details Section */}
+            <div className="site-details">
+              <p className="site-description" style={{ fontWeight: 'bolder' }}>{site.current}</p>
+              {site.formYes && <p className="site-description"><TiTick /> lucky draw</p>}
+              <p className="site-description">
+                {boldTextInsideQuotes(site.description)} {/* Apply bold styling to text inside quotes */}
+              </p>
+            </div>
+
+            {/* Modal for Image */}
+            {modalImage && <ImageShowFull image={modalImage} onClose={closeModal} />}
+          </div>
+        </>
+      )}
+>>>>>>> KaranF
     </>
   );
 };

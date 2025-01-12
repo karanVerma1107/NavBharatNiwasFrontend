@@ -16,7 +16,10 @@ import { ADD_SITE_FAIL, ADD_SITE_REQUEST, ADD_SITE_SUCCESS,
     GET_SITE_BY_ID_FAIL,
     GET_FORM_BY_ID_REQUEST,
     GET_FORM_BY_ID_SUCCESS,
-    GET_FORM_BY_ID_FAIL
+    GET_FORM_BY_ID_FAIL,
+    GET_SEARCHED_SITE_REQ,
+    GET_SEARCHED_SITE_SUCCESS,
+    GET_SEARCHED_SITE_FAIL
  } from "../Constant/siteConstant";
 import axiosInstance from "../../axiosInstance";
 
@@ -237,3 +240,27 @@ export const getTestimonialSites = (page) => async (dispatch) => {
         });
     }
 };
+
+
+
+  export const getSearchedSite = (searchQuery) => async (dispatch) => {
+    try {
+      // Dispatch the request start action
+      dispatch({ type: GET_SEARCHED_SITE_REQ });
+  
+      // Make the API call using axios
+      const response = await axiosInstance.get(`/api/v1/search?name=${searchQuery}`);
+  
+      // If the response is successful, dispatch success action
+      dispatch({
+        type: GET_SEARCHED_SITE_SUCCESS,
+        payload: response.data, // Access data from the response
+      });
+    } catch (error) {
+      // If an error occurs, dispatch fail action
+      dispatch({
+        type: GET_SEARCHED_SITE_FAIL,
+        payload: error.response ? error.response.data.error : error.message,  // Get error message from the response or fallback
+      });
+    }
+  };

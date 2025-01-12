@@ -123,8 +123,8 @@ const Home = () => {
         )}
       </div>
 
-      {/* Removed Searching component, you can add it if required */}
-      {/* <Searching /> */}
+     
+       <Searching /> 
 
       <div className="overview">
         <div className="overviewText" style={{ borderRight: '1.5px solid gray' }}>
