@@ -2,7 +2,7 @@ import {legacy_createStore as createStore, combineReducers, applyMiddleware} fro
 import { thunk }  from 'redux-thunk';
 import {composeWithDevTools}from 'redux-devtools-extension'
 import { authReducer, userReducer } from './src/Reducers/authReducer';
-import { AddsiteReducer, formAPPReducer, getImagesReducer, getOngoingSiteReducer, getTestimonialSiteReducer, getUpcomingSiteReducer, siteReducer } from './src/Reducers/siteReducer';
+import { AddsiteReducer, formAPPReducer, getImagesReducer, getOngoingSiteReducer, getTestimonialSiteReducer, getUpcomingSiteReducer, siteReducer, siteSearchReducer } from './src/Reducers/siteReducer';
 import { applicationsReducer, faqFormReducer, fillLuckyDrawReducer,  formAndResultsReducer,  formReducer, getIsAllowReducer, getluckyDrawReducer, luckydrawReducer, passtoresult, resultReducer, statusUpdateReducer } from './src/Reducers/formreducer';
 
 
@@ -26,7 +26,8 @@ getalldraws:getluckyDrawReducer,
 passResult:passtoresult,
 getresult: resultReducer,
 result:formAndResultsReducer,
-faq: faqFormReducer   
+faq: faqFormReducer   ,
+search :siteSearchReducer
 });
 
 // learn what thunk actually do

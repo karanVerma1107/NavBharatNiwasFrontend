@@ -51,8 +51,8 @@ export const makeIsallow = (data) => async (dispatch) => {
         };
 
         // Make the API request
-        const response = await axiosInstance.post('/api/v1/create-draw', data, config);
-
+        const response = await axiosInstance.post('/api/v1/filldraw', data, config);
+        
         // If the request is successful, dispatch the success action
         dispatch({
             type: SUBMIT_ISALLOW_SUCCESS,
@@ -67,6 +67,8 @@ export const makeIsallow = (data) => async (dispatch) => {
         });
     }
 };
+
+
 
 
 export const updateLuckyDrawStatus = (id, action) => async (dispatch) => {
@@ -251,7 +253,10 @@ export const createDraw = (formData) => async (dispatch) => {
         form.append('fatherName', formData.fatherName);
         form.append('AdhaarNo', formData.AdhaarNo);
         form.append('PANno', formData.PANno);
-        
+        form.append('DOB', formData.DOB); // Added DOB field
+        form.append('nationality', formData.nationality); // Added nationality field
+        form.append('project', formData.project); // Added project field
+
         
 
         // Append the image file to the FormData object
@@ -300,6 +305,7 @@ export const getLuckyDraws = (page) => async (dispatch) => {
         dispatch({ type: GET_ALL_LUCKYDRAW_REQ });
 
         const response = await axiosInstance.get(`/api/v1/getAlldraws?page=${page}`);
+        console.log('kiuhb', response)
         
         dispatch({
             type: GET_ALL_LUCKYDRAW_SUCCESS,

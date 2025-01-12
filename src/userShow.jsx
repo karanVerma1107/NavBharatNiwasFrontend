@@ -57,10 +57,9 @@ const UserShow = ({toggleUserShow}) => {
         )}
         <ul>
           <li><h3 onClick={handleApplicationsClick} style={{cursor:'pointer'}}><FaClipboardList /> My Applications</h3></li>
-          <li><h3><FaFileAlt /> My EOIs</h3></li>
-          <li><h3><FaReceipt /> My Receipts</h3></li>
+          
           <li><h3 onClick={handleHistoryClick} style={{cursor:'pointer'}}><FaGift /> Lucky Draw</h3></li>
-          <li><h3><FaPhone /> Contact Us</h3></li>
+         
         </ul>
         {user && user.role === 'admin' && (
           <>

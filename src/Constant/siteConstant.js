@@ -29,3 +29,10 @@ export const GET_SITE_BY_ID_FAIL = 'GET_SITE_BY_ID_FAIL';
 export const GET_FORM_BY_ID_REQUEST = 'GET_FORM_BY_ID_REQUEST';
 export const GET_FORM_BY_ID_SUCCESS = 'GET_FORM_BY_ID_SUCCESS';
 export const GET_FORM_BY_ID_FAIL = 'GET_FORM_BY_ID_FAIL';
+
+
+
+// Constants for different states of searching for sites
+export const GET_SEARCHED_SITE_REQ = 'GET_SEARCHED_SITE_REQ'; // Request initiated
+export const GET_SEARCHED_SITE_SUCCESS = 'GET_SEARCHED_SITE_SUCCESS'; // Request succeeded
+export const GET_SEARCHED_SITE_FAIL = 'GET_SEARCHED_SITE_FAIL'; // Request failed

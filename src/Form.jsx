@@ -26,7 +26,10 @@ const {
     fatherName, 
     address, 
     status, 
-    openingDate 
+    openingDate,
+    DOB,
+    project,
+    nationality 
 } = draw || {};
 
     return (<>
@@ -56,7 +59,10 @@ const {
                         <p><strong>PAN No:</strong> {PANno}</p>
                         <p><strong>Father's Name:</strong> {fatherName}</p>
                         <p><strong>Address:</strong> {address}</p>
-                        <p><strong>Status:</strong> {status}</p>
+                        <p><strong>Status:</strong> {status} </p>
+                        <p><strong>DOB:</strong> {new Date(DOB).toLocaleDateString()}</p>
+                        <p><strong>Project:</strong> {project}</p>
+                        <p><strong>Nationality:</strong> {nationality}</p>
                         <p><strong>Opening Date:</strong> {new Date(openingDate).toLocaleDateString()}</p>
 
          </div>
@@ -64,7 +70,6 @@ const {
         </div>
       </div>
 
-      djbbjdebj
       </>
     );
   };
