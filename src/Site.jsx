@@ -94,6 +94,21 @@ const Site = () => {
           </>
         )}
       </div>
+
+
+
+
+      <div className="video-container" style={{margin:'2vmax 0.5vmax'}}>
+          <iframe
+            width="100%"
+            height="26vmax"
+            src="https://www.youtube.com/embed/"
+            title="How to Apply - YouTube"
+            frameBorder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        </div>
     </>
   );
 };

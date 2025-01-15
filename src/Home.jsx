@@ -32,6 +32,9 @@ const Home = () => {
     budget: '', // New budget field
   });
 
+  // State for toggling LuckyDrawForm
+  const [showLuckyDraw, setShowLuckyDraw] = useState(false);
+
   // Handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -64,17 +67,13 @@ const Home = () => {
       return;
     }
 
-
-
     // Dispatch the action to submit the form
     dispatch(faqform(formData));
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     toast.success(text);
-    },[text]);
-    
-
+  }, [text]);
 
   const goto = (id) => {
     window.open(`/site/${id}`, '_blank');
@@ -123,8 +122,7 @@ const Home = () => {
         )}
       </div>
 
-     
-       <Searching /> 
+      
 
       <div className="overview">
         <div className="overviewText" style={{ borderRight: '1.5px solid gray' }}>
@@ -150,7 +148,7 @@ const Home = () => {
           <iframe
             width="100%"
             height="26vmax"
-            src="https://www.youtube.com/embed/E7kbA9-ch9Q?si=G0X_klj_otm3QPXb"
+            src="https://www.youtube.com/embed/WfL4u75spXc?si=Mnj5_CGTt4D1xa-e"
             title="How to Apply - YouTube"
             frameBorder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
@@ -212,7 +210,7 @@ const Home = () => {
                 <option value="">Select your budget</option>
                 <option value="10 lakh to 20 lakh">10 lakh to 20 lakh</option>
                 <option value="30 lakh to 40 lakh">30 lakh to 40 lakh</option>
-                <option value="3 crore to 4 crore">3 crore to 4 crore</option>
+                <option value="3 crore to 4 crore">3 crore and Above</option>
               </select>
             </div>
 
@@ -223,6 +221,7 @@ const Home = () => {
         </div>
       </div>
 
+     
       <div
         className="ongoing"
         style={{
@@ -294,11 +293,24 @@ const Home = () => {
             building a secure future with prime land investments.
           </p>
 
-          <button className="contact-us-btn">Contact Us</button>
+          
         </div>
       </div>
 
-      <LuckyDrawForm />
+
+       {/* New Button to show Lucky Draw */}
+       <div className="lucky-draw-btn-container">
+        <button
+          className="lucky-draw-btn"
+          onClick={() => setShowLuckyDraw(!showLuckyDraw)}
+        >
+          Fill Lucky Draw
+        </button>
+      </div>
+
+      {/* Conditional rendering of LuckyDrawForm */}
+      {showLuckyDraw && <LuckyDrawForm />}
+
     </>
   );
 };

@@ -274,6 +274,9 @@ const LuckyDrawForm = () => {
                     </div>
                 )}
 
+
+               <p style={{color:'black'}}><span>Note: </span>The amount of ₹5,100 is refundable in case of no allotment  under this scheme. </p>
+
                 <div className="form-actions">
                     {/* Button text changes based on isProcessing state */}
                     <button type="submit" className="submit-btn">
