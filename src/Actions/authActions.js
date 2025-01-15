@@ -24,7 +24,8 @@ export const sendSignupOtp = (name, email) => async (dispatch) => {
         const config = {
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            
         };
 
         const { data } = await axiosInstance.post('/api/v1/sendSignupotp', { name, email }, config);
