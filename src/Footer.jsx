@@ -31,12 +31,12 @@ const Footer = () => {
         <p>Follow Us</p>
         <p><FaInstagramSquare/><a href='https://www.instagram.com/navbharatniwas/' style={{color:'white'}}>Instagram</a> </p>
         <p><FaFacebook/> <a href='https://www.facebook.com/NavBharatNiwas'  style={{color:'white'}}> FaceBook</a></p>
-        <p><FaYoutube/> YouTube</p>
+        <p><FaSquareXTwitter/> <a href='http://www.youtube.com/@NavBharatNiwas'  style={{color:'white'}}> YouTube</a></p>
        
-        <p><FaSquareXTwitter/> X</p>
+      
 
-        <p>Privacy Policy</p>
-        <p>Terms & Conditions</p>
+       
+        <p> <a href='/T'  target='_blank' style={{color:'white'}}>Terms and Conditions</a></p>
       </div>
     </div>
   );

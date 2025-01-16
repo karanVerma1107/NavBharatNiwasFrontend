@@ -48,10 +48,8 @@ const Header = () => {
         </div>
 
         <div className="rightSide">
-          <div className="hamburger-container">
-            <FaBars className="hamburger-icon" />
-          </div>
-          <div className="vertical-line"></div>
+         
+          
           <div className="login-container">
             {auth ? (
               <FaUser className="user-icon" style={{fontSize:'1.9vmax', cursor:'pointer'}}  onClick={toggleUserShow}/>

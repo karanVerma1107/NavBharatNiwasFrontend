@@ -10,6 +10,7 @@ import FormRelated from './FormRelated'
 import Site from './Site'
 import Form from './Form'
 import Result from './Result'
+import T from './T'
 
 function App() {
  
@@ -26,6 +27,7 @@ function App() {
           <Route path='/site/:id' element={<Site/>}/>
           <Route path='/draw/:id' element={<Form/>}/>
           <Route path='/result/:formId' element={<Result/>}/>
+          <Route path = '/T' element={<T/>}/>
          
         </Routes>
         <Footer/>

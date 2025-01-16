@@ -5,6 +5,7 @@ import './Findalldraw.css'; // Import the CSS file for styling
 import ImageShowFull from './imageShowFull';
 import { passToresult } from './Actions/formAction';
 import { toast } from 'react-toastify';
+import { updateLuckyDrawStatus } from './Actions/formAction';
 
 const Findalldraw = () => {
     const dispatch = useDispatch();
@@ -37,19 +38,33 @@ const Findalldraw = () => {
         }
     };
 
+    // For handling the allot value input
+    const [allot, setAllot] = useState(''); // State to store the allot value
 
-    const handlePassToResult = (id) => {
-        dispatch(passToresult(id));
+    const handleAllotChange = (e) => {
+        setAllot(e.target.value); // Update allot value on input change
     };
 
-    const goto = (id)=>{
+    const handlePassToResult = (id, allot) => {
+        console.log('Pass to result triggered');
+        console.log('LuckyDraw ID:', id);
+        console.log('Allot:', allot);
+        dispatch(passToresult(id, allot)); // Pass both ID and allot to the action
+    };
+
+    const goto = (id) => {
         window.open(`/draw/${id}`, '_blank');
-      }
+    };
+
+
+    const handleReject = (id) => {
+        console.log('Reject triggered');
+        dispatch(updateLuckyDrawStatus(id, 'reject')); // Pass the ID and 'reject' status
+    };
 
 
 
-
-      // Display toast notifications when Message or Error changes
+    // Display toast notifications when Message or Error changes
     useEffect(() => {
         if (Message) {
             toast.success(Message); // Show success message as toast
@@ -58,8 +73,6 @@ const Findalldraw = () => {
             toast.error(Error); // Show error message as toast
         }
     }, [Message, Error]);
-
-
 
     // Fetch Lucky Draws when the component mounts or when the page changes
     useEffect(() => {
@@ -76,7 +89,7 @@ const Findalldraw = () => {
 
             <div className="lucky-draws-wrapper">
                 {luckyDraws.map((luckyDraw) => (
-                    <div key={luckyDraw._id} className="lucky-draw-item"  onClick={()=>{goto(luckyDraw._id)}} >
+                    <div key={luckyDraw._id} className="lucky-draw-item" onClick={() => { goto(luckyDraw._id) }}>
                         <img
                             src={luckyDraw.image}
                             alt="Lucky Draw"
@@ -87,14 +100,52 @@ const Findalldraw = () => {
                         <p className="lucky-draw-info">Father's Name: {luckyDraw.fatherName}</p>
                         <p className="lucky-draw-info">Address: {luckyDraw.address}</p>
 
+                        {/* Input field for allot */}
+                        <input
+                            type="text"
+                            value={allot}
+                            onChange={handleAllotChange}
+                            placeholder="Enter allot"
+                            className="allot-input"
+                            style={{
+                                width: '30vmax',
+                                height: '4vmax',
+                                fontSize: '1.5vmax',
+
+                            }}
+                        />
+
+                        {/* Pass to Result button */}
                         <button
                             className="pass-to-result-btn"
                             onClick={(e) => {
                                 e.stopPropagation(); // Prevent triggering the image click action
-                                handlePassToResult(luckyDraw._id);
+                                handlePassToResult(luckyDraw._id, allot); // Pass both id and allot value
                             }}
                         >
                             Pass to Result
+                        </button>
+
+
+                        <button
+                            className="reject-btn"
+                            onClick={(e) => {
+                                e.stopPropagation(); // Prevent triggering the image click action
+                                handleReject(luckyDraw._id); // Pass the id and 'reject' status
+                            }}
+                            style={{
+                                width: '30vmax',
+                                height: '5vmax',
+                                fontSize: '1.5vmax',
+                                backgroundColor: '#FF5733', // Red for reject
+                                color: '#fff',
+                                border: 'none',
+                                borderRadius: '8px',
+                                cursor: 'pointer',
+                                marginBottom: '1vmax',
+                            }}
+                        >
+                            Reject
                         </button>
                     </div>
                 ))}

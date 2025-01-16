@@ -324,11 +324,11 @@ export const getLuckyDraws = (page) => async (dispatch) => {
 
 
 // Action to fetch all LuckyDraws with pagination
-export const passToresult = (id) => async (dispatch) => {
+export const passToresult = (id, allot) => async (dispatch) => {
     try {
         dispatch({ type: PUSH_TO_RESULT_REQ });
 
-        const response = await axiosInstance.put(`/api/v1/pass/${id}`);
+        const response = await axiosInstance.put(`/api/v1/pass/${id}/${allot}`);
         
         dispatch({
             type: PUSH_TO_RESULT_SUCCESS,
