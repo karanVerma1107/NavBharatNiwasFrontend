@@ -17,12 +17,12 @@
         var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
         if (isSafari) {
-          // Safari workaround to enable cookies
+          // Safari workaround to enable cookies (user must click for this to work)
           document.addEventListener('click', function() {
-            document.cookie = 'safariCookieTest=1; SameSite=None; Secure=true;';
+            // Try setting the cookie on user click to ensure Safari allows it
+            document.cookie = 'safariCookieTest=1; SameSite=None; Secure; path=/;';
+            console.log('Safari detected. Cookie workaround applied.');
           });
-
-          console.log('Safari detected. Cookie workaround applied.');
         }
       })();
     </script>
