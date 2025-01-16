@@ -89,14 +89,14 @@ const Findalldraw = () => {
 
             <div className="lucky-draws-wrapper">
                 {luckyDraws.map((luckyDraw) => (
-                    <div key={luckyDraw._id} className="lucky-draw-item" onClick={() => { goto(luckyDraw._id) }}>
+                    <div key={luckyDraw._id} className="lucky-draw-item" >
                         <img
                             src={luckyDraw.image}
                             alt="Lucky Draw"
                             className="lucky-draw-img"
                             onClick={() => openModal(luckyDraw.image)} // Open modal on image click
                         />
-                        <h3 className="lucky-draw-name">{luckyDraw.name}</h3>
+                        <h3 className="lucky-draw-name"  onClick={() => { goto(luckyDraw._id) }}>{luckyDraw.name}</h3>
                         <p className="lucky-draw-info">Father's Name: {luckyDraw.fatherName}</p>
                         <p className="lucky-draw-info">Address: {luckyDraw.address}</p>
 
@@ -108,8 +108,8 @@ const Findalldraw = () => {
                             placeholder="Enter allot"
                             className="allot-input"
                             style={{
-                                width: '30vmax',
-                                height: '4vmax',
+                                width: '12vx',
+                                height: '2.5x',
                                 fontSize: '1.5vmax',
 
                             }}
@@ -134,8 +134,8 @@ const Findalldraw = () => {
                                 handleReject(luckyDraw._id); // Pass the id and 'reject' status
                             }}
                             style={{
-                                width: '30vmax',
-                                height: '5vmax',
+                                width: '5vmax',
+                                height: '2.5vmax',
                                 fontSize: '1.5vmax',
                                 backgroundColor: '#FF5733', // Red for reject
                                 color: '#fff',
