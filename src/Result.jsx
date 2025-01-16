@@ -48,6 +48,8 @@ const Result = () => {
                 <h3 className="lucky-draw-name">{luckyDraw.name}</h3>
                 <p className="lucky-draw-info">Father's Name: {luckyDraw.fatherName}</p>
                 <p className="lucky-draw-info">ID: {luckyDraw._id}</p>
+                <p className="lucky-draw-info">allotment: {luckyDraw.allotment}</p>
+
               </div>
 
             </div>

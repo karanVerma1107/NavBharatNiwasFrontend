@@ -60,6 +60,11 @@ const Findalldraw = () => {
     const handleReject = (id) => {
         console.log('Reject triggered');
         dispatch(updateLuckyDrawStatus(id, 'reject')); // Pass the ID and 'reject' status
+
+        // After a delay of 2 seconds (2000 milliseconds), reload the page
+    setTimeout(() => {
+        window.location.reload(); // This will reload the current page
+    }, 2000);
     };
 
 
