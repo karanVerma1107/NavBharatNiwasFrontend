@@ -10,21 +10,6 @@
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
 
-    <!-- Safari Cookie Workaround -->
-    <script>
-      (function() {
-        // Detect if the browser is Safari
-        var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-
-        if (isSafari) {
-          // Safari workaround to enable cookies (user must click for this to work)
-          document.addEventListener('click', function() {
-            // Try setting the cookie on user click to ensure Safari allows it
-            document.cookie = 'safariCookieTest=1; SameSite=None; Secure; path=/;';
-            console.log('Safari detected. Cookie workaround applied.');
-          });
-        }
-      })();
-    </script>
+  
   </body>
 </html>
