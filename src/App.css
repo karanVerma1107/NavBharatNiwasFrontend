@@ -1,0 +1,32 @@
+.cookie-consent {
+    position: fixed;
+   margin-top: 7vmax;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    text-align: center;
+    padding: 15px;
+    z-index: 1000;
+  }
+  
+  .cookie-consent button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin: 0 5px;
+  }
+  
+  .cookie-consent button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Style for Close Button */
+  .cookie-consent button:last-child {
+    background-color: #f44336; /* Red color for close button */
+  }
+  
+  .cookie-consent button:last-child:hover {
+    background-color: #e53935; /* Darker red */
+  }
