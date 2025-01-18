@@ -23,7 +23,7 @@ export const sendSignupOtp = (name, email) => async (dispatch) => {
 
         const config = {
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
             
         };
@@ -53,7 +53,8 @@ export const verifySignupOtp = (email, otp) => async (dispatch) => {
         const config = {
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            withCredentials: true
         };
 
         const { data } = await axiosInstance.post('/api/v1/verifySignupOtp', { email, otp }, config);
@@ -111,7 +112,8 @@ export const verifyLoginOtp = (email, Otp) => async (dispatch) => {
         const config = {
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            withCredentials: true
         };
 
         const { data } = await axiosInstance.post('/api/v1/verifyLoginOtp', { email, Otp }, config);
