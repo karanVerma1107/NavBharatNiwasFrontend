@@ -148,7 +148,7 @@ const Home = () => {
           <iframe
             width="100%"
             height="26vmax"
-            src="https://www.youtube-nocookie.com/embed/6BDaicmindM?si=qVs6yJg1Ri2Wx3_V"
+            src="https://www.youtube-nocookie.com/embed/6BDaicmindM?si=qVs6yJg1Ri2Wx3_V?rel=0$autoplay=1&controls=1&showinfo=0"
             title="How to Apply - YouTube"
             frameBorder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
