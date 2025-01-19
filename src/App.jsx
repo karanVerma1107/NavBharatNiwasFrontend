@@ -53,16 +53,7 @@ function App() {
         <Header />
         <Callnow />
 
-        {/* Cookie Consent Banner */}
-        {showCookieBanner && (
-          <div id="cookieConsent" className="cookie-consent">
-            <p>
-              This website uses cookies to improve your experience. Cookies are required for login functionality.
-              <button onClick={handleAllowCookies}>Allow Cookies</button>
-              <button onClick={handleCloseBanner}>Close</button>
-            </p>
-          </div>
-        )}
+      
 
         <Routes>
           <Route path="/" element={<Home />} />
