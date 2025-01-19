@@ -1,6 +1,12 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
+
+  # Redirect non-www to www
+  RewriteCond %{HTTP_HOST} ^navbharatniwas\.in [NC]
+  RewriteRule ^(.*)$ https://www.navbharatniwas.in/$1 [L,R=301]
+
+  # SPA fallback to index.html
   RewriteRule ^index\.html$ - [L]
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
