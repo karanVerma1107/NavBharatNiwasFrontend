@@ -23,13 +23,23 @@ function App() {
       setCookiesAllowed(true);
       setShowCookieBanner(false); // Hide banner if consented
     }
+
+    // Check if cookies are blocked in the browser (using test cookie)
+    if (document.cookie.indexOf('testCookie') === -1) {
+      // Cookies are likely blocked
+      setShowCookieBanner(true); // Show consent banner if cookies are blocked
+    }
   }, []);
 
   const handleAllowCookies = () => {
+    // Set a test cookie to confirm cookies can be set
+    document.cookie = "testCookie=test; path=/; SameSite=None; Secure; HttpOnly;";
+    
     // Save user preference and hide the consent banner
     localStorage.setItem('cookiesAllowed', 'true');
     setCookiesAllowed(true);
     setShowCookieBanner(false); // Hide the banner
+    alert('Cookies have been allowed for login purposes.');
   };
 
   const handleCloseBanner = () => {
@@ -47,7 +57,7 @@ function App() {
         {showCookieBanner && (
           <div id="cookieConsent" className="cookie-consent">
             <p>
-              This website uses cookies to improve your experience.
+              This website uses cookies to improve your experience. Cookies are required for login functionality.
               <button onClick={handleAllowCookies}>Allow Cookies</button>
               <button onClick={handleCloseBanner}>Close</button>
             </p>
