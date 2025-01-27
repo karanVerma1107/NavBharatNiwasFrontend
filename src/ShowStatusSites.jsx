@@ -4,7 +4,7 @@ import { getOngoingSites, getUpcomingSites, getTestimonialSites } from './Action
 import './showStatusSites.css';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Import carousel styles
 import { Carousel } from 'react-responsive-carousel';
-import ImageShowFull from './imageShowFull';
+import ImageShowFull from './ImageShowFull';
 import './showSiteStatus.css'
 import { FaStarOfLife,  } from "react-icons/fa";
 import { Link } from 'react-router-dom';
