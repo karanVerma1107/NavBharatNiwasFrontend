@@ -5,7 +5,7 @@ import { getImages } from './Actions/siteActions';
 import { useDispatch, useSelector } from 'react-redux';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Import carousel styles
 import { Carousel } from 'react-responsive-carousel';
-import ShowStatusSites from './showStatusSites';
+import ShowStatusSites from './ShowStatusSites';
 import pay from './payment.jpeg';
 import aff from './afford.jpg';
 import { toast } from 'react-toastify';
