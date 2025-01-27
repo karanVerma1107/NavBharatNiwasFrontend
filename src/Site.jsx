@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { getSitebyID } from './Actions/siteActions';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Import carousel styles
 import { Carousel } from 'react-responsive-carousel';
-import ImageShowFull from './imageShowFull';
+import ImageShowFull from './ImageShowFull';
 import './siteStyles.css';  // We'll define styles in this file
 import { TiTick } from "react-icons/ti";
 import Loading from './Loading';
