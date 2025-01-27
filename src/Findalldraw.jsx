@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getLuckyDraws } from './Actions/formAction';
 import './Findalldraw.css'; // Import the CSS file for styling
-import ImageShowFull from './imageShowFull';
+import ImageShowFull from './ImageShowFull';
 import { passToresult } from './Actions/formAction';
 import { toast } from 'react-toastify';
 import { updateLuckyDrawStatus } from './Actions/formAction';
