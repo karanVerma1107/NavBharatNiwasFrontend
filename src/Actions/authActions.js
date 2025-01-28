@@ -57,7 +57,7 @@ export const verifySignupOtp = (email, otp) => async (dispatch) => {
             withCredentials: true
         };
 
-        const { data } = await axiosInstance.post('/api/v1/verifySignupOtp', { email, otp }, config,npm );
+        const { data } = await axiosInstance.post('/api/v1/verifySignupOtp', { email, otp }, config);
 
         dispatch({
             type: VERIFY_SIGNUP_OTP_SUCCESS,
