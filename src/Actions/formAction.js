@@ -30,7 +30,10 @@ import { SUBMIT_ISALLOW_REQ,
     GET_RESULT_FAIL,
     FILL_FAQ_FORM_REQ,
     FILL_FAQ_FORM_SUCCESS,
-    FILL_FAQ_FORM_FAIL
+    FILL_FAQ_FORM_FAIL,
+    FILL_COMPANY_FORM_REQUEST,
+    FILL_COMPANY_FORM_SUCCESS,
+    FILL_COMPANY_FORM_FAIL
  } from "../Constant/formConstant";
 
 import axiosInstance from "../../axiosInstance";
@@ -236,6 +239,7 @@ export const getLatestIsAppli = () => async (dispatch) => {
 
 
 
+
 // Action to add a draw
 export const createDraw = (formData) => async (dispatch) => {
     console.log("formData", formData);
@@ -256,12 +260,20 @@ export const createDraw = (formData) => async (dispatch) => {
         form.append('DOB', formData.DOB); // Added DOB field
         form.append('nationality', formData.nationality); // Added nationality field
         form.append('project', formData.project); // Added project field
+        form.append('paymentPlan', formData.paymentPlan); // Added paymentPlan field
 
-        
+        // Append the images (Aadhaar and PAN photos) if they exist
+        if (formData.adhaarPhoto) {
+            form.append('adhaarPhoto', formData.adhaarPhoto); // Append the Adhaar photo
+        }
 
-        // Append the image file to the FormData object
+        if (formData.panPhoto) {
+            form.append('panPhoto', formData.panPhoto); // Append the PAN photo
+        }
+
+        // Append the main profile image if it exists
         if (formData.image) {
-            form.append('image', formData.image); // Append the image with the field name 'image'
+            form.append('image', formData.image); // Append the profile image
         }
 
         // Log FormData entries (optional for debugging)
@@ -277,7 +289,7 @@ export const createDraw = (formData) => async (dispatch) => {
         };
 
         // Make POST request to create the draw
-        const  { data }  = await axiosInstance.post('/api/v1/create-draw', form, config);
+        const { data } = await axiosInstance.post('/api/v1/create-draw', form, config);
 
         // Dispatch success action with response data
         dispatch({
@@ -295,6 +307,70 @@ export const createDraw = (formData) => async (dispatch) => {
         });
     }
 };
+
+
+
+export const createCompanyFill = (formData) => async (dispatch) => {
+    console.log("formData", formData);  // Debugging log for form data
+
+    try {
+        // Dispatch the request action to update the state (isProcessing = true)
+        dispatch({ type: FILL_COMPANY_FORM_REQUEST });
+
+        // Create a FormData object for handling file uploads and other form data
+        const form = new FormData();
+        form.append('companyName', formData.companyName);
+        form.append('authorizedSignatory', formData.authorizedSignatory);
+        form.append('gstNumber', formData.gstNumber);
+        form.append('panNumber', formData.panNumber);
+        form.append('companyAddress', formData.companyAddress);
+        form.append('authorizedSignatoryAddress', formData.authorizedSignatoryAddress);
+        form.append('paymentPlan', formData.paymentPlan);
+        form.append('project', formData.project); // Added project field
+
+        // Append the images (PAN and Passport photos)
+        if (formData.panPhoto) {
+            form.append('panPhoto', formData.panPhoto);
+        }
+
+        if (formData.passportPhoto) {
+            form.append('passportPhoto', formData.passportPhoto);
+        }
+
+        // Log FormData entries (optional for debugging purposes)
+        for (let [key, value] of form.entries()) {
+            console.log(key, value);
+        }
+
+        // Configure headers for the request
+        const config = {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        };
+
+        // Make POST request to create the company fill form
+        const { data } = await axiosInstance.post('/api/v1/company-fill', form, config);
+
+        // Dispatch success action with response data
+        dispatch({
+            type: FILL_COMPANY_FORM_SUCCESS,
+            payload: data,
+        });
+    } catch (error) {
+        console.log("Error response:", error.response);  // Log error response for debugging
+
+        // Dispatch failure action if there is an error
+        dispatch({
+            type: FILL_COMPANY_FORM_FAIL,
+            payload: error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
+        });
+    }
+};
+
+
 
 
 

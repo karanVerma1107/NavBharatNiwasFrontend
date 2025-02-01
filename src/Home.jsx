@@ -3,7 +3,7 @@ import './home.css';
 import Loading from './Loading';
 import { getImages } from './Actions/siteActions';
 import { useDispatch, useSelector } from 'react-redux';
-import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Import carousel styles
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
 import ShowStatusSites from './ShowStatusSites';
 import pay from './payment.jpeg';
@@ -14,6 +14,7 @@ import app from './app.png';
 import Searching from './Searching';
 import { faqform } from './Actions/formAction';
 import LuckyDrawForm from './LuckyDrawForm';
+import CompanyFillForm from './CompanyFillForm'; // Import the CompanyFillForm
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -24,18 +25,17 @@ const Home = () => {
     dispatch(getImages());
   }, [dispatch]);
 
-  // State to store form data
   const [formData, setFormData] = useState({
     name: '',
     phoneNo: '',
     city: '',
-    budget: '', // New budget field
+    budget: '',
   });
 
-  // State for toggling LuckyDrawForm
-  const [showLuckyDraw, setShowLuckyDraw] = useState(false);
+  const [showLuckyDrawOptions, setShowLuckyDrawOptions] = useState(false); // State to show options
+  const [showLuckyDrawForm, setShowLuckyDrawForm] = useState(false); // State to show LuckyDrawForm
+  const [showCompanyFillForm, setShowCompanyFillForm] = useState(false); // State to show CompanyFillForm
 
-  // Handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -44,13 +44,10 @@ const Home = () => {
     });
   };
 
-  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const { name, phoneNo, city, budget } = formData;
 
-    // Validate the data
     if (!name || !phoneNo || !city || !budget) {
       alert('Please fill in all fields.');
       return;
@@ -67,7 +64,6 @@ const Home = () => {
       return;
     }
 
-    // Dispatch the action to submit the form
     dispatch(faqform(formData));
   };
 
@@ -77,6 +73,25 @@ const Home = () => {
 
   const goto = (id) => {
     window.open(`/site/${id}`, '_blank');
+  };
+
+  // Handle Lucky Draw button click
+  const handleLuckyDrawClick = () => {
+    setShowLuckyDrawOptions(true); // Show the options modal
+  };
+
+  // Handle Individual Fill selection
+  const handleIndividualFill = () => {
+    setShowLuckyDrawOptions(false); // Hide options
+    setShowLuckyDrawForm(true); // Show LuckyDrawForm
+    setShowCompanyFillForm(false); // Ensure CompanyFillForm is hidden
+  };
+
+  // Handle Company Fill selection
+  const handleCompanyFill = () => {
+    setShowLuckyDrawOptions(false); // Hide options
+    setShowCompanyFillForm(true); // Show CompanyFillForm
+    setShowLuckyDrawForm(false); // Ensure LuckyDrawForm is hidden
   };
 
   return (
@@ -107,6 +122,7 @@ const Home = () => {
                     />
                     <div className="carousel-caption">
                       <h1>{site.name}</h1>
+                      <h2 style={{ color: 'white' }}>{site.current}</h2>
                       <p>Exclusively by Nav Bharat Niwas</p>
                       <button
                         className="view-details-button"
@@ -122,23 +138,18 @@ const Home = () => {
         )}
       </div>
 
-      
-
       <div className="overview">
         <div className="overviewText" style={{ borderRight: '1.5px solid gray' }}>
-          <img src={aff} />
+          <img src={aff} alt="Affordable" />
         </div>
-
         <div className="overviewText">
-          <img src={pay} />
+          <img src={pay} alt="Payment" />
         </div>
-
         <div className="overviewText" style={{ borderLeft: '1.5px solid gray' }}>
-          <img src={app} />
+          <img src={app} alt="App" />
         </div>
-
         <div className="overviewText" style={{ borderLeft: '1.5px solid gray' }}>
-          <img src={grow} />
+          <img src={grow} alt="Growth" />
         </div>
       </div>
 
@@ -221,7 +232,6 @@ const Home = () => {
         </div>
       </div>
 
-     
       <div
         className="ongoing"
         style={{
@@ -292,25 +302,92 @@ const Home = () => {
             potential. Join us at Nav Bharat Niwas and take the first step towards
             building a secure future with prime land investments.
           </p>
-
-          
         </div>
       </div>
 
-
-       {/* New Button to show Lucky Draw */}
-       <div className="lucky-draw-btn-container">
+      {/* Lucky Draw Button */}
+      <div className="lucky-draw-btn-container">
         <button
           className="lucky-draw-btn"
-          onClick={() => setShowLuckyDraw(!showLuckyDraw)}
+          onClick={handleLuckyDrawClick}
+          style={{
+            fontSize: '1.5vmax',
+            padding: '1vmax 2vmax',
+            backgroundColor: '#2e3c52',
+            color: 'white',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer',
+          }}
         >
           Fill Lucky Draw
         </button>
       </div>
 
-      {/* Conditional rendering of LuckyDrawForm */}
-      {showLuckyDraw && <LuckyDrawForm />}
+      {/* Lucky Draw Options Modal */}
+      {showLuckyDrawOptions && (
+        <div
+          style={{
+            position: 'fixed',
+            top: '0',
+            left: '0',
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 1000,
+          }}
+        >
+          <div
+            style={{
+              backgroundColor: 'white',
+              padding: '2vmax',
+              borderRadius: '10px',
+              textAlign: 'center',
+            }}
+          >
+            <h3 style={{ fontSize: '1.5vmax', marginBottom: '1vmax' }}>
+              Choose an option:
+            </h3>
+            <button
+              onClick={handleIndividualFill}
+              style={{
+                fontSize: '1.5vmax',
+                padding: '1vmax 2vmax',
+                backgroundColor: '#2e3c52',
+                color: 'white',
+                border: 'none',
+                borderRadius: '5px',
+                cursor: 'pointer',
+                margin: '0.5vmax',
+              }}
+            >
+              Individual Fill
+            </button>
+            <button
+              onClick={handleCompanyFill}
+              style={{
+                fontSize: '1.5vmax',
+                padding: '1vmax 2vmax',
+                backgroundColor: '#2e3c52',
+                color: 'white',
+                border: 'none',
+                borderRadius: '5px',
+                cursor: 'pointer',
+                margin: '0.5vmax',
+              }}
+            >
+              Company Fill
+            </button>
+          </div>
+        </div>
+      )}
 
+      {/* Render LuckyDrawForm or CompanyFillForm based on selection */}
+      {showLuckyDrawForm && <LuckyDrawForm />}
+      {showCompanyFillForm && <CompanyFillForm />}
     </>
   );
 };

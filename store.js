@@ -3,7 +3,7 @@ import { thunk }  from 'redux-thunk';
 import {composeWithDevTools}from 'redux-devtools-extension'
 import { authReducer, userReducer } from './src/Reducers/authReducer';
 import { AddsiteReducer, formAPPReducer, getImagesReducer, getOngoingSiteReducer, getTestimonialSiteReducer, getUpcomingSiteReducer, siteReducer, siteSearchReducer } from './src/Reducers/siteReducer';
-import { applicationsReducer, faqFormReducer, fillLuckyDrawReducer,  formAndResultsReducer,  formReducer, getIsAllowReducer, getluckyDrawReducer, luckydrawReducer, passtoresult, resultReducer, statusUpdateReducer } from './src/Reducers/formreducer';
+import { applicationsReducer, faqFormReducer, fillCompanyFormReducer, fillLuckyDrawReducer,  formAndResultsReducer,  formReducer, getIsAllowReducer, getluckyDrawReducer, luckydrawReducer, passtoresult, resultReducer, statusUpdateReducer } from './src/Reducers/formreducer';
 
 
 const rootReducer = combineReducers({
@@ -27,7 +27,8 @@ passResult:passtoresult,
 getresult: resultReducer,
 result:formAndResultsReducer,
 faq: faqFormReducer   ,
-search :siteSearchReducer
+search :siteSearchReducer,
+companyfill: fillCompanyFormReducer
 });
 
 // learn what thunk actually do

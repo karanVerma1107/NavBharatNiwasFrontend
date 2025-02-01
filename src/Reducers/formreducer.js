@@ -30,7 +30,10 @@ import { SUBMIT_ISALLOW_REQ,
     GET_RESULT_FAIL,
     FILL_FAQ_FORM_REQ,
     FILL_FAQ_FORM_SUCCESS,
-    FILL_FAQ_FORM_FAIL
+    FILL_FAQ_FORM_FAIL,
+    FILL_COMPANY_FORM_REQUEST,
+    FILL_COMPANY_FORM_SUCCESS,
+    FILL_COMPANY_FORM_FAIL
  } from "../Constant/formConstant";
 
  // Initial state for the reducer
@@ -69,6 +72,9 @@ export const formReducer = (state = initialState, action) => {
             return state;
     }
 };
+
+
+
 
 
 // Initial state for the reducer
@@ -144,6 +150,37 @@ export const fillLuckyDrawReducer = (state = initialState2, action) => {
             return state;
     }
 };
+
+
+
+export const fillCompanyFormReducer = (state = initialState2, action) => {
+    switch (action.type) {
+        case FILL_COMPANY_FORM_REQUEST:
+            return {
+                ...state,
+                isProcessing: true,   // Set processing to true when request is made
+            };
+
+        case FILL_COMPANY_FORM_SUCCESS:
+            return {
+                ...state,
+                isProcessing: false,  // Set processing to false on success
+                messageContent: action.payload.message, // Store success message
+            };
+
+        case FILL_COMPANY_FORM_FAIL:
+            return {
+                ...state,
+                isProcessing: false,  // Set processing to false on failure
+                errorContent: action.payload,   // Store error message
+            };
+
+        default:
+            return state;
+    }
+};
+
+
 
 
 const initialState3 = {
