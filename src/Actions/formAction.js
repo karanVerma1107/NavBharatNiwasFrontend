@@ -33,7 +33,13 @@ import { SUBMIT_ISALLOW_REQ,
     FILL_FAQ_FORM_FAIL,
     FILL_COMPANY_FORM_REQUEST,
     FILL_COMPANY_FORM_SUCCESS,
-    FILL_COMPANY_FORM_FAIL
+    FILL_COMPANY_FORM_FAIL,
+    GET_COMPANY_FORM_REQ,
+    GET_COMPANY_FORM_SUCCESS,
+    GET_COMPANY_FORM_FAIL,
+    UPDATE_COMPANY_FORM_STATUS_REQ,
+    UPDATE_COMPANY_FORM_STATUS_SUCCESS,
+    UPDATE_COMPANY_FORM_STATUS_FAIL
  } from "../Constant/formConstant";
 
 import axiosInstance from "../../axiosInstance";
@@ -70,6 +76,53 @@ export const makeIsallow = (data) => async (dispatch) => {
         });
     }
 };
+
+
+
+
+export const updateCDrawStatus = (id, action) => async (dispatch) => {
+    try {
+        // Dispatching request action to indicate API call is in progress
+        dispatch({
+            type: UPDATE_COMPANY_FORM_STATUS_REQ,
+        });
+
+        // Define the request body
+        const data = {
+            id,       // LuckyDraw ID
+            action,   // Action to perform: 'approve' or 'reject'
+        };
+
+        // Define the config for the API request
+        const config = {
+            headers: {
+                'Content-Type': 'application/json', // Sending JSON data
+            },
+        };
+
+        console.log('alalala')
+
+        // Make the API request to update the LuckyDraw status
+        const response = await axiosInstance.put('/api/v1/update-company-status', data, config);
+
+        // If the request is successful, dispatch the success action
+        dispatch({
+            type: UPDATE_COMPANY_FORM_STATUS_SUCCESS,
+            payload: response.data,  // Store the response data (the updated LuckyDraw)
+        });
+
+    } catch (error) {
+        // If the request fails, dispatch the fail action with the error message
+        dispatch({
+            type: UPDATE_COMPANY_FORM_STATUS_FAIL,
+            payload: error.response ? error.response.data.message : error.message, // Handle error message
+        });
+    }
+};
+
+
+
+
 
 
 
@@ -176,6 +229,38 @@ export const getDrawbyId = (data) => async (dispatch) => {
         // If the request fails, dispatch the fail action with the error message
         dispatch({
             type: GET_LUCKYDRAW_BY_ID_FAIL,
+            payload: error.response ? error.response.data.message : error.message, // Get error message
+        });
+    }
+};
+
+
+
+
+
+
+export const getCDrawbyId = (data) => async (dispatch) => {
+    try {
+        // Dispatching request action to indicate API call is in progress
+        dispatch({
+            type: GET_COMPANY_FORM_REQ,
+        });
+
+        
+
+        // Make the API request
+        const response = await axiosInstance.get(`/api/v1/companyDraw/${data}`);
+
+        // If the request is successful, dispatch the success action
+        dispatch({
+            type: GET_COMPANY_FORM_SUCCESS,
+            payload: response.data.companyFill,  // Store the response data in the Redux state
+        });
+
+    } catch (error) {
+        // If the request fails, dispatch the fail action with the error message
+        dispatch({
+            type: GET_COMPANY_FORM_FAIL,
             payload: error.response ? error.response.data.message : error.message, // Get error message
         });
     }

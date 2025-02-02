@@ -33,7 +33,13 @@ import { SUBMIT_ISALLOW_REQ,
     FILL_FAQ_FORM_FAIL,
     FILL_COMPANY_FORM_REQUEST,
     FILL_COMPANY_FORM_SUCCESS,
-    FILL_COMPANY_FORM_FAIL
+    FILL_COMPANY_FORM_FAIL,
+    GET_COMPANY_FORM_REQ,
+    GET_COMPANY_FORM_FAIL,
+    GET_COMPANY_FORM_SUCCESS,
+    UPDATE_COMPANY_FORM_STATUS_REQ,
+    UPDATE_COMPANY_FORM_STATUS_SUCCESS,
+    UPDATE_COMPANY_FORM_STATUS_FAIL
  } from "../Constant/formConstant";
 
  // Initial state for the reducer
@@ -74,6 +80,40 @@ export const formReducer = (state = initialState, action) => {
 };
 
 
+
+// Initial state
+const initialState0 = {
+    loading: false,
+    companyFill: null,
+    error: null
+};
+
+// Reducer function
+export const getcompanyFormReducer = (state = initialState0, action) => {
+    switch (action.type) {
+        case GET_COMPANY_FORM_REQ:
+            return {
+                ...state,
+                loading: true,  // Set loading to true when request is made
+            };
+        case GET_COMPANY_FORM_SUCCESS:
+            return {
+                ...state,
+                loading: false,  // Set loading to false when success
+                companyFill: action.payload,  // Assign payload (company fill data)
+                error: null,  // Clear any error
+            };
+        case GET_COMPANY_FORM_FAIL:
+            return {
+                ...state,
+                loading: false,  // Set loading to false on failure
+                companyFill: null,  // Clear the company fill data
+                error: action.payload,  // Set the error message
+            };
+        default:
+            return state;
+    }
+};
 
 
 
@@ -179,6 +219,9 @@ export const fillCompanyFormReducer = (state = initialState2, action) => {
             return state;
     }
 };
+
+
+
 
 
 
@@ -292,6 +335,46 @@ export const statusUpdateReducer = (state = initialState5, action) => {
 
 
 
+const initialState01 = {
+    message: null,   // Array to hold applications data
+    processing: false,     // Indicates loading state
+    fault: null         // To store any errors
+};
+
+export const CstatusUpdateReducer = (state = initialState01, action) => {
+    switch (action.type) {
+        case UPDATE_COMPANY_FORM_STATUS_REQ:
+            return {
+                ...state,
+                processing: true,  // Set loading to true when the request starts
+                fault: null     // Clear any previous errors
+            };
+
+        case UPDATE_COMPANY_FORM_STATUS_SUCCESS:
+            return {
+                ...state,
+                processing: false,         // Set loading to false once request is done
+                message: action.payload.message, // Store the fetched applications data
+                fault: null             // Clear any errors
+            };
+
+        case UPDATE_COMPANY_FORM_STATUS_FAIL:
+            return {
+                ...state,
+                processing: false,  // Set loading to false when there's an error
+                fault: action.payload // Store the error message
+            };
+
+        default:
+            return state;
+    }
+};
+
+
+
+
+
+
 
 
 const initialState6 = {
@@ -333,6 +416,13 @@ export const getluckyDrawReducer = (state = initialState6, action) => {
         return state;
     }
   };
+
+
+
+
+
+
+
 
 
 

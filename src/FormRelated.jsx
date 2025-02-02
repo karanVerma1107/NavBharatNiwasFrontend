@@ -5,6 +5,7 @@ import { makeIsallow } from './Actions/formAction';
 import { toast } from 'react-toastify';  // Importing toast
 import SearchDraw from './SearchDraw';
 import Findalldraw from './Findalldraw';
+import SearchCompanyFill from './SearchCompanyFill';
 
 const FormRelated = () => {
   const dispatch = useDispatch();
@@ -107,6 +108,8 @@ const FormRelated = () => {
     </div>
     
     <SearchDraw/>
+
+    <SearchCompanyFill/>
 
 
    <Findalldraw/>
