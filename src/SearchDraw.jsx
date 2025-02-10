@@ -3,12 +3,26 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getDrawbyId, updateLuckyDrawStatus } from './Actions/formAction'; // Make sure the action is imported
 import { toast } from 'react-toastify';
 import './SearchDraw.css';
+import ImageShowFull from './ImageShowFull';
 
 const SearchDraw = () => {
   const [id, setId] = useState('');
   const { error, loading, appli } = useSelector(state => state.getdraw);
   const { message, fault, processing } = useSelector(state => state.updateStatus); // Extract message, fault, and processing
   const dispatch = useDispatch();
+  
+  // State for storing image to display in the modal
+  const [modalImage, setModalImage] = useState(null);
+
+  // Function to open modal with the selected image
+  const openModal = (image) => {
+    setModalImage(image);
+  };
+
+  // Function to close the modal
+  const closeModal = () => {
+    setModalImage(null);
+  };
 
   const handleSearch = () => {
     if (id) {
@@ -69,6 +83,31 @@ const SearchDraw = () => {
           {/* Add more fields based on the structure of appli */}
           <p><strong>Status:</strong> {appli.status}</p>
 
+          {/* Display PAN and Aadhaar Photos */}
+          {appli.adhaarPhoto && (
+            <div className="photo-container">
+              <p><strong>Aadhaar Photo:</strong></p>
+              <img
+                src={appli.adhaarPhoto} 
+                alt="Aadhaar" 
+                style={{ width: '17vmax', height: '15vmax', objectFit: 'cover' }}
+                onClick={() => openModal(appli.adhaarPhoto)}  // Open modal on image click
+              />
+            </div>
+          )}
+
+          {appli.panPhoto && (
+            <div className="photo-container">
+              <p><strong>PAN Photo:</strong></p>
+              <img
+                src={appli.panPhoto} 
+                alt="PAN" 
+                style={{ width: '17vmax', height: '15vmax', objectFit: 'cover' }}
+                onClick={() => openModal(appli.panPhoto)}  // Open modal on image click
+              />
+            </div>
+          )}
+
           {/* Approve and Reject buttons appear for pending or approved status */}
           {['pending', 'approved'].includes(appli.status) && (
             <div className="action-buttons">
@@ -93,6 +132,9 @@ const SearchDraw = () => {
           {processing && <p className="processing-text">Processing...</p>}
         </div>
       )}
+
+      {/* Conditionally render the modal if modalImage exists */}
+      {modalImage && <ImageShowFull image={modalImage} onClose={closeModal} />}
     </div>
   );
 };

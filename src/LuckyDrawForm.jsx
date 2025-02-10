@@ -23,6 +23,8 @@ const LuckyDrawForm = () => {
         nationality: '',       // New field for nationality
         project: '',           // New field for project
         paymentPlan: 'Down Payment Plan', // New field for Payment Plan
+        plotSize: '125 SQY - 150 SQY', // Modified Plot Size
+        preference: 'Corner', // Modified Preference
         image: null,
         adhaarPhoto: null,     // New field for Adhaar Photo
         panPhoto: null         // New field for PAN Photo
@@ -226,7 +228,7 @@ const LuckyDrawForm = () => {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="project" className="label" >Project</label>
+                    <label htmlFor="project" className="label">Project</label>
                     <input
                         type="text"
                         id="project"
@@ -254,7 +256,7 @@ const LuckyDrawForm = () => {
 
                 {/* Payment Plan Dropdown */}
                 <div className="form-group">
-                    <label htmlFor="paymentPlan" className="label" >Payment Plan</label>
+                    <label htmlFor="paymentPlan" className="label">Payment Plan</label>
                     <select
                         id="paymentPlan"
                         name="paymentPlan"
@@ -262,13 +264,49 @@ const LuckyDrawForm = () => {
                         onChange={handleChange}
                         className="input-field"
                         required
-                        style={{backgroundColor: 'white'}}
+                        style={{ backgroundColor: 'white' }}
                     >
                         <option value="Down Payment Plan">Down Payment Plan</option>
                         <option value="Possession Link Payment Plan">Possession Link Payment Plan</option>
                         <option value="Flexi Payment Plan">Flexi Payment Plan</option>
                     </select>
                 </div>
+
+                <div className="form-group">
+    <label htmlFor="plotSize" className="label">Plot Size</label>
+    <select
+        id="plotSize"
+        name="plotSize"
+        value={formData.plotSize}
+        onChange={handleChange}
+        className="input-field"
+        required
+        style={{ backgroundColor: 'white' }}
+    >
+        <option value="">Select Plot Size</option>
+        <option value="125 SQY - 150 SQY">125 SQY - 150 SQY</option>
+        <option value="150 SQY - 200 SQY">150 SQY - 200 SQY</option>
+        <option value="ABOVE 200 SQY">ABOVE 200 SQY</option>
+    </select>
+</div>
+
+<div className="form-group">
+    <label htmlFor="preference" className="label">Preference</label>
+    <select
+        id="preference"
+        name="preference"
+        value={formData.preference}
+        onChange={handleChange}
+        className="input-field"
+        required
+        style={{ backgroundColor: 'white' }}
+    >
+        <option value="">Select Preference</option>
+        <option value="Corner">Corner</option>
+        <option value="Park Facing">Park Facing</option>
+        <option value="N/A">N/A</option>
+    </select>
+</div>
 
                 {/* Adhaar Photo Upload */}
                 <div className="form-group">
@@ -312,7 +350,7 @@ const LuckyDrawForm = () => {
                     </div>
                 )}
 
-                <p style={{color:'black'}}><span>Note: </span>The amount of ₹5,100 is refundable in case of no allotment under this scheme.</p>
+                <p style={{ color: 'black' }}><span>Note: </span>The amount of ₹5,100 is refundable in case of no allotment under this scheme.</p>
 
                 <div className="form-actions">
                     <button type="submit" className="submit-btn">
