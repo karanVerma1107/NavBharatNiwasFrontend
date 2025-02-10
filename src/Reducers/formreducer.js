@@ -39,7 +39,13 @@ import { SUBMIT_ISALLOW_REQ,
     GET_COMPANY_FORM_SUCCESS,
     UPDATE_COMPANY_FORM_STATUS_REQ,
     UPDATE_COMPANY_FORM_STATUS_SUCCESS,
-    UPDATE_COMPANY_FORM_STATUS_FAIL
+    UPDATE_COMPANY_FORM_STATUS_FAIL,
+    GET_ALL_COMPANY_FORM_REQ,
+    GET_ALL_COMPANY_FORM_SUCCESS,
+    GET_ALL_COMPANY_FORM_FAIL,
+    PUSH_COMPANY_TO_RESULT_SUCCESS,
+    PUSH_COMPANY_TO_RESULT_REQ,
+    PUSH_COMPANY_TO_RESULT_FAIL,
  } from "../Constant/formConstant";
 
  // Initial state for the reducer
@@ -78,6 +84,50 @@ export const formReducer = (state = initialState, action) => {
             return state;
     }
 };
+
+
+
+
+const initialStatee = {
+    Loading: false,
+    message: null ,
+    Error: null,
+};
+
+// Reducer to handle the push company to result action
+export const pushCompanyToResultReducer = (state = initialStatee, action) => {
+    switch (action.type) {
+        case PUSH_COMPANY_TO_RESULT_REQ:
+            return {
+                ...state,
+                Loading: true,
+                success: false,
+                Error: null,
+            };
+
+        case PUSH_COMPANY_TO_RESULT_SUCCESS:
+            return {
+                ...state,
+                Loading: false,
+                success: true,
+                Error: null,
+                message: action.payload.message, // Success message from API response
+            };
+
+        case PUSH_COMPANY_TO_RESULT_FAIL:
+            return {
+                ...state,
+                Loading: false,
+                success: false,
+                Error: action.payload, // Error message from API response
+            };
+
+        default:
+            return state;
+    }
+};
+
+
 
 
 
@@ -422,7 +472,47 @@ export const getluckyDrawReducer = (state = initialState6, action) => {
 
 
 
+// Initial State renamed to initialCompanyFillState
+const initialCompanyFillState = {
+    loading: false,
+    companyFills: [],
+    totalCompanyFills: 0,
+    totalPages: 0,
+    currentPage: 0,
+    error: null,
+};
 
+// Reducer with renamed initial state
+export const getCompanyFillsReducer = (state = initialCompanyFillState, action) => {
+    switch (action.type) {
+        case GET_ALL_COMPANY_FORM_REQ:
+            return {
+                ...state,
+                loading: true,
+                error: null,
+            };
+        
+        case GET_ALL_COMPANY_FORM_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                companyFills: action.payload.companyFills,    // List of company fills fetched
+                totalCompanyFills: action.payload.totalCompanyFills, // Total number of company fills
+                totalPages: action.payload.totalPages,  // Total number of pages based on pagination
+                currentPage: action.payload.currentPage, // Current page number
+            };
+
+        case GET_ALL_COMPANY_FORM_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,  // Store the error message in case of failure
+            };
+        
+        default:
+            return state;
+    }
+};
 
 
 

@@ -19,6 +19,8 @@ const CompanyFillForm = () => {
         companyAddress: '',
         authorizedSignatoryAddress: '',
         paymentPlan: 'Down Payment Plan',
+        plotSize: '125 SQY - 150 SQY', // Modified Plot Size
+        preference: 'Corner', // Modified Preference
         panPhoto: null,
         passportPhoto: null,
         project: '',
@@ -216,11 +218,47 @@ const CompanyFillForm = () => {
                         onChange={handleChange}
                         className="input-field"
                         required
-                        style={{backgroundColor: 'white'}}
+                        style={{ backgroundColor: 'white' }}
                     >
                         <option value="Down Payment Plan">Down Payment Plan</option>
                         <option value="Possession Link Payment Plan">Possession Link Payment Plan</option>
                         <option value="Flexi Payment Plan">Flexi Payment Plan</option>
+                    </select>
+                </div>
+
+                {/* Plot Size Dropdown */}
+                <div className="form-group">
+                    <label htmlFor="plotSize" className="label">Plot Size</label>
+                    <select
+                        id="plotSize"
+                        name="plotSize"
+                        value={formData.plotSize}
+                        onChange={handleChange}
+                        className="input-field"
+                        required
+                        style={{ backgroundColor: 'white' }}
+                    >
+                        <option value="125 SQY - 150 SQY">125 SQY - 150 SQY</option>
+                        <option value="150 SQY - 200 SQY">150 SQY - 200 SQY</option>
+                        <option value="ABOVE 200 SQY">ABOVE 200 SQY</option>
+                    </select>
+                </div>
+
+                {/* Preference Dropdown */}
+                <div className="form-group">
+                    <label htmlFor="preference" className="label">Preference</label>
+                    <select
+                        id="preference"
+                        name="preference"
+                        value={formData.preference}
+                        onChange={handleChange}
+                        className="input-field"
+                        required
+                        style={{ backgroundColor: 'white' }}
+                    >
+                        <option value="Corner">Corner</option>
+                        <option value="Park Facing">Park Facing</option>
+                        <option value="N/A">N/A</option>
                     </select>
                 </div>
 

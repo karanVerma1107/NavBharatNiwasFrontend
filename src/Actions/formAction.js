@@ -39,7 +39,13 @@ import { SUBMIT_ISALLOW_REQ,
     GET_COMPANY_FORM_FAIL,
     UPDATE_COMPANY_FORM_STATUS_REQ,
     UPDATE_COMPANY_FORM_STATUS_SUCCESS,
-    UPDATE_COMPANY_FORM_STATUS_FAIL
+    UPDATE_COMPANY_FORM_STATUS_FAIL,
+    GET_ALL_COMPANY_FORM_REQ,
+    GET_ALL_COMPANY_FORM_SUCCESS,
+    GET_ALL_COMPANY_FORM_FAIL,
+    PUSH_COMPANY_TO_RESULT_SUCCESS,
+    PUSH_COMPANY_TO_RESULT_REQ,
+    PUSH_COMPANY_TO_RESULT_FAIL,
  } from "../Constant/formConstant";
 
 import axiosInstance from "../../axiosInstance";
@@ -346,6 +352,9 @@ export const createDraw = (formData) => async (dispatch) => {
         form.append('nationality', formData.nationality); // Added nationality field
         form.append('project', formData.project); // Added project field
         form.append('paymentPlan', formData.paymentPlan); // Added paymentPlan field
+        // Add the new fields for plot size and preference
+        form.append('plotSize', formData.plotSize); // Added plotSize field
+        form.append('preference', formData.preference); // Added preference field
 
         // Append the images (Aadhaar and PAN photos) if they exist
         if (formData.adhaarPhoto) {
@@ -412,7 +421,9 @@ export const createCompanyFill = (formData) => async (dispatch) => {
         form.append('authorizedSignatoryAddress', formData.authorizedSignatoryAddress);
         form.append('paymentPlan', formData.paymentPlan);
         form.append('project', formData.project); // Added project field
-
+// Add the new fields for plot size and preference
+form.append('plotSize', formData.plotSize); // Added plotSize field
+form.append('preference', formData.preference); // Added preference field
         // Append the images (PAN and Passport photos)
         if (formData.panPhoto) {
             form.append('panPhoto', formData.panPhoto);
@@ -483,6 +494,31 @@ export const getLuckyDraws = (page) => async (dispatch) => {
 
 
 
+// Action to fetch all LuckyDraws with pagination
+export const getCDraws = (page) => async (dispatch) => {
+    try {
+        dispatch({ type: GET_ALL_COMPANY_FORM_REQ });
+
+        const response = await axiosInstance.get(`/api/v1/getCompany?page=${page}`);
+        console.log('kiuhb', response)
+        
+        dispatch({
+            type: GET_ALL_COMPANY_FORM_SUCCESS,
+            payload: response.data, // Contains luckyDraws, totalPages, etc.
+        });
+    } catch (error) {
+        dispatch({
+            type: GET_ALL_COMPANY_FORM_FAIL,
+            payload: error.response ? error.response.data.message : error.message,
+        });
+    }
+};
+
+
+
+
+
+
 
 // Action to fetch all LuckyDraws with pagination
 export const passToresult = (id, allot) => async (dispatch) => {
@@ -505,6 +541,24 @@ export const passToresult = (id, allot) => async (dispatch) => {
 
 
 
+// Action to pass company to result
+export const passCToresult = (companyId, allot) => async (dispatch) => {
+    try {
+        dispatch({ type: PUSH_COMPANY_TO_RESULT_REQ });
+
+        const response = await axiosInstance.put(`/api/v1/Cpass/${companyId}/${allot}`);
+        
+        dispatch({
+            type: PUSH_COMPANY_TO_RESULT_SUCCESS,
+            payload: response.data, // The response data containing the success message and other relevant info
+        });
+    } catch (error) {
+        dispatch({
+            type: PUSH_COMPANY_TO_RESULT_FAIL,
+            payload: error.response ? error.response.data.message : error.message,
+        });
+    }
+};
 
 
 
