@@ -1,0 +1,113 @@
+/* Container Styling */
+.res-isallow-container {
+    max-width: 80vmax;
+    margin: 5vmax auto;
+    padding: 3vmax;
+    background: #f8f9fa; /* Light background */
+    border-radius: 1vmax;
+    box-shadow: 0 0.5vmax 1vmax rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+/* Header Styling */
+.header-title {
+    text-align: center;
+    color: navy;
+    font-size: 3vmax;
+    font-weight: bold;
+}
+
+/* Loading & Error Styling */
+.loading {
+    text-align: center;
+    color: black;
+    font-size: 2vmax;
+    font-weight: bold;
+}
+
+.error {
+    text-align: center;
+    color: red;
+    font-size: 2vmax;
+    font-weight: bold;
+}
+
+/* Section Styling */
+.section {
+    margin-top: 2vmax;
+    padding: 2vmax;
+    background: white;
+    border-radius: 1vmax;
+    box-shadow: 0 0.3vmax 0.6vmax rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+    color: navy;
+    font-size: 2.5vmax;
+    font-weight: bold;
+    border-bottom: 0.3vmax solid navy;
+    padding-bottom: 1vmax;
+}
+
+/* Result Card Styling */
+.result-card {
+    background: white;
+    padding: 2vmax;
+    margin: 2vmax 0;
+    border-radius: 1vmax;
+    box-shadow: 0 0.3vmax 0.6vmax rgba(0, 0, 0, 0.1);
+    border-left: 0.5vmax solid navy;
+}
+
+.result-card p {
+    margin: 1vmax 0;
+    font-size: 1.8vmax;
+    color: black;
+}
+
+/* Button Styling */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2vmax;
+}
+
+.action-button {
+    padding: 1.5vmax 3vmax;
+    font-size: 1.5vmax;
+    font-weight: bold;
+    border: none;
+    border-radius: 0.8vmax;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.allotment {
+    background: navy;
+    color: white;
+}
+
+.welcome {
+    background: black;
+    color: white;
+}
+
+.action-button:hover {
+    opacity: 0.8;
+}
+
+/* Responsive Styling */
+@media (max-width: 600px) {
+    .res-isallow-container {
+        padding: 2vmax;
+    }
+
+    .button-container {
+        flex-direction: column;
+        gap: 2vmax;
+    }
+
+    .action-button {
+        width: 100%;
+    }
+}

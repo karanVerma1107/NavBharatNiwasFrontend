@@ -11,6 +11,12 @@ import Site from './Site';
 import Form from './Form';
 import Result from './Result';
 import T from './T';
+import CompanyFormFull from './CompanyFormFull';
+import AdvancedStuff from './AdvancedStuff';
+import ResIsallow from './ResIsallow';
+import WelcomeLetter from './WelcomeLetter';
+import WelcomeCletter from './WelcomeCletter';
+import CompanyAllotment from './CompanyAllotment';
 
 function App() {
   const [cookiesAllowed, setCookiesAllowed] = useState(false);
@@ -59,9 +65,15 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path='/ADD-SITE' element={<Addsite />} />
           <Route path='/form-related' element={<FormRelated />} />
+          <Route path='/afterResult' element={<AdvancedStuff />} />
           <Route path='/site/:id' element={<Site />} />
           <Route path='/draw/:id' element={<Form />} />
+          <Route path='/Cdraw/:id' element={<CompanyFormFull />} />
           <Route path='/result/:formId' element={<Result />} />
+          <Route path='/WelcomeForm/:id' element={<WelcomeLetter />} />
+          <Route path='/WelcomeCForm/:id' element={<WelcomeCletter />} />
+          <Route path='/AllotmentCForm/:id' element={<CompanyAllotment />} />
+          <Route path='/getar/:id' element={<ResIsallow />} />
           <Route path='/T' element={<T />} />
         </Routes>
 

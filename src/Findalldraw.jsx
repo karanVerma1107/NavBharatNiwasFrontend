@@ -1,85 +1,52 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getLuckyDraws } from './Actions/formAction';
+import { getLuckyDraws, passToresult, updateLuckyDrawStatus } from './Actions/formAction';
 import './Findalldraw.css'; // Import the CSS file for styling
 import ImageShowFull from './ImageShowFull';
-import { passToresult } from './Actions/formAction';
 import { toast } from 'react-toastify';
-import { updateLuckyDrawStatus } from './Actions/formAction';
 
 const Findalldraw = () => {
     const dispatch = useDispatch();
     
-    // Set initial page number to 1
     const [currentPage, setCurrentPage] = useState(1);
-
     const { loading, error, luckyDraws, totalPages } = useSelector(state => state.getalldraws);
+    const { Loading, Message, Error } = useSelector(state => state.passResult);
 
-    const {Loading, Message, Error} = useSelector(state=>state.passResult);
-
-    // For the modal functionality
     const [modalImage, setModalImage] = useState(null);
 
-    // Open modal to show the image
-    const openModal = (image) => {
-        setModalImage(image);
-    };
+    const [allot, setAllot] = useState('');
+    const [gift, setGift] = useState('');
 
-    // Close the modal
-    const closeModal = () => {
-        setModalImage(null);
-    };
+    const handleAllotChange = (e) => setAllot(e.target.value);
+    const handleGiftChange = (e) => setGift(e.target.value);
 
-    // Handle page change logic
-    const handlePageChange = (page) => {
-        // If the page is within the valid range, update the current page
-        if (page >= 1 && page <= totalPages) {
-            setCurrentPage(page);
-        }
-    };
-
-    // For handling the allot value input
-    const [allot, setAllot] = useState(''); // State to store the allot value
-
-    const handleAllotChange = (e) => {
-        setAllot(e.target.value); // Update allot value on input change
-    };
-
-    const handlePassToResult = (id, allot) => {
+    const handlePassToResult = (id) => {
         console.log('Pass to result triggered');
         console.log('LuckyDraw ID:', id);
         console.log('Allot:', allot);
-        dispatch(passToresult(id, allot)); // Pass both ID and allot to the action
-    };
+        console.log('Gift:', gift);
+        dispatch(passToresult(id, allot, gift)); // Passing allot and gift
 
-    const goto = (id) => {
-        window.open(`/draw/${id}`, '_blank');
-    };
 
+        setTimeout(() => {
+            window.location.reload();
+        }, 2000);
+    };
 
     const handleReject = (id) => {
         console.log('Reject triggered');
-        dispatch(updateLuckyDrawStatus(id, 'reject')); // Pass the ID and 'reject' status
+        dispatch(updateLuckyDrawStatus(id, 'reject'));
 
-        // After a delay of 2 seconds (2000 milliseconds), reload the page
-    setTimeout(() => {
-        window.location.reload(); // This will reload the current page
-    }, 2000);
+        setTimeout(() => {
+            window.location.reload();
+        }, 2000);
     };
 
-
-
-    // Display toast notifications when Message or Error changes
     useEffect(() => {
-        if (Message) {
-            toast.success(Message); // Show success message as toast
-        }
-        if (Error) {
-            toast.error(Error); // Show error message as toast
-        }
+        if (Message) toast.success(Message);
+        if (Error) toast.error(Error);
     }, [Message, Error]);
 
-    // Fetch Lucky Draws when the component mounts or when the page changes
     useEffect(() => {
         dispatch(getLuckyDraws(currentPage));
     }, [dispatch, currentPage]);
@@ -88,99 +55,85 @@ const Findalldraw = () => {
         <div className="findalldraw-container">
             <h2 className="heading">Get All Lucky Draw Forms</h2>
 
-            {/* Display loading spinner or error message */}
             {loading && <p className="loading-text">Loading...</p>}
             {error && <p className="error-text">{error}</p>}
 
             <div className="lucky-draws-wrapper">
-                {luckyDraws.map((luckyDraw) => (
-                    <div key={luckyDraw._id} className="lucky-draw-item" >
-                        <img
-                            src={luckyDraw.image}
-                            alt="Lucky Draw"
-                            className="lucky-draw-img"
-                            onClick={() => openModal(luckyDraw.image)} // Open modal on image click
-                        />
-                        <h3 className="lucky-draw-name"  onClick={() => { goto(luckyDraw._id) }}>{luckyDraw.name}</h3>
-                        <p className="lucky-draw-info">Father's Name: {luckyDraw.fatherName}</p>
-                        <p className="lucky-draw-info">Address: {luckyDraw.address}</p>
+                {luckyDraws.map((luckyDraw) => {
+                    const isFilled = luckyDraw.allotment && luckyDraw.gift; // Check if both fields are filled
 
-                        {/* Input field for allot */}
-                        <input
-                            type="text"
-                            value={allot}
-                            onChange={handleAllotChange}
-                            placeholder="Enter allot"
-                            className="allot-input"
-                            style={{
-                                width: '12vx',
-                                height: '2.5x',
-                                fontSize: '1.5vmax',
+                    return (
+                        <div key={luckyDraw._id} className="lucky-draw-item">
+                            <img
+                                src={luckyDraw.image}
+                                alt="Lucky Draw"
+                                className="lucky-draw-img"
+                                onClick={() => setModalImage(luckyDraw.image)}
+                            />
+                            <h3 className="lucky-draw-name" onClick={() => window.open(`/draw/${luckyDraw._id}`, '_blank')}>
+                                {luckyDraw.name}
+                            </h3>
+                            <p className="lucky-draw-info">Father's Name: {luckyDraw.fatherName}</p>
+                            <p className="lucky-draw-info">Address: {luckyDraw.address}</p>
 
-                            }}
-                        />
+                            {/* Allotment Input */}
+                            <input
+                                type="text"
+                                value={luckyDraw.allotment || allot}
+                                onChange={handleAllotChange}
+                                placeholder="Enter allot"
+                                className="allot-input"
+                                readOnly={isFilled} // Disable editing if already filled
+                            />
 
-                        {/* Pass to Result button */}
-                        <button
-                            className="pass-to-result-btn"
-                            onClick={(e) => {
-                                e.stopPropagation(); // Prevent triggering the image click action
-                                handlePassToResult(luckyDraw._id, allot); // Pass both id and allot value
-                            }}
-                        >
-                            Pass to Result
-                        </button>
+                            {/* Gift Input */}
+                            <input
+                                type="text"
+                                value={luckyDraw.gift || gift}
+                                onChange={handleGiftChange}
+                                placeholder="Enter gift"
+                                className="allot-input"
+                                readOnly={isFilled} // Disable editing if already filled
+                            />
 
+<button 
+    className="pass-to-result-btn" 
+    onClick={() => handlePassToResult(luckyDraw._id)} 
+    disabled={!!luckyDraw.allotment && !!luckyDraw.gift} 
+    style={{ cursor: !!luckyDraw.allotment && !!luckyDraw.gift ? 'not-allowed' : 'pointer' }}
+>
+    Pass to Result
+</button>
 
-                        <button
-                            className="reject-btn"
-                            onClick={(e) => {
-                                e.stopPropagation(); // Prevent triggering the image click action
-                                handleReject(luckyDraw._id); // Pass the id and 'reject' status
-                            }}
-                            style={{
-                                width: '5vmax',
-                                height: '2.5vmax',
-                                fontSize: '1.5vmax',
-                                backgroundColor: '#FF5733', // Red for reject
-                                color: '#fff',
-                                border: 'none',
-                                borderRadius: '8px',
-                                cursor: 'pointer',
-                                marginBottom: '1vmax',
-                            }}
-                        >
-                            Reject
-                        </button>
-                    </div>
-                ))}
+<button 
+    className="pass-to-result-btn" 
+    onClick={() => handleReject(luckyDraw._id)} 
+    style={{ 
+        backgroundColor: 'red',
+        cursor: !!luckyDraw.allotment && !!luckyDraw.gift ? 'not-allowed' : 'pointer'
+    }}
+    disabled={!!luckyDraw.allotment && !!luckyDraw.gift}
+>
+    Reject
+</button>
+
+                        </div>
+                    );
+                })}
             </div>
 
             {/* Pagination Controls */}
             <div className="pagination-controls">
-                <button
-                    className="pagination-btn"
-                    disabled={currentPage === 1}
-                    onClick={() => handlePageChange(currentPage - 1)}
-                >
+                <button className="pagination-btn" disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>
                     Previous
                 </button>
-                <span className="pagination-text">
-                    Page {currentPage} of {totalPages}
-                </span>
-                <button
-                    className="pagination-btn"
-                    disabled={currentPage === totalPages}
-                    onClick={() => handlePageChange(currentPage + 1)}
-                >
+                <span className="pagination-text">Page {currentPage} of {totalPages}</span>
+                <button className="pagination-btn" disabled={currentPage === totalPages} onClick={() => setCurrentPage(currentPage + 1)}>
                     Next
                 </button>
             </div>
 
-            {/* Image Modal with ImageShowFull component */}
-            {modalImage && (
-                <ImageShowFull image={modalImage} onClose={closeModal} />
-            )}
+            {modalImage && <ImageShowFull image={modalImage} onClose={() => setModalImage(null)} />}
         </div>
     );
 };

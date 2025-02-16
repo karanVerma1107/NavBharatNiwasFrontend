@@ -1,0 +1,113 @@
+/* Main container */
+.prop {
+    max-width: 70vmax;
+    margin: 6vmax auto;
+    padding: 2.5vmax;
+    background: #f9f9f9; /* Light grayish white */
+    border-radius: 1vmax;
+    box-shadow: 0 0 1.5vmax rgba(0, 0, 0, 0.1);
+    color: #333; /* Dark gray for contrast */
+    text-align: center;
+  }
+  
+  /* Heading */
+  h2 {
+    font-size: 3vmax;
+    font-weight: bold;
+    margin-bottom: 2vmax;
+    color: #007bff; /* Soft blue */
+  }
+  
+  /* Form list container */
+  .form-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* Form item styling */
+  .form-item {
+    background: #ffffff; /* Pure white */
+    margin: 1.5vmax auto;
+    padding: 2vmax;
+    border-radius: 1vmax;
+    font-size: 1.8vmax;
+    box-shadow: 0 0.5vmax 1vmax rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    text-align: left;
+    border-left: 0.5vmax solid #007bff;
+  }
+  
+  .form-item:hover {
+    background: #f0f8ff; /* Light blue tint */
+  }
+  
+  /* Strong labels inside form items */
+  .form-item strong {
+    color: #0056b3;
+    font-size: 1.9vmax;
+  }
+  
+  /* Pagination container */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3vmax;
+    font-size: 1.8vmax;
+  }
+  
+  /* Pagination buttons */
+  .pagination button {
+    padding: 1.2vmax 2.2vmax;
+    margin: 0 1vmax;
+    border: none;
+    border-radius: 0.8vmax;
+    background: #007bff;
+    color: white;
+    font-size: 1.5vmax;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+  }
+  
+  .pagination button:hover {
+    background: #0056b3;
+  }
+  
+  /* Disabled button */
+  .pagination button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  /* Error message */
+  .error {
+    color: red;
+    font-size: 2vmax;
+    margin-top: 1vmax;
+    font-weight: bold;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .prop {
+      width: 90%;
+      padding: 4vmax;
+    }
+  
+    h2 {
+      font-size: 4vmax;
+    }
+  
+    .form-item {
+      font-size: 2.2vmax;
+      padding: 3vmax;
+    }
+  
+    .pagination button {
+      font-size: 2vmax;
+      padding: 2vmax 3vmax;
+    }
+  }
+  

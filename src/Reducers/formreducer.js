@@ -46,7 +46,141 @@ import { SUBMIT_ISALLOW_REQ,
     PUSH_COMPANY_TO_RESULT_SUCCESS,
     PUSH_COMPANY_TO_RESULT_REQ,
     PUSH_COMPANY_TO_RESULT_FAIL,
+    GET_COMPANYFILL_BY_ID_SUCCESS,
+    GET_COMPANYFILL_BY_ID_REQ,
+    GET_COMPANYFILL_BY_ID_FAIL,
+    GET_COMPANYFILL_REQ,
+    GET_COMPANYFILL_SUCCESS,
+    GET_COMPANYFILL_FAIL,
+    GET_ALL_ISALLOW_REQ,
+    GET_ALL_ISALLOW_SUCCESS,
+    GET_ALL_ISALLOW_FAIL,
+    GET_IS_ALLOW_PP_RESULT_REQUEST,
+    GET_IS_ALLOW_PP_RESULT_SUCCESS,
+    GET_IS_ALLOW_PP_RESULT_FAILURE,
+    CREATE_COMPANY_ALLOTMENT_REQ,
+    CREATE_COMPANY_ALLOTMENT_SUCCESS,
+    CREATE_COMPANY_ALLOTMENT_FAIL,
  } from "../Constant/formConstant";
+
+
+
+
+ // Initial State
+const initialState929 = {
+    loading: false,
+    allotment: null,
+    Error: null,
+};
+
+// Reducer Function
+export const companyAllotmentReducer = (state = initialState929, action) => {
+    switch (action.type) {
+        case CREATE_COMPANY_ALLOTMENT_REQ:
+            return {
+                ...state,
+                loading: true,
+            };
+        case CREATE_COMPANY_ALLOTMENT_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                allotment: action.payload, // allotment data returned from action
+                message: action.payload.message, // success message returned from action
+                Error: null,
+            };
+        case CREATE_COMPANY_ALLOTMENT_FAIL:
+            return {
+                ...state,
+                loading: false,
+                allotment: null,
+                Error: action.payload, // error message returned from action
+            };
+        default:
+            return state;
+    }
+};
+
+
+
+
+ const defaultState = { // Replaced 'initialState' with 'defaultState'
+    isLoading: false,
+    result: [],
+    resultCompany: [],
+    error: null,
+  };
+  
+  export const isAllowResultsReducer = (state = defaultState, action) => {
+    switch (action.type) {
+      case GET_IS_ALLOW_PP_RESULT_REQUEST:
+        return { ...state, isLoading: true };
+  
+      case GET_IS_ALLOW_PP_RESULT_SUCCESS:
+        return {
+          ...state,
+          isLoading: false,
+          result: action.payload.result, // LuckyDraw results
+          resultCompany: action.payload.resultCompany, // CompanyFill results
+        };
+  
+      case GET_IS_ALLOW_PP_RESULT_FAILURE:
+        return { ...state, isLoading: false, error: action.payload };
+  
+      default:
+        return state;
+    }
+  };
+
+
+
+
+
+
+ const isAllowState = {
+    isLoading: false,
+    isAllowRecords: [],
+    totalRecords: 0,
+    totalPages: 0,
+    currentPage: 1,
+    error: null,
+  };
+  
+  export const isAllowHandler = (state = isAllowState, action) => {
+    switch (action.type) {
+      case GET_ALL_ISALLOW_REQ:
+        return {
+          ...state,
+          isLoading: true,
+        };
+  
+      case GET_ALL_ISALLOW_SUCCESS:
+        return {
+          ...state,
+          isLoading: false,
+          isAllowRecords: action.payload.isAllow,
+          totalRecords: action.payload.totalRecords,
+          totalPages: action.payload.totalPages,
+          currentPage: action.payload.currentPage,
+          error: null,
+        };
+  
+      case GET_ALL_ISALLOW_FAIL:
+        return {
+          ...state,
+          isLoading: false,
+          error: action.payload,
+        };
+  
+      default:
+        return state;
+    }
+  };
+
+
+
+
+
 
  // Initial state for the reducer
 const initialState = {
@@ -310,6 +444,50 @@ export const applicationsReducer = (state = initialState3, action) => {
             return state;
     }
 };
+
+
+
+export const CapplicationsReducer = (state = initialState3, action) => {
+    switch (action.type) {
+        case GET_COMPANYFILL_REQ:
+            return {
+                ...state,
+                loading: true,  // Set loading to true when the request starts
+                error: null     // Clear any previous errors
+            };
+
+        case GET_COMPANYFILL_SUCCESS:
+            return {
+                ...state,
+                loading: false,         // Set loading to false once request is done
+                appli: action.payload.companyFill, // Store the fetched applications data
+                error: null             // Clear any errors
+            };
+
+        case GET_COMPANYFILL_FAIL:
+            return {
+                ...state,
+                loading: false,  // Set loading to false when there's an error
+                error: action.payload // Store the error message
+            };
+
+        default:
+            return state;
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const initialState4 = {
     appli: [],   // Array to hold applications data
@@ -668,6 +846,31 @@ const initialState11 = {
           text: null ,             // Clear any success text
           error: action.payload.error , // Set error message from the payload
         };
+  
+      default:
+        return state;
+    }
+  };
+
+
+
+
+  const initialState95 = {
+    loading: false,
+    companyFill: {},
+    error: null
+  };
+  
+  export const companyFillByIdReducer = (state = initialState95, action) => {
+    switch (action.type) {
+      case GET_COMPANYFILL_BY_ID_REQ:
+        return { ...state, loading: true };
+  
+      case GET_COMPANYFILL_BY_ID_SUCCESS:
+        return { ...state, loading: false, companyFill: action.payload };
+  
+      case GET_COMPANYFILL_BY_ID_FAIL:
+        return { ...state, loading: false, error: action.payload };
   
       default:
         return state;

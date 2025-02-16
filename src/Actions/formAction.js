@@ -46,9 +46,106 @@ import { SUBMIT_ISALLOW_REQ,
     PUSH_COMPANY_TO_RESULT_SUCCESS,
     PUSH_COMPANY_TO_RESULT_REQ,
     PUSH_COMPANY_TO_RESULT_FAIL,
+    GET_COMPANYFILL_BY_ID_REQ,
+    GET_COMPANYFILL_BY_ID_SUCCESS,
+    GET_COMPANYFILL_BY_ID_FAIL,
+    GET_COMPANYFILL_REQ,
+    GET_COMPANYFILL_SUCCESS,
+    GET_COMPANYFILL_FAIL,
+    GET_ALL_ISALLOW_REQ,
+    GET_ALL_ISALLOW_SUCCESS,
+    GET_ALL_ISALLOW_FAIL,
+    GET_IS_ALLOW_PP_RESULT_REQUEST,
+    GET_IS_ALLOW_PP_RESULT_SUCCESS,
+    GET_IS_ALLOW_PP_RESULT_FAILURE,
+    CREATE_COMPANY_ALLOTMENT_REQ,
+    CREATE_COMPANY_ALLOTMENT_SUCCESS,
+    CREATE_COMPANY_ALLOTMENT_FAIL,
  } from "../Constant/formConstant";
 
 import axiosInstance from "../../axiosInstance";
+
+
+
+
+// Function to create a company allotment
+export const createCompanyAllotment = (allotmentData) => async (dispatch) => {
+    try {
+        dispatch({ type: CREATE_COMPANY_ALLOTMENT_REQ }); // Dispatch request action to set loading state
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json', // Set the header to application/json
+            },
+        };
+
+        const response = await axios.post('/api/v1/createCAllotment', allotmentData, config); // Send the data to the backend
+
+        dispatch({
+            type: CREATE_COMPANY_ALLOTMENT_SUCCESS,
+            payload: response.data.allotment, // The response data from the backend
+        });
+    } catch (error) {
+        dispatch({
+            type: CREATE_COMPANY_ALLOTMENT_FAIL,
+            payload: error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
+        });
+    }
+};
+
+
+
+
+
+
+// Function to fetch IsAllow results by ID
+export const getIsAllowResults = (id) => async (dispatch) => {
+    try {
+      dispatch({ type: GET_IS_ALLOW_PP_RESULT_REQUEST });
+  
+      const { data } = await axiosInstance.get(`/api/v1/getisallow/${id}`);
+  
+      dispatch({ 
+        type: GET_IS_ALLOW_PP_RESULT_SUCCESS, 
+        payload: data.data // Contains 'result' & 'resultCompany'  
+      });
+  
+    } catch (error) {
+      dispatch({ 
+        type: GET_IS_ALLOW_PP_RESULT_FAILURE, 
+        payload: error.response?.data?.message || "Something went wrong" 
+      });
+    }
+  };
+
+
+
+export const getIsAllowRecords = (page) => async (dispatch) => {
+    try {
+      dispatch({ type: GET_ALL_ISALLOW_REQ });
+  
+      const { data } = await axiosInstance.get(`/api/v1/getAllisallow?page=${page}`, {
+       
+      });
+  
+      dispatch({
+        type: GET_ALL_ISALLOW_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: GET_ALL_ISALLOW_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+
+
 
 
 export const makeIsallow = (data) => async (dispatch) => {
@@ -213,6 +310,9 @@ export const faqform = (data) => async (dispatch) => {
 
 
 
+
+
+
 export const getDrawbyId = (data) => async (dispatch) => {
     try {
         // Dispatching request action to indicate API call is in progress
@@ -301,6 +401,11 @@ export const getLatestIsAllow = () => async (dispatch) => {
     }
 };
 
+
+
+
+
+
 export const getLatestIsAppli = () => async (dispatch) => {
     try {
         // Dispatching request action to indicate API call is in progress
@@ -310,7 +415,7 @@ export const getLatestIsAppli = () => async (dispatch) => {
 
         // Make the API request
         const response = await axiosInstance.get('/api/v1/getApplications');
-        console.log('response', response);
+        
         // If the request is successful, dispatch the success action
         dispatch({
             type: GET_APPLICATIONS_SUCCESS,
@@ -321,6 +426,34 @@ export const getLatestIsAppli = () => async (dispatch) => {
         // If the request fails, dispatch the fail action with the error message
         dispatch({
             type: GET_APPLICATIONS_FAIL,
+            payload: error.response ? error.response.data.message : error.message, // Get error message
+        });
+    }
+};
+
+
+
+
+export const getLatestCAppli = () => async (dispatch) => {
+    try {
+        // Dispatching request action to indicate API call is in progress
+        dispatch({
+            type: GET_COMPANYFILL_REQ,
+        });
+
+        // Make the API request
+        const response = await axiosInstance.get('/api/v1/getCApplications');
+        console.log('response', response);
+        // If the request is successful, dispatch the success action
+        dispatch({
+            type: GET_COMPANYFILL_SUCCESS,
+            payload: response.data,  // Store the response data in the Redux state
+        });
+
+    } catch (error) {
+        // If the request fails, dispatch the fail action with the error message
+        dispatch({
+            type: GET_COMPANYFILL_FAIL,
             payload: error.response ? error.response.data.message : error.message, // Get error message
         });
     }
@@ -521,11 +654,11 @@ export const getCDraws = (page) => async (dispatch) => {
 
 
 // Action to fetch all LuckyDraws with pagination
-export const passToresult = (id, allot) => async (dispatch) => {
+export const passToresult = (id, allot, gift) => async (dispatch) => {
     try {
         dispatch({ type: PUSH_TO_RESULT_REQ });
 
-        const response = await axiosInstance.put(`/api/v1/pass/${id}/${allot}`);
+        const response = await axiosInstance.put(`/api/v1/pass/${id}/${allot}/${gift}`);
         
         dispatch({
             type: PUSH_TO_RESULT_SUCCESS,
@@ -542,11 +675,11 @@ export const passToresult = (id, allot) => async (dispatch) => {
 
 
 // Action to pass company to result
-export const passCToresult = (companyId, allot) => async (dispatch) => {
+export const passCToresult = (companyId, allot, gift) => async (dispatch) => {
     try {
         dispatch({ type: PUSH_COMPANY_TO_RESULT_REQ });
 
-        const response = await axiosInstance.put(`/api/v1/Cpass/${companyId}/${allot}`);
+        const response = await axiosInstance.put(`/api/v1/Cpass/${companyId}/${allot}/${gift}`);
         
         dispatch({
             type: PUSH_COMPANY_TO_RESULT_SUCCESS,

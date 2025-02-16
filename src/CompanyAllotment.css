@@ -1,0 +1,124 @@
+.company-allotment-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin: 7.5vmax 0;
+    flex-wrap: wrap;
+}
+
+.allotment-card {
+    width: 55vmax;
+    height: auto; /* Increase height if necessary */
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    border: 2px solid #2c3e50;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Align items to the top */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1vmax;
+}
+
+.logo {
+    width: 15vmax;
+    height: 12vmax;
+    margin: -4vmax 0;
+    object-fit: contain;
+}
+
+.address-container {
+    text-align: center;
+    margin-top: -1vmax;
+    font-size: 1.5vmax;
+}
+
+.address-container p {
+    color: black;
+    font-weight: bold;
+}
+
+.allotment-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom right, #2c3e50 1px, transparent 1px) 0 0,
+                linear-gradient(to top right, #2c3e50 1px, transparent 1px) 0 0;
+    background-size: 10px 10px;
+    pointer-events: none;
+}
+
+/* Compact form container */
+.form-container {
+    width: 90%;
+    margin: 12px auto;
+    padding: 10px;
+  }
+  
+  /* Compact the image container */
+  .image-container {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  /* Styling for tables - reducing padding and margins */
+  .styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+  }
+  
+  .styled-table th,
+  .styled-table td {
+    padding: 1px 10px; /* Reduce padding */
+    text-align: left;
+    
+    font-weight: bold;
+    font-size: 0.9vmax;
+  }
+  
+  .styled-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
+  .styled-table input {
+    width: 100%;
+    padding: 1px 8px;
+    font-size: 0.9vmax;
+    margin: 5px 0;
+    font-weight: bold;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Submit button style */
+  .submit-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    border-radius: 5px;
+  }
+  
+  /* Hover effect for submit button */
+  .submit-btn:hover {
+    background-color: #45a049;
+  }

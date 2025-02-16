@@ -3,7 +3,7 @@ import { thunk }  from 'redux-thunk';
 import {composeWithDevTools}from 'redux-devtools-extension'
 import { authReducer, userReducer } from './src/Reducers/authReducer';
 import { AddsiteReducer, formAPPReducer, getImagesReducer, getOngoingSiteReducer, getTestimonialSiteReducer, getUpcomingSiteReducer, siteReducer, siteSearchReducer } from './src/Reducers/siteReducer';
-import { applicationsReducer, CstatusUpdateReducer, faqFormReducer, fillCompanyFormReducer, fillLuckyDrawReducer,  formAndResultsReducer,  formReducer, getCompanyFillsReducer, getcompanyFormReducer, getIsAllowReducer, getluckyDrawReducer, luckydrawReducer, passtoresult, pushCompanyToResultReducer, resultReducer, statusUpdateReducer } from './src/Reducers/formreducer';
+import { applicationsReducer, CapplicationsReducer, companyAllotmentReducer, companyFillByIdReducer, CstatusUpdateReducer, faqFormReducer, fillCompanyFormReducer, fillLuckyDrawReducer,  formAndResultsReducer,  formReducer, getCompanyFillsReducer, getcompanyFormReducer, getIsAllowReducer, getluckyDrawReducer, isAllowHandler, isAllowResultsReducer, luckydrawReducer, passtoresult, pushCompanyToResultReducer, resultReducer, statusUpdateReducer } from './src/Reducers/formreducer';
 
 
 const rootReducer = combineReducers({
@@ -26,13 +26,18 @@ getalldraws:getluckyDrawReducer,
 passResult:passtoresult,
 getresult: resultReducer,
 result:formAndResultsReducer,
-faq: faqFormReducer   ,
+faq: faqFormReducer,
 search :siteSearchReducer,
 companyfill: fillCompanyFormReducer,
 getCF:getcompanyFormReducer,
 Cupdate: CstatusUpdateReducer,
 getallc: getCompanyFillsReducer,
-passCtoR:pushCompanyToResultReducer
+passCtoR:pushCompanyToResultReducer,
+getCbyid: companyFillByIdReducer,
+getuserC: CapplicationsReducer,
+getAllisallow: isAllowHandler,
+getIsallRREE:isAllowResultsReducer,
+createAllotC: companyAllotmentReducer,
 });
 
 // learn what thunk actually do

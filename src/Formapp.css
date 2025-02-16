@@ -1,126 +1,111 @@
-/* A4 size container using vmax (responsive) */
-.formm-container {
-    width: 59.2vmax; /* A4 width converted to vmax */
-    height: 83.7vmax; /* A4 height converted to vmax */
-    margin: 6vmax 2vmax; /* Margin top and sides */
-    position: relative;
-    overflow: hidden; /* Prevent text from overflowing outside the container */
-    color: #2e3c52; /* Font color for the content */
-    border: 1.2px solid #000; /* Optional border for visual reference */
-}
-
-/* Adding the text "NavBharatNiwas" */
-.form-container::before {
-    content: "NavBharatNiwas"; /* The text to be displayed */
-    position: absolute;
-    top: 50%; /* Center vertically */
-    left: 50%; /* Center horizontally */
-    font-size: 5vmax; /* Adjust the font size */
-    color: rgba(46, 60, 82, 0.3); /* Light shade of #2e3c52 */
-    transform: translate(-50%, -50%) rotate(45deg); /* Center the text and rotate */
-    white-space: nowrap;
-    z-index: -1; /* Ensure the text is in the background */
-    pointer-events: none; /* Prevent the text from interfering with other content */
-}
-
-/* Content styling, placed above the background text */
-.content {
-    position: relative;
-    z-index: 1; /* Ensure content appears above the background text */
-    font-size: 1.7vmax; /* Font size for the content */
-    padding: 0; /* Remove unnecessary padding */
-    color: #2e3c52; /* Text color for the content */
-    font-family: 'Arial', sans-serif; /* Choose font family */
-    text-align: left;
-   
-}
-
-/* Intro section: Logo and company details */
-.intro {
-    height: auto;
-    width: 100%;
+/* Main Container */
+.form-container {
+    margin: 5vmax 1vmax;
+    padding: 2vmax;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Company Info Section */
+  .company-info {
+    text-align: center;
+    margin-bottom: 3vmax;
+  }
+  
+  .logo-container {
     display: flex;
-    flex-direction: row;
     justify-content: center;
-}
-
-/* Name section */
-.name {
-    width: 72%;
+    margin-bottom: 1vmax;
+  }
+  
+  .company-logo {
+    width: 19.5vmax;
+    height: 7.7vmax;
+  }
+  
+  .company-address {
+    font-size: 1.2vmax;
+  }
+  
+  .address, .address-details {
+    margin: 0.5vmax 0;
+  }
+  
+  /* Form Details Section */
+  .form-details {
+    margin-top: 3vmax;
+  }
+  
+  .profile-container {
     display: flex;
-    height: auto;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
-}
-
-.name h1 {
-    color: #2e3c52;
-    font-size: 1.8vmax;
-}
-
-.company-address {
-    font-size: 1.1vmax;
-}
-
-/* Details section */
-.details {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    width: 96%;
-    height: auto;
-   
-    
-}
-
-/* Styling for the draw image */
-.draw-image {
-    width: 13vmax;
+    margin-bottom: 2vmax;
+  }
+  
+  .profile-image {
+    width: 13vmax;   /* Passport-size image */
     height: 15vmax;
-   align-self: flex-end;
-    top: 0; /* Position at the top */
-    right: 0; /* Align to the right */
-}
-
-.details p{
-    text-align: left;
-    align-self: flex-start;
-    color:#2e3c52;
-    font-size: 1.5vmax;
-    
-}
-
-/* Responsive Styling for smaller screens */
-@media (max-width: 768px) {
-    /* Adjust the A4 size container to be more mobile-friendly */
+ 
+    object-fit: cover;  /* Ensures the image maintains its aspect ratio */
+    border: 2px solid #ddd;
+  }
+  
+  .form-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2vmax;
+    font-size: 1.2vmax;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-table td {
+    padding: 1vmax;
+    border: 1px solid #ddd;
+  }
+  
+  .form-table td strong {
+    color: #333;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .company-logo {
+      width: 50vw;
+      height: auto;
+    }
+  
+    .form-table td {
+      font-size: 1vmax;
+      padding: 0.8vmax;
+    }
+  
+    .profile-image {
+      width: 20vmax;
+      height: 20vmax;
+    }
+  
     .form-container {
-        width: 100%;  /* Full width for mobile */
-        height: auto;  /* Height will adjust based on content */
-        margin-top: 7vmax; /* Keep the top margin */
-        border: none;  /* Optional: remove border for smaller screens */
+      padding: 1.5vmax;
     }
-
-    /* Adjust logo size for smaller screens */
-    .logo {
-        height: 5vmax;
-        width: 14vmax;
+  }
+  
+  @media (max-width: 480px) {
+    .company-logo {
+      width: 60vw;
+      height: auto;
     }
-
-    
-
-    /* Adjust company info for smaller screens */
-    .company-name {
-        font-size: 2vmax;
+  
+    .profile-image {
+      width: 30vmax;
+      height: 30vmax;
     }
-
-    .company-address {
-        font-size: 1.2vmax;
+  
+    .form-table td {
+      font-size: 0.9vmax;
     }
-
-    .draw-image{
-        margin: 1vmax 1vmax;
-    }
-
-    
-}
+  }
+  

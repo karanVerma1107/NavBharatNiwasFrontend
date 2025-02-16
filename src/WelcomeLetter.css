@@ -1,0 +1,126 @@
+.welcome-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    margin-top: 5vmax;
+    background-color: #f5f5f5;
+    position: relative;
+}
+
+/* A4 Paper with Dynamic Dimensions */
+.a4-paper {
+    background-image: url('./letterhead.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 2vmax;
+    display: flex;
+    margin: 2vmax 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+
+.welcome-content p{
+    color: black;
+    font-size: 1vmax;
+    text-align: left;
+}
+
+.date{
+    
+    width: 100%;
+    height: auto;
+    text-align: end;
+}
+
+.date input{
+    align-self: flex-end;
+    text-align: end;
+    width: 7.5vmax;
+    font-weight: 900;
+    font-size: 0.9vmax;
+    height: 2vmax;
+    color: black;
+}
+
+/* Download Button */
+.download-btn {
+    margin-top: 2vmax;
+    padding: 1vmax 2vmax;
+    font-size: 1.5vmax;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.5vmax;
+}
+
+
+
+
+.details-table {
+    width: 100%;
+   
+    border-collapse: collapse;
+    font-size: 0.9vmax; /* Small but readable */
+    background: transparent; /* Ensure table background is transparent */
+}
+
+.details-table td {
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Light transparent border */
+    padding: 2px;
+   
+    background: transparent; /* Make cells transparent */
+    font-weight: bold;
+    text-align: left;
+    white-space: nowrap;
+    color: rgb(5, 5, 5); /* Ensure text is visible if background is transparent */
+}
+
+.details-table input {
+    width: 15vmax;
+    padding: 2px;
+    
+    font-size: 0.9vmax;
+    border: 1px solid rgba(3, 3, 3, 0.5); /* Light transparent border */
+    background: transparent; /* Make input fields transparent */
+    color: rgb(8, 8, 8); /* Ensure text is visible */
+}
+
+.small-input {
+    width: 45%;
+    margin-right: 5px;
+}
+
+.table-iinput{
+    width: 15vmax;
+    padding: 2px;
+    font-size: 0.1vmax;
+    border: 1px solid rgba(3, 3, 3, 0.5); /* Light transparent border */
+    background: transparent; /* Make input fields transparent */
+    color: rgb(8, 8, 8); /* Ensure text is visible */
+
+}
+.ending {
+    width: 100%;
+    min-height: 30px;
+    font-size: 0.9vmax;
+    padding: 5px;
+   
+    
+    border: 1px solid #ccc;
+    border-radius: 4px;
+   
+}
+
+
+.hidden {
+    display: none;
+}
