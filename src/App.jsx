@@ -17,6 +17,8 @@ import ResIsallow from './ResIsallow';
 import WelcomeLetter from './WelcomeLetter';
 import WelcomeCletter from './WelcomeCletter';
 import CompanyAllotment from './CompanyAllotment';
+import AllotMentLetter from './AllotMentLetter';
+import AllotmentIndiLetter from './AllotmentIndiLetter';
 
 function App() {
   const [cookiesAllowed, setCookiesAllowed] = useState(false);
@@ -73,7 +75,10 @@ function App() {
           <Route path='/WelcomeForm/:id' element={<WelcomeLetter />} />
           <Route path='/WelcomeCForm/:id' element={<WelcomeCletter />} />
           <Route path='/AllotmentCForm/:id' element={<CompanyAllotment />} />
+          <Route path='/AllotmentIndiForm/:id' element={<AllotmentIndiLetter />} />
           <Route path='/getar/:id' element={<ResIsallow />} />
+          <Route path='/Allotment/:id' element={<AllotMentLetter />} />
+          
           <Route path='/T' element={<T />} />
         </Routes>
 

@@ -353,7 +353,7 @@ const WelcomeLetter = () => {
       
       {isConfirmed ? (
         <>
-          Your account manager is <strong>{managerName}</strong> and will be reachable at{" "}
+          Your personal account manager is <strong>{managerName}</strong> and will be reachable at{" "}
           <strong>
             <a href={`tel:${phoneNumber}`}>{phoneNumber}</a>
           </strong>

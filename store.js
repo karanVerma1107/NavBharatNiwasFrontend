@@ -3,7 +3,7 @@ import { thunk }  from 'redux-thunk';
 import {composeWithDevTools}from 'redux-devtools-extension'
 import { authReducer, userReducer } from './src/Reducers/authReducer';
 import { AddsiteReducer, formAPPReducer, getImagesReducer, getOngoingSiteReducer, getTestimonialSiteReducer, getUpcomingSiteReducer, siteReducer, siteSearchReducer } from './src/Reducers/siteReducer';
-import { applicationsReducer, CapplicationsReducer, companyAllotmentReducer, companyFillByIdReducer, CstatusUpdateReducer, faqFormReducer, fillCompanyFormReducer, fillLuckyDrawReducer,  formAndResultsReducer,  formReducer, getCompanyFillsReducer, getcompanyFormReducer, getIsAllowReducer, getluckyDrawReducer, isAllowHandler, isAllowResultsReducer, luckydrawReducer, passtoresult, pushCompanyToResultReducer, resultReducer, statusUpdateReducer } from './src/Reducers/formreducer';
+import { allotmentbyIDReducer, allotmentReducer, applicationsReducer, CapplicationsReducer, companyAllotmentReducer, companyFillByIdReducer, CstatusUpdateReducer, faqFormReducer, fillCompanyFormReducer, fillLuckyDrawReducer,  formAndResultsReducer,  formReducer, getCompanyFillsReducer, getcompanyFormReducer, getIsAllowReducer, getluckyDrawReducer, IndiAllotmentReducer, isAllowHandler, isAllowResultsReducer, luckydrawReducer, passtoresult, pushCompanyToResultReducer, resultReducer, signatureReducer, statusUpdateReducer } from './src/Reducers/formreducer';
 
 
 const rootReducer = combineReducers({
@@ -38,6 +38,10 @@ getuserC: CapplicationsReducer,
 getAllisallow: isAllowHandler,
 getIsallRREE:isAllowResultsReducer,
 createAllotC: companyAllotmentReducer,
+getAllot: allotmentReducer,
+allotbyid:allotmentbyIDReducer,
+sign:signatureReducer,
+createAllotL: IndiAllotmentReducer
 });
 
 // learn what thunk actually do

@@ -21,7 +21,7 @@
     margin: 2vmax 0;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items:flex-start;
     overflow: hidden;
     position: relative;
 }

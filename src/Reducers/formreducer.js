@@ -61,7 +61,96 @@ import { SUBMIT_ISALLOW_REQ,
     CREATE_COMPANY_ALLOTMENT_REQ,
     CREATE_COMPANY_ALLOTMENT_SUCCESS,
     CREATE_COMPANY_ALLOTMENT_FAIL,
+    GET_ALLOTMENT_REQ,
+    GET_ALLOTMENT_SUCCESS,
+    GET_ALLOTMENT_FAIL,
+    GET_ALLOTMENT_BY_ID_REQ,
+    GET_ALLOTMENT_BY_ID_SUCCESS,
+    GET_ALLOTMENT_BY_ID_FAIL,
+    SUBMIT_SIGN_VALUE_REQ,
+    SUBMIT_SIGN_VALUE_SUCCESS,
+    SUBMIT_SIGN_VALUE_FAIL,
+    CREATE_INDIVIDUAL_ALLOTMENT_REQ,
+    CREATE_INDIVIDUAL_ALLOTMENT_SUCCESS,
+    CREATE_INDIVIDUAL_ALLOTMENT_FAIL
  } from "../Constant/formConstant";
+
+
+
+ const initialState120202 = {
+    Loading: false,
+    success: false,
+    Error: null,
+    message: null
+};
+
+export const signatureReducer = (state = initialState120202, action) => {
+    switch (action.type) {
+        case SUBMIT_SIGN_VALUE_REQ:
+            return {
+                ...state,
+                loading: true,
+                success: false,
+                error: null
+            };
+        
+        case SUBMIT_SIGN_VALUE_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                success: true,
+                message: action.payload
+            };
+        
+        case SUBMIT_SIGN_VALUE_FAIL:
+            return {
+                ...state,
+                loading: false,
+                success: false,
+                error: action.payload
+            };
+
+        default:
+            return state;
+    }
+};
+
+
+
+
+ const initialState33333 = {
+    loading: false,
+    allotment: null,
+    error: null,
+};
+
+export const allotmentbyIDReducer = (state = initialState33333, action) => {
+    switch (action.type) {
+        case GET_ALLOTMENT_BY_ID_REQ:
+            return {
+                ...state,
+                loading: true,
+            };
+
+        case GET_ALLOTMENT_BY_ID_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                allotment: action.payload,
+                error: null,
+            };
+
+        case GET_ALLOTMENT_BY_ID_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            };
+
+        default:
+            return state;
+    }
+};
 
 
 
@@ -70,7 +159,32 @@ import { SUBMIT_ISALLOW_REQ,
 const initialState929 = {
     loading: false,
     allotment: null,
+    message: null,
     Error: null,
+};
+
+
+ // Initial State
+ const initialState9291 = {
+    loading: false,
+    allotments: [],
+    Error: null,
+};
+
+
+
+// Reducer
+export const allotmentReducer = (state = initialState9291, action) => {
+    switch (action.type) {
+        case GET_ALLOTMENT_REQ:
+            return { ...state, loading: true };
+        case GET_ALLOTMENT_SUCCESS:
+            return { ...state, loading: false, allotments: action.payload };
+        case GET_ALLOTMENT_FAIL:
+            return { ...state, loading: false, Error: action.payload };
+        default:
+            return state;
+    }
 };
 
 // Reducer Function
@@ -85,11 +199,43 @@ export const companyAllotmentReducer = (state = initialState929, action) => {
             return {
                 ...state,
                 loading: false,
-                allotment: action.payload, // allotment data returned from action
+                allotment: action.payload.allotment, // allotment data returned from action
                 message: action.payload.message, // success message returned from action
                 Error: null,
             };
         case CREATE_COMPANY_ALLOTMENT_FAIL:
+            return {
+                ...state,
+                loading: false,
+                allotment: null,
+                Error: action.payload, // error message returned from action
+            };
+        default:
+            return state;
+    }
+};
+
+
+
+
+
+// Reducer Function
+export const IndiAllotmentReducer = (state = initialState929, action) => {
+    switch (action.type) {
+        case CREATE_INDIVIDUAL_ALLOTMENT_REQ:
+            return {
+                ...state,
+                loading: true,
+            };
+        case CREATE_INDIVIDUAL_ALLOTMENT_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                allotment: action.payload.allotment, // allotment data returned from action
+                message: action.payload.message, // success message returned from action
+                Error: null,
+            };
+        case CREATE_INDIVIDUAL_ALLOTMENT_FAIL:
             return {
                 ...state,
                 loading: false,

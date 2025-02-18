@@ -4,8 +4,9 @@ import { useSelector } from 'react-redux'
 import { FaClipboardList, FaFileAlt, FaReceipt, FaGift, FaPhone, FaPlus, FaEdit, FaCheck, FaQuestion, FaEye } from 'react-icons/fa'
 import Applications from './Applications'
 import Companyappli from './Companyappli'
+import { HiDocumentText } from "react-icons/hi";  // Heroicons
 import Gethistory from './Gethistory'
-
+import GetAllotments from './GetAllotments'
 
 const UserShow = ({ toggleUserShow }) => {
   const { user } = useSelector(state => state.user) // Get the user from the state
@@ -21,37 +22,41 @@ const UserShow = ({ toggleUserShow }) => {
   }
 
   const [showApplications, setShowApplications] = useState(false);
-  const [showCompanyAppli, setShowCompanyAppli] = useState(false);  // New state for Companyappli
-  const [showHistory, setShowHistory] = useState(false);  // New state for Gethistory
+  const [showCompanyAppli, setShowCompanyAppli] = useState(false);
+  const [showHistory, setShowHistory] = useState(false);
+  const [showAllotments, setShowAllotments] = useState(false); // New state for GetAllotments
 
-  const closeApp = () => {
-    setShowApplications(false); // Function to close the Applications component
-  };
-
-  const closeCompanyAppli = () => {
-    setShowCompanyAppli(false); // Function to close the Companyappli component
-  };
-
-  const closeHistory = () => {
-    setShowHistory(false); // Function to close the Gethistory component
-  };
+  const closeApp = () => setShowApplications(false);
+  const closeCompanyAppli = () => setShowCompanyAppli(false);
+  const closeHistory = () => setShowHistory(false);
+  const closeAllotments = () => setShowAllotments(false);
 
   const handleApplicationsClick = () => {
-    setShowApplications(true); // Open the Applications component
-    setShowCompanyAppli(false); // Close the Companyappli component if it was open
-    setShowHistory(false); // Close the Gethistory component if it was open
+    setShowApplications(true);
+    setShowCompanyAppli(false);
+    setShowHistory(false);
+    setShowAllotments(false);
   };
 
   const handleCompanyAppliClick = () => {
-    setShowCompanyAppli(true); // Open the Companyappli component
-    setShowApplications(false); // Close the Applications component if it was open
-    setShowHistory(false); // Close the Gethistory component if it was open
+    setShowCompanyAppli(true);
+    setShowApplications(false);
+    setShowHistory(false);
+    setShowAllotments(false);
   };
 
   const handleHistoryClick = () => {
-    setShowHistory(true); // Open the Gethistory component
-    setShowApplications(false); // Close the Applications component if it was open
-    setShowCompanyAppli(false); // Close the Companyappli component if it was open
+    setShowHistory(true);
+    setShowApplications(false);
+    setShowCompanyAppli(false);
+    setShowAllotments(false);
+  };
+
+  const handleAllotmentsClick = () => {
+    setShowAllotments(true);
+    setShowApplications(false);
+    setShowCompanyAppli(false);
+    setShowHistory(false);
   };
 
   const closebutton = () => {
@@ -73,6 +78,7 @@ const UserShow = ({ toggleUserShow }) => {
           <li><h3 onClick={handleApplicationsClick} style={{ cursor: 'pointer' }}><FaClipboardList /> My Applications</h3></li>
           <li><h3 onClick={handleCompanyAppliClick} style={{ cursor: 'pointer' }}><FaClipboardList /> Company Fill Applications</h3></li>
           <li><h3 onClick={handleHistoryClick} style={{ cursor: 'pointer' }}><FaGift /> Lucky Draw</h3></li>
+          <li><h3 onClick={handleAllotmentsClick} style={{ cursor: 'pointer' }}><HiDocumentText /> Allotments</h3></li>
         </ul>
         {user && user.role === 'admin' && (
           <>
@@ -80,8 +86,8 @@ const UserShow = ({ toggleUserShow }) => {
             <ul>
               <li><h3><a href="/ADD-SITE" target="_blank" style={{ color: 'white' }}><FaPlus /> Add a Site</a></h3></li>
               <li><h3><FaEdit /> Edit a Site</h3></li>
-              <li><h3><FaCheck /><a href="/form-related" target="_blank" style={{ color: 'white' }}><FaPlus />Manage form</a></h3></li>
-              <li><h3><FaCheck /><a href="/afterResult" target="_blank" style={{ color: 'white' }}><FaPlus />After Results</a></h3></li>
+              <li><h3><FaCheck /><a href="/form-related" target="_blank" style={{ color: 'white' }}><FaPlus /> Manage form</a></h3></li>
+              <li><h3><FaCheck /><a href="/afterResult" target="_blank" style={{ color: 'white' }}><FaPlus /> After Results</a></h3></li>
             </ul>
           </>
         )}
@@ -90,6 +96,7 @@ const UserShow = ({ toggleUserShow }) => {
       {showApplications && <Applications closeApp={closeApp} />}
       {showCompanyAppli && <Companyappli closeApp={closeCompanyAppli} />}
       {showHistory && <Gethistory closeHistory={closeHistory} />}
+      {showAllotments && <GetAllotments closeAllotments={closeAllotments} />}
     </>
   )
 }

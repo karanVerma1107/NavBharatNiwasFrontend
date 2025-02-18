@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCDrawbyId, createCompanyAllotment } from './Actions/formAction';
 import './CompanyAllotment.css'; // Import the CSS file
 import logo from './logoimg - Copy.jpg';
+import { toast } from 'react-toastify';
 import SignaturePad from './Signaturepad';
 
 const CompanyAllotment = () => {
@@ -29,6 +30,17 @@ const CompanyAllotment = () => {
     setSignature(signatureData);
   };
 
+
+  useEffect(() => {
+    if (message) {
+        
+        toast.success(message); // Display success message
+    }
+    if (Error) {
+       
+        toast.error(Error); // Display error message
+    }
+}, [message, Error]);
   
     // Local state for form fields
     const [formData, setFormData] = useState({
@@ -53,7 +65,7 @@ const CompanyAllotment = () => {
         amount: '',
         chequeDateDDDate: '',
         transactionId: '',
-        passportPhoto: passportPhoto || ''
+        image: passportPhoto || ''
     });
 
     useEffect(() => {
@@ -80,7 +92,8 @@ const CompanyAllotment = () => {
                 amount: '',
                 chequeDateDDDate: '',
                 transactionId: '',
-                passportPhoto: companyFill.passportPhoto || ''
+                image: companyFill.passportPhoto || ''
+                
             });
         }
     }, [companyFill]);
@@ -125,8 +138,8 @@ const CompanyAllotment = () => {
                     <div className="form-container">
     {/* Passport Image displayed above the tables */}
     <div className="image-container">
-        {formData.passportPhoto ? (
-            <img src={formData.passportPhoto} alt="Passport" style={{ width: '10vmax', height: '12vmax' }} />
+        {passportPhoto ? (
+            <img src={passportPhoto} alt="Passport" style={{ width: '10vmax', height: '12vmax' }} />
         ) : (
             <p>No passport photo available</p>
         )}

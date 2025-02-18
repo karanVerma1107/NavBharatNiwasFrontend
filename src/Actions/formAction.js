@@ -61,9 +61,136 @@ import { SUBMIT_ISALLOW_REQ,
     CREATE_COMPANY_ALLOTMENT_REQ,
     CREATE_COMPANY_ALLOTMENT_SUCCESS,
     CREATE_COMPANY_ALLOTMENT_FAIL,
+    GET_ALLOTMENT_REQ,
+    GET_ALLOTMENT_SUCCESS,
+    GET_ALLOTMENT_FAIL,
+    GET_ALLOTMENT_BY_ID_REQ,
+    GET_ALLOTMENT_BY_ID_SUCCESS,
+    GET_ALLOTMENT_BY_ID_FAIL,
+    SUBMIT_SIGN_VALUE_REQ,
+    SUBMIT_SIGN_VALUE_SUCCESS,
+    SUBMIT_SIGN_VALUE_FAIL,
+    CREATE_INDIVIDUAL_ALLOTMENT_REQ, 
+    CREATE_INDIVIDUAL_ALLOTMENT_SUCCESS, 
+    CREATE_INDIVIDUAL_ALLOTMENT_FAIL 
  } from "../Constant/formConstant";
 
 import axiosInstance from "../../axiosInstance";
+
+
+
+
+export const createIndiAllotment = (allotmentData) => async (dispatch, getState) => {
+    try {
+        dispatch({ type: CREATE_INDIVIDUAL_ALLOTMENT_REQ });
+
+        
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                
+            },
+        };
+
+        const { data } = await axiosInstance.post('/api/v1/createIndiAllotment', allotmentData, config);
+
+        dispatch({
+            type: CREATE_INDIVIDUAL_ALLOTMENT_SUCCESS,
+            payload: data,
+        });
+
+    } catch (error) {
+        dispatch({
+            type: CREATE_INDIVIDUAL_ALLOTMENT_FAIL,
+            payload: error.response && error.response.data.message 
+                ? error.response.data.message 
+                : error.message,
+        });
+    }
+};
+
+
+
+
+// Action to update signature
+export const updateSignature = (allotmentId, signType, signature) => async (dispatch) => {
+    try {
+        dispatch({ type: SUBMIT_SIGN_VALUE_REQ });
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        const { data } = await axiosInstance.post(
+            `/api/v1/sign/${allotmentId}/${signType}`,
+            { signature },
+            config
+        );
+
+        dispatch({
+            type: SUBMIT_SIGN_VALUE_SUCCESS,
+            payload: data.message
+        });
+
+    } catch (error) {
+        dispatch({
+            type: SUBMIT_SIGN_VALUE_FAIL,
+            payload: error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
+        });
+    }
+};
+
+
+
+
+export const getAllotmentById = (id) => async (dispatch) => {
+    try {
+        dispatch({ type: GET_ALLOTMENT_BY_ID_REQ });
+
+        const { data } = await axiosInstance.get(`/api/v1/getAllotmentbyId/${id}`);
+
+        dispatch({
+            type: GET_ALLOTMENT_BY_ID_SUCCESS,
+            payload: data.allotment,
+        });
+    } catch (error) {
+        dispatch({
+            type: GET_ALLOTMENT_BY_ID_FAIL,
+            payload: error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
+        });
+    }
+};
+
+
+
+// Function to fetch IsAllow results by ID
+export const getallAllotment = () => async (dispatch) => {
+    try {
+      dispatch({ type: GET_ALLOTMENT_REQ });
+  
+      const  { data }  = await axiosInstance.get(`/api/v1/getAllotment`);
+  
+     
+
+      dispatch({ 
+        type: GET_ALLOTMENT_SUCCESS, 
+        payload: data.allotments // Contains 'result' & 'resultCompany'  
+      });
+  
+    } catch (error) {
+      dispatch({ 
+        type: GET_ALLOTMENT_FAIL, 
+        payload: error.response?.data?.message || "Something went wrong" 
+      });
+    }
+  };
 
 
 
@@ -79,11 +206,11 @@ export const createCompanyAllotment = (allotmentData) => async (dispatch) => {
             },
         };
 
-        const response = await axios.post('/api/v1/createCAllotment', allotmentData, config); // Send the data to the backend
-
+        const response = await axiosInstance.post('/api/v1/createCAllotment', allotmentData, config); // Send the data to the backend
+        console.log(response.data); // Check the response here
         dispatch({
             type: CREATE_COMPANY_ALLOTMENT_SUCCESS,
-            payload: response.data.allotment, // The response data from the backend
+            payload: response.data, // The response data from the backend
         });
     } catch (error) {
         dispatch({

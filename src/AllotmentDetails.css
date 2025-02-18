@@ -1,0 +1,101 @@
+.allotment-container {
+    max-width: 90%;
+    margin: 5.6vmax auto;
+    background: white;
+    padding: 2vmax;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-size: 1.2vmax;
+    font-family: "Arial", sans-serif;
+}
+
+.section {
+    margin-bottom: 2vmax;
+    padding: 1.5vmax;
+    background: #f4f4f4;
+    border-radius: 8px;
+}
+
+.section-title {
+    font-size: 1.4vmax;
+    color: #2e3c52;
+    margin-bottom: 1vmax;
+    border-bottom: 2px solid #2e3c52;
+    padding-bottom: 0.5vmax;
+}
+
+.info p {
+    margin: 0.8vmax 0;
+    color: #333;
+}
+
+.info strong {
+    color: black;
+}
+
+.no-data {
+    text-align: center;
+    color: gray;
+    font-size: 1.3vmax;
+}
+
+
+
+
+.signature-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.sigCanvas {
+    border: 2px dashed #555;
+    border-radius: 8px;
+    background-color: white;
+}
+
+.signature-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.save-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+.save-btn:hover {
+    background-color: #218838;
+}
+
+.clear-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+.clear-btn:hover {
+    background-color: #c82333;
+}
+
+.signature-img {
+    width: 300px;
+    height: 100px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    object-fit: contain;
+    background-color: white;
+    margin-top: 10px;
+}

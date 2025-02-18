@@ -30,7 +30,7 @@ const ResIsallow = () => {
                             <p><strong>Father's Name:</strong> {item.fatherName}</p>
                             <p><strong>Address:</strong> {item.address}</p>
                             <div className="button-container">
-                                <button className="action-button allotment">Create Allotment</button>
+                                <button className="action-button allotment"><a href={`/AllotmentIndiForm/${item._id} `} target='_blank' style={{color:'white'}}>Create Allotment Letter</a></button>
                                 <button className="action-button welcome"><a href={`/WelcomeForm/${item._id} `} target='_blank' style={{color:'white'}}>Create Welcome Letter</a></button>
                             </div>
                         </div>
@@ -48,7 +48,7 @@ const ResIsallow = () => {
                             <p><strong>GST Number:</strong> {company.gstNumber}</p>
                             <p><strong>Company Address:</strong> {company.companyAddress}</p>
                             <div className="button-container">
-                                <button className="action-button allotment"><a href={`/AllotmentCForm/${company._id} `} target='_blank' style={{color:'white'}}>Create Welcome Letter</a></button>
+                                <button className="action-button allotment"><a href={`/AllotmentCForm/${company._id} `} target='_blank' style={{color:'white'}}>Create Allotment Letter</a></button>
                                 <button className="action-button welcome"><a href={`/WelcomeCForm/${company._id} `} target='_blank' style={{color:'white'}}>Create Welcome Letter</a></button>
                             </div>
                         </div>
