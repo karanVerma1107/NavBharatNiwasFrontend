@@ -57,7 +57,9 @@ const CompanyAllotment = () => {
         plc: '',
         paymentPlan: paymentPlan || '',
         plcAmount: '',
+        bookingAmount:'',
         registrationAmount: '',
+        project:'',
         totalCost: '',
         modeOfPayment: '',
         chequeNoDDNo: '',
@@ -88,6 +90,8 @@ const CompanyAllotment = () => {
                 totalCost: '',
                 modeOfPayment: '',
                 chequeNoDDNo: '',
+                bookingAmount:'',
+                project:'',
                 bankName: '',
                 amount: '',
                 chequeDateDDDate: '',
@@ -198,6 +202,14 @@ const CompanyAllotment = () => {
                     <tr>
                         <td>Development Charge</td>
                         <td><input type="text" name="developmentCharge" value={formData.developmentCharge} onChange={handleInputChange} required /></td>
+                    </tr>
+                    <tr>
+                        <td>Project</td>
+                        <td><input type="text" name="project" value={formData.project} onChange={handleInputChange} required /></td>
+                    </tr>
+                    <tr>
+                        <td>Booking Amount</td>
+                        <td><input type="text" name="bookingAmount" value={formData.bookingAmount} onChange={handleInputChange} required /></td>
                     </tr>
                     <tr>
                         <td>Area</td>

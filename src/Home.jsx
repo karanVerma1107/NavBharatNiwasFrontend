@@ -12,6 +12,7 @@ import { toast } from 'react-toastify';
 import grow from './growth.png';
 import app from './app.png';
 import Searching from './Searching';
+import { Chatbot } from 'aibotchat'
 import { faqform } from './Actions/formAction';
 import LuckyDrawForm from './LuckyDrawForm';
 import CompanyFillForm from './CompanyFillForm'; // Import the CompanyFillForm
@@ -152,6 +153,8 @@ const Home = () => {
           <img src={grow} alt="Growth" />
         </div>
       </div>
+
+      
 
       <div className="how">
         <h1>How to Apply</h1>

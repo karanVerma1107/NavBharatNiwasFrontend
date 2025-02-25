@@ -1,192 +1,190 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom';
 import { getAllotmentById } from './Actions/formAction';
 import SignatureCanvas from 'react-signature-canvas';
 import { updateSignature } from './Actions/formAction';
-import "./AllotmentDetails.css";
+import './AllotmentDetails.css';
 import { toast } from 'react-toastify';
 
 const AllotMentLetter = () => {
-
-    const {id} = useParams();
+    const { id } = useParams();
     const dispatch = useDispatch();
 
-    const {loading, error, allotment} = useSelector(state=>state.allotbyid);
+    const { loading, error, allotment } = useSelector(state => state.allotbyid);
 
     // Extract necessary information from the response
-const { 
-    _id,
-    name, 
-    swdo, // Son/Wife/Daughter Of
-    phoneNumber, 
-    gstNumber, 
-    dob, 
-    nationality, 
-    company, 
-    emailId, 
-    aadhaarNo, 
-    panNo, 
-    profession, 
-    address, 
-    uniqueId, // Unique ID
-    // Property Details
-    developmentCharge, 
-    area, 
-    unitNo, 
-    plc, // Preferential Location Charges
-    paymentPlan, 
-    changeinPP, // Change in Payment Plan
-    date,
-    // Payment Details
-    plcAmount, 
-    registrationAmount, 
-    totalCost, 
-    modeOfPayment, 
-    chequeNoDDNo, 
-    bankName, 
-    amount, 
-    image,
-    chequeDateDDDate, 
-    transactionId,
-    // Signatures
-    sign1, 
-    sign2, 
-    sign3, 
-    createdAt, 
-    updatedAt // Timestamps from Mongoose
-} = allotment || {};
+    const {
+        _id,
+        name,
+        swdo, // Son/Wife/Daughter Of
+        phoneNumber,
+        gstNumber,
+        dob,
+        nationality,
+        company,
+        emailId,
+        aadhaarNo,
+        panNo,
+        profession,
+        address,
+        uniqueId, // Unique ID
+        // Property Details
+        bookingAmount,
+        project,
+        developmentCharge,
+        area,
+        unitNo,
+        plc, // Preferential Location Charges
+        paymentPlan,
+        changeinPP, // Change in Payment Plan
+        date,
+        // Payment Details
+        plcAmount,
+        registrationAmount,
+        totalCost,
+        modeOfPayment,
+        chequeNoDDNo,
+        bankName,
+        amount,
+        image,
+        chequeDateDDDate,
+        transactionId,
+        // Signatures
+        sign,
+        createdAt,
+        updatedAt // Timestamps from Mongoose
+    } = allotment || {};
 
-const {Loading, Error, message} = useSelector(state=>state.sign)
+    const { Loading, Error, message } = useSelector(state => state.sign);
 
-useEffect(()=>{
-    if(message){
-        toast.success(message);
-    }
+    useEffect(() => {
+        if (message) {
+            toast.success(message);
+        }
 
-    if (Error){
-        toast.error(Error);
-    }
-})
+        if (Error) {
+            toast.error(Error);
+        }
+    }, [message, Error]);
 
+    const sigRef1 = useRef(null);
+    const sigRef2 = useRef(null);
+    const sigRef3 = useRef(null);
 
- const signatureRef = useRef(null);
+    const [signature1, setSignature1] = useState(sign);
+    const [signature2, setSignature2] = useState(sign);
+    const [signature3, setSignature3] = useState(sign);
 
- const [currentSignField, setCurrentSignField] = useState(null);
- const [signatures, setSignatures] = useState({ sign1, sign2, sign3 });
+    useEffect(() => {
+        setSignature1(sign);
+        setSignature2(sign);
+        setSignature3(sign);
+    }, [sign]);
 
- const sigRef1 = useRef(null);
- const sigRef2 = useRef(null);
- const sigRef3 = useRef(null);
+    const saveSignature = (ref, setSignature, field) => {
+        if (!ref.current) return;
 
- const [signature1, setSignature1] = useState(sign1);
- const [signature2, setSignature2] = useState(sign2);
- const [signature3, setSignature3] = useState(sign3);
+        const signatureData = ref.current.toDataURL();
+        dispatch(updateSignature(id, signatureData, field));
 
-  
-
-
- useEffect(() => {
-    setSignature1(sign1);
-    setSignature2(sign2);
-    setSignature3(sign3);
-}, [sign1, sign2, sign3]);
-
-
-const saveSignature = (ref, setSignature, field) => {
-    if (!ref.current) return;
-
-    const signatureData = ref.current.toDataURL();
-    dispatch(updateSignature(id, field, signatureData));
-
-    setSignature(signatureData);
-};
-
-const clearSignature = (ref) => {
-    if (ref.current) {
-        ref.current.clear();
-    }
-};
+        setSignature(signatureData);
 
 
-    useEffect(()=>{
-      dispatch(getAllotmentById(id));
-    },[]);
-    
+        // Reload after 2 seconds
+    setTimeout(() => {
+        window.location.reload();
+    }, 2000);
+        
+    };
 
-  return (
-   <>
-   
-   <div className="allotment-container">
-            {/* Applicant Details */}
-            {(name || swdo || phoneNumber || gstNumber|| dob || nationality || company || emailId || aadhaarNo || panNo || profession || address || uniqueId|| image) && (
-                <div className="section">
-                    <h2 className="section-title">Applicant Details</h2>
-                    <div className="info">
-                    {image&&  <img src={image} alt="Passport" style={{ width: '10vmax', height: '12vmax' }} />}
-                        {name && <p><strong>Name:</strong> {name}</p>}
-                        {swdo && <p><strong>Son/Wife/Daughter Of:</strong> {swdo}</p>}
-                        {phoneNumber && <p><strong>Phone Number:</strong> {phoneNumber}</p>}
-                        {dob && <p><strong>Date of Birth:</strong> {new Date(dob).toLocaleDateString()}</p>}
-                        {nationality && <p><strong>Nationality:</strong> {nationality}</p>}
-                        {company && <p><strong>Company:</strong> {company}</p>}
-                        {emailId && <p><strong>Email:</strong> {emailId}</p>}
-                        {aadhaarNo && <p><strong>Aadhaar Number:</strong> {aadhaarNo}</p>}
-                        {gstNumber && <p><strong>GST Number:</strong> {gstNumber}</p>}
-                        {panNo && <p><strong>PAN Number:</strong> {panNo}</p>}
-                        {profession && <p><strong>Profession:</strong> {profession}</p>}
-                        {address && <p><strong>Address:</strong> {address}</p>}
-                        {uniqueId && <p><strong>Unique ID:</strong> {uniqueId}</p>}
+    const clearSignature = (ref) => {
+        if (ref.current) {
+            ref.current.clear();
+        }
+    };
+
+    useEffect(() => {
+        dispatch(getAllotmentById(id));
+    }, [dispatch, id]);
+
+    return (
+        <>
+            <div className="allotment-container">
+                {/* Applicant Details */}
+                {(name || swdo || phoneNumber || gstNumber || dob || nationality || company || emailId || aadhaarNo || panNo || profession || address || uniqueId || image) && (
+                    <div className="section">
+                        <h2 className="section-title">Applicant Details</h2>
+                        <div className="info">
+                            {image && <img src={image} alt="Passport" style={{ width: '10vmax', height: '12vmax' }} />}
+                            {name && <p><strong>Name:</strong> {name}</p>}
+                            {swdo && <p><strong>Son/Wife/Daughter Of:</strong> {swdo}</p>}
+                            {phoneNumber && <p><strong>Phone Number:</strong> {phoneNumber}</p>}
+                            {dob && <p><strong>Date of Birth:</strong> {new Date(dob).toLocaleDateString()}</p>}
+                            {nationality && <p><strong>Nationality:</strong> {nationality}</p>}
+                            {company && <p><strong>Company:</strong> {company}</p>}
+                            {emailId && <p><strong>Email:</strong> {emailId}</p>}
+                            {aadhaarNo && <p><strong>Aadhaar Number:</strong> {aadhaarNo}</p>}
+                            {gstNumber && <p><strong>GST Number:</strong> {gstNumber}</p>}
+                            {panNo && <p><strong>PAN Number:</strong> {panNo}</p>}
+                            {profession && <p><strong>Profession:</strong> {profession}</p>}
+                            {address && <p><strong>Address:</strong> {address}</p>}
+                            {uniqueId && <p><strong>Unique ID:</strong> {uniqueId}</p>}
+                        </div>
                     </div>
-                </div>
-            )}
+                )}
 
-            {/* Booking Details */}
-            {(developmentCharge || area || unitNo || plc || paymentPlan || changeinPP || plcAmount || registrationAmount || totalCost || modeOfPayment || chequeNoDDNo || bankName || amount || chequeDateDDDate || transactionId) && (
-                <div className="section">
-                    <h2 className="section-title">Booking Details</h2>
-                    <div className="info">
-                        {developmentCharge && <p><strong>Development Charge:</strong> {developmentCharge}</p>}
-                        {area && <p><strong>Area:</strong> {area}</p>}
-                        {unitNo && <p><strong>Unit Number:</strong> {unitNo}</p>}
-                        {plc && <p><strong>Preferential Location Charges:</strong> {plc}</p>}
-                        {paymentPlan && <p><strong>Payment Plan:</strong> {paymentPlan}</p>}
-                        {changeinPP && <p><strong>Change in Payment Plan:</strong> {changeinPP}</p>}
-                        {plcAmount && <p><strong>PLC Amount:</strong> {plcAmount}</p>}
-                        {registrationAmount && <p><strong>Registration Amount:</strong> {registrationAmount}</p>}
-                        {totalCost && <p><strong>Total Cost:</strong> {totalCost}</p>}
-                        {modeOfPayment && <p><strong>Mode of Payment:</strong> {modeOfPayment}</p>}
-                        {chequeNoDDNo && <p><strong>Cheque/DD Number:</strong> {chequeNoDDNo}</p>}
-                        {bankName && <p><strong>Bank Name:</strong> {bankName}</p>}
-                        {amount && <p><strong>Amount:</strong> {amount}</p>}
-                        {chequeDateDDDate && <p><strong>Cheque/DD Date:</strong> {new Date(chequeDateDDDate).toLocaleDateString()}</p>}
-                        {transactionId && <p><strong>Transaction ID:</strong> {transactionId}</p>}
+                {/* Booking Details */}
+                {(developmentCharge || area || unitNo || plc || paymentPlan || changeinPP || plcAmount || registrationAmount || totalCost || modeOfPayment || chequeNoDDNo || bankName || amount || chequeDateDDDate || transactionId) && (
+                    <div className="section">
+                        <h2 className="section-title">Booking Details</h2>
+                        <div className="info">
+                            {developmentCharge && <p><strong>Development Charge:</strong> {developmentCharge}</p>}
+                            {bookingAmount && <p><strong>Boooking Amount:</strong> {bookingAmount}</p>}
+                            {project && <p><strong>Project:</strong> {project}</p>}
+                            {area && <p><strong>Area:</strong> {area}</p>}
+                            {unitNo && <p><strong>Unit Number:</strong> {unitNo}</p>}
+                            {plc && <p><strong>Preferential Location Charges:</strong> {plc}</p>}
+                            {paymentPlan && <p><strong>Payment Plan:</strong> {paymentPlan}</p>}
+                            {changeinPP && <p><strong>Change in Payment Plan:</strong> {changeinPP}</p>}
+                            {plcAmount && <p><strong>PLC Amount:</strong> {plcAmount}</p>}
+                            {registrationAmount && <p><strong>Registration Amount:</strong> {registrationAmount}</p>}
+                            {totalCost && <p><strong>Total Cost:</strong> {totalCost}</p>}
+                            {modeOfPayment && <p><strong>Mode of Payment:</strong> {modeOfPayment}</p>}
+                            {chequeNoDDNo && <p><strong>Cheque/DD Number:</strong> {chequeNoDDNo}</p>}
+                            {bankName && <p><strong>Bank Name:</strong> {bankName}</p>}
+                            {amount && <p><strong>Amount:</strong> {amount}</p>}
+                            {chequeDateDDDate && <p><strong>Cheque/DD Date:</strong> {new Date(chequeDateDDDate).toLocaleDateString()}</p>}
+                            {transactionId && <p><strong>Transaction ID:</strong> {transactionId}</p>}
+                        </div>
                     </div>
-                </div>
-            )}
+                )}
 
-            {/* Timestamps */}
-            {(createdAt || updatedAt) && (
-                <div className="section">
-                    <h2 className="section-title">Timestamps</h2>
-                    <div className="info">
-                        {createdAt && <p><strong>Created At:</strong> {new Date(createdAt).toLocaleString()}</p>}
-                        {updatedAt && <p><strong>Updated At:</strong> {new Date(updatedAt).toLocaleString()}</p>}
+                {/* Timestamps */}
+                {(createdAt || updatedAt) && (
+                    <div className="section">
+                        <h2 className="section-title">Timestamps</h2>
+                        <div className="info">
+                            {createdAt && <p><strong>Created At:</strong> {new Date(createdAt).toLocaleString()}</p>}
+                            {updatedAt && <p><strong>Updated At:</strong> {new Date(updatedAt).toLocaleString()}</p>}
+                        </div>
                     </div>
-                </div>
-            )}
-        </div>
+                )}
+            </div>
 
-        {!signature1 ? (
+            {/* Signature Fields */}
+            <div className="signature-container">
+                {/* Signature 1 */}
+                {!signature1 ? (
                     <div className="signature-area">
                         <SignatureCanvas
                             ref={sigRef1}
                             penColor="black"
-                            canvasProps={{ width: 400, height: 200,  className: 'sigCanvas' }}
+                            canvasProps={{ width: 400, height: 200, className: 'sigCanvas' }}
                         />
                         <div className="signature-buttons">
                             <button onClick={() => saveSignature(sigRef1, setSignature1, "sign1")} className="save-btn">
-                                Save Signature
+                                Save Signature 1
                             </button>
                             <button onClick={() => clearSignature(sigRef1)} className="clear-btn">
                                 Clear
@@ -199,7 +197,8 @@ const clearSignature = (ref) => {
                     </div>
                 )}
 
-        <div className="terms-container">
+
+<div className="terms-container">
     <h2 style={{ fontSize: '1.5vmax', fontWeight: 'bold', marginLeft:'2vmax'}}>Terms & Conditions</h2>
     <ul style={{ fontSize: '1.3vmax', fontWeight: 'bold' }}>
         <li>The Intending Buyer has applied for the registration of Plot/Farm House with full knowledge and subject to all laws, notifications and rules applicable to this area, which have been explained by the company and understood by him/her.</li>
@@ -225,16 +224,17 @@ const clearSignature = (ref) => {
     <h4 style={{marginLeft:'2vmax'}}> DATE: {date}</h4>
 </div>
 
-{!signature2 ? (
+                {/* Signature 2 */}
+                {!signature2 ? (
                     <div className="signature-area">
                         <SignatureCanvas
                             ref={sigRef2}
                             penColor="black"
-                            canvasProps={{ width: 400, height: 200,  className: 'sigCanvas' }}
+                            canvasProps={{ width: 400, height: 200, className: 'sigCanvas' }}
                         />
                         <div className="signature-buttons">
                             <button onClick={() => saveSignature(sigRef2, setSignature2, "sign2")} className="save-btn">
-                                Save Signature
+                                Save Signature 2
                             </button>
                             <button onClick={() => clearSignature(sigRef2)} className="clear-btn">
                                 Clear
@@ -259,8 +259,9 @@ const clearSignature = (ref) => {
     </ul>
     <h4 style={{marginLeft:'2vmax'}}> DATE: {date}</h4>
 </div>
-   
-{!signature3 ? (
+
+                {/* Signature 3 */}
+                {!signature3 ? (
                     <div className="signature-area">
                         <SignatureCanvas
                             ref={sigRef3}
@@ -269,7 +270,7 @@ const clearSignature = (ref) => {
                         />
                         <div className="signature-buttons">
                             <button onClick={() => saveSignature(sigRef3, setSignature3, "sign3")} className="save-btn">
-                                Save Signature
+                                Save Signature 3
                             </button>
                             <button onClick={() => clearSignature(sigRef3)} className="clear-btn">
                                 Clear
@@ -281,8 +282,9 @@ const clearSignature = (ref) => {
                         <img src={signature3} alt="Signature 3" className="signature-img" />
                     </div>
                 )}
-   </>
-  )
-}
+            </div>
+        </>
+    );
+};
 
-export default AllotMentLetter
+export default AllotMentLetter;

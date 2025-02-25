@@ -47,8 +47,8 @@
 
 .vertical-line {
     height: 2.2vmax; /* Adjust the height of the vertical line */
-    width: 1px;
-    background-color: black;
+    width: 2px;
+    background-color: rgb(81, 78, 143);
     margin: 0 1vmax; /* Add space on both sides of the vertical line */
 }
 

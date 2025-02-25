@@ -1,84 +1,112 @@
+/* AllotmentDetails.css */
+
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #cbdcf5;
+}
+
 .allotment-container {
-    max-width: 90%;
-    margin: 5.6vmax auto;
+    max-width: 120vmax;
+    margin: 2vmax auto;
+    padding: 3vmax;
     background: white;
-    padding: 2vmax;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    font-size: 1.2vmax;
-    font-family: "Arial", sans-serif;
+    box-shadow: 0 0.5vmax 1.5vmax rgba(46, 60, 82, 0.1);
+    border-radius: 1vmax;
 }
 
 .section {
-    margin-bottom: 2vmax;
-    padding: 1.5vmax;
-    background: #f4f4f4;
-    border-radius: 8px;
+    margin-bottom: 3vmax;
+    padding: 2vmax;
+    background: #2e3c52;
+    border-left: 0.5vmax solid #2e3c52;
+    transition: transform 0.3s ease;
+}
+
+
+.info p strong{
+    color: #090909;
+}
+.section:hover {
+    transform: translateX(0.5vmax);
 }
 
 .section-title {
-    font-size: 1.4vmax;
-    color: #2e3c52;
-    margin-bottom: 1vmax;
-    border-bottom: 2px solid #2e3c52;
+    color: #f7f9fd;
+    font-size: 1.8vmax;
+    margin-bottom: 1.5vmax;
     padding-bottom: 0.5vmax;
+    border-bottom: 0.2vmax solid #2e3c52;
+    font-weight: 600;
 }
 
-.info p {
-    margin: 0.8vmax 0;
-    color: #333;
-}
-
-.info strong {
-    color: black;
-}
-
-.no-data {
-    text-align: center;
-    color: gray;
+.info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30vmax, 1fr));
+    gap: 1.5vmax;
     font-size: 1.3vmax;
 }
 
+.info p {
+    margin: 0.5vmax 0;
+    padding: 0.8vmax;
+    background: #f8f9fa;
+    border-radius: 0.5vmax;
+}
 
+.info img {
+    border: 0.2vmax solid #2e3c52;
+    border-radius: 0.5vmax;
+    box-shadow: 0 0.5vmax 1vmax rgba(46, 60, 82, 0.1);
+}
 
+.signature-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(40vmax, 1fr));
+    gap: 3vmax;
+    padding: 3vmax;
+    margin: 2vmax auto;
+}
 
 .signature-area {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+    background: white;
+    padding: 2vmax;
+    border-radius: 1vmax;
+    box-shadow: 0 0.5vmax 1.5vmax rgba(46, 60, 82, 0.1);
 }
 
 .sigCanvas {
-    border: 2px dashed #555;
-    border-radius: 8px;
-    background-color: white;
+    border: 0.2vmax solid #2e3c52 !important;
+    border-radius: 0.5vmax;
+    background: #f8f9fa !important;
+    width: 100% !important;
+    height: 20vmax !important;
 }
 
 .signature-buttons {
+    margin-top: 1.5vmax;
     display: flex;
-    gap: 10px;
-    margin-top: 10px;
+    gap: 1vmax;
 }
 
-button {
-    padding: 10px 16px;
+.save-btn, .clear-btn {
+    padding: 1vmax 2vmax;
     border: none;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: bold;
+    border-radius: 0.5vmax;
+    font-size: 1.2vmax;
     cursor: pointer;
     transition: all 0.3s ease;
-    text-transform: uppercase;
 }
 
 .save-btn {
-    background-color: #28a745;
+    background-color: #2e3c52;
     color: white;
 }
 
 .save-btn:hover {
-    background-color: #218838;
+    background-color: #1a2635;
+    transform: translateY(-0.2vmax);
 }
 
 .clear-btn {
@@ -87,15 +115,53 @@ button {
 }
 
 .clear-btn:hover {
-    background-color: #c82333;
+    background-color: #bb2d3b;
+    transform: translateY(-0.2vmax);
 }
 
 .signature-img {
-    width: 300px;
-    height: 100px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    object-fit: contain;
-    background-color: white;
-    margin-top: 10px;
+    border: 0.2vmax solid #2e3c52;
+    border-radius: 0.5vmax;
+    padding: 1vmax;
+    background: white;
+    max-width: 40vmax;
+    height: auto;
+    box-shadow: 0 0.5vmax 1vmax rgba(46, 60, 82, 0.1);
+}
+
+.terms-container, .declaration-container {
+    margin: 3vmax 0;
+    padding: 2vmax;
+    background: #ffffff;
+    border-radius: 1vmax;
+    box-shadow: 0 0.5vmax 1.5vmax rgba(46, 60, 82, 0.1);
+}
+
+.terms-container h2, .declaration-container h2 {
+    color: #2e3c52;
+    font-size: 1.8vmax;
+    margin-bottom: 1.5vmax;
+    padding-bottom: 0.5vmax;
+    border-bottom: 0.2vmax solid #2e3c52;
+}
+
+.terms-container ul, .declaration-container ul {
+    list-style-type: square;
+    padding-left: 3vmax;
+    margin: 1.5vmax 0;
+}
+
+.terms-container li, .declaration-container li {
+    margin-bottom: 1vmax;
+    font-size: 1.3vmax;
+    line-height: 1.8;
+    color: #4a5568;
+}
+
+h4 {
+    color: #2e3c52;
+    font-size: 1.3vmax;
+    margin-top: 2vmax;
+    padding-top: 1vmax;
+    border-top: 0.1vmax solid #e2e8f0;
 }

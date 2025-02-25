@@ -54,6 +54,8 @@ const AllotmentIndiLetter = () => {
     totalCost: '',
     modeOfPayment: '',
     chequeNoDDNo: '',
+    project:'',
+    bookingAmount:'',
     bankName: '',
     amount: '',
     chequeDateDDDate: '',
@@ -117,6 +119,8 @@ const AllotmentIndiLetter = () => {
         <div className="form-section">
           <h3>Booking Details</h3>
           <div className="input-group"><label>Development Charge</label><input type="text" name="developmentCharge" value={formData.developmentCharge} onChange={handleChange} /></div>
+          <div className="input-group"><label>Booking Amount</label><input type="text" name="bookingAmount" value={formData.bookingAmount} onChange={handleChange} /></div>
+          <div className="input-group"><label>Project</label><input type="text" name="project" value={formData.project} onChange={handleChange} /></div>
           <div className="input-group"><label>Plot Size</label><input type="text" name="area" value={formData.area} onChange={handleChange} /></div>
           <div className="input-group"><label>Unit No.</label><input type="text" name="unitNo" value={formData.unitNo} onChange={handleChange} /></div>
           <div className="input-group"><label>PLC</label><input type="text" name="plc" value={formData.plc} onChange={handleChange} /></div>

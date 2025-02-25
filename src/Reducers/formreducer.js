@@ -72,8 +72,75 @@ import { SUBMIT_ISALLOW_REQ,
     SUBMIT_SIGN_VALUE_FAIL,
     CREATE_INDIVIDUAL_ALLOTMENT_REQ,
     CREATE_INDIVIDUAL_ALLOTMENT_SUCCESS,
-    CREATE_INDIVIDUAL_ALLOTMENT_FAIL
+    CREATE_INDIVIDUAL_ALLOTMENT_FAIL,
+    SEARCH_ALLOTMENT_LETTER_REQ, 
+  SEARCH_ALLOTMENT_LETTER_SUCCESS, 
+  SEARCH_ALLOTMENT_LETTER_FAIL ,
+  SEE_ALL_FAQS_REQ,
+  SEE_ALL_FAQS_SUCCESS,
+  SEE_ALL_FAQS_FAIL
  } from "../Constant/formConstant";
+
+
+
+
+
+// Reducer for Seeing All FAQs
+export const seeAllFAQsReducer = (state = { faqs: [] }, action) => {
+    switch (action.type) {
+      case SEE_ALL_FAQS_REQ:
+        return { loading: true, faqs: [] };
+      case SEE_ALL_FAQS_SUCCESS:
+        return { loading: false, faqs: action.payload };
+      case SEE_ALL_FAQS_FAIL:
+        return { loading: false, Error: action.payload };
+      default:
+        return state;
+    }
+  };
+  
+
+
+
+
+ const initialState0010 = {
+    loading: false,
+    allotments: [],
+    error: null,
+  };
+  
+
+
+
+ export const searchAllotmentReducer = (state = initialState0010, action) => {
+    switch (action.type) {
+      case SEARCH_ALLOTMENT_LETTER_REQ:
+        return {
+          ...state,
+          loading: true,
+          error: null,
+        };
+  
+      case SEARCH_ALLOTMENT_LETTER_SUCCESS:
+        return {
+          ...state,
+          loading: false,
+          allotments: action.payload, // backend returns allotments in results
+        };
+  
+      case SEARCH_ALLOTMENT_LETTER_FAIL:
+        return {
+          ...state,
+          loading: false,
+          error: action.payload,
+        };
+  
+      default:
+        return state;
+    }
+  };
+
+
 
 
 
@@ -944,6 +1011,7 @@ const initialState11 = {
           ...state,
           loading: false, // Loading finished
           luckyDraws: action.payload.luckyDraws || [], // Store lucky draws or set empty array
+          companyForms: action.payload.companyForms || [], // Store lucky draws or set empty array
           message: action.payload.message || '', // Store message if the form is not open yet
         };
   

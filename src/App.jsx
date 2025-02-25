@@ -9,6 +9,7 @@ import Footer from './Footer';
 import FormRelated from './FormRelated';
 import Site from './Site';
 import Form from './Form';
+
 import Result from './Result';
 import T from './T';
 import CompanyFormFull from './CompanyFormFull';
@@ -19,6 +20,8 @@ import WelcomeCletter from './WelcomeCletter';
 import CompanyAllotment from './CompanyAllotment';
 import AllotMentLetter from './AllotMentLetter';
 import AllotmentIndiLetter from './AllotmentIndiLetter';
+
+
 
 function App() {
   const [cookiesAllowed, setCookiesAllowed] = useState(false);
@@ -59,10 +62,11 @@ function App() {
     <>
       <Router>
         <Header />
+       
         <Callnow />
 
       
-
+        
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path='/ADD-SITE' element={<Addsite />} />

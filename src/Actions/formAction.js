@@ -72,11 +72,61 @@ import { SUBMIT_ISALLOW_REQ,
     SUBMIT_SIGN_VALUE_FAIL,
     CREATE_INDIVIDUAL_ALLOTMENT_REQ, 
     CREATE_INDIVIDUAL_ALLOTMENT_SUCCESS, 
-    CREATE_INDIVIDUAL_ALLOTMENT_FAIL 
+    CREATE_INDIVIDUAL_ALLOTMENT_FAIL,
+    SEARCH_ALLOTMENT_LETTER_REQ, 
+    SEARCH_ALLOTMENT_LETTER_SUCCESS, 
+    SEARCH_ALLOTMENT_LETTER_FAIL , 
+    SEE_ALL_FAQS_REQ,
+    SEE_ALL_FAQS_SUCCESS,
+    SEE_ALL_FAQS_FAIL
  } from "../Constant/formConstant";
 
 import axiosInstance from "../../axiosInstance";
 
+
+
+
+export const fetchAllFAQs = () => async (dispatch) => {
+    try {
+      dispatch({ type: SEE_ALL_FAQS_REQ });
+  
+      const { data } = await axiosInstance.get('/api/v1/seefaq');
+  
+      dispatch({
+        type: SEE_ALL_FAQS_SUCCESS,
+        payload: data.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: SEE_ALL_FAQS_FAIL,
+        payload: error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+      });
+    }
+  };
+  
+
+
+export const searchAllotments = (query) => async (dispatch) => {
+    try {
+      dispatch({ type: SEARCH_ALLOTMENT_LETTER_REQ });
+  
+      const { data } = await axiosInstance.get(`/api/v1/getAllotment/${query}`);
+  
+      dispatch({
+        type: SEARCH_ALLOTMENT_LETTER_SUCCESS,
+        payload: data.results,
+      });
+    } catch (error) {
+      dispatch({
+        type: SEARCH_ALLOTMENT_LETTER_FAIL,
+        payload: error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+      });
+    }
+  };
 
 
 
@@ -114,7 +164,7 @@ export const createIndiAllotment = (allotmentData) => async (dispatch, getState)
 
 
 // Action to update signature
-export const updateSignature = (allotmentId, signType, signature) => async (dispatch) => {
+export const updateSignature = (allotmentId, signature) => async (dispatch) => {
     try {
         dispatch({ type: SUBMIT_SIGN_VALUE_REQ });
 
@@ -125,7 +175,7 @@ export const updateSignature = (allotmentId, signType, signature) => async (disp
         };
 
         const { data } = await axiosInstance.post(
-            `/api/v1/sign/${allotmentId}/${signType}`,
+            `/api/v1/sign/${allotmentId}`,
             { signature },
             config
         );

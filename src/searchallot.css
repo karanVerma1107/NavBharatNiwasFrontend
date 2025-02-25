@@ -1,0 +1,81 @@
+/* Container */
+.container {
+    width: 100%;
+    margin: 5vmax auto;
+    text-align: center;
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 1.2vmax;
+  }
+  
+  /* Title */
+  .title {
+    font-size: 1.5vmax;
+    margin-bottom: 2vmax;
+    color: #333;
+  }
+  
+  /* Input */
+  .input {
+    width: 40vmax;
+    padding: 1vmax;
+    font-size: 1.2vmax;
+    border-radius: 1vmax;
+    border: 0.15vmax solid #ccc;
+    outline: none;
+    margin-bottom: 3vmax;
+    transition: border-color 0.3s ease;
+  }
+  
+  .input:focus {
+    border-color: #007BFF;
+  }
+  
+  /* Loading & Error */
+  .loading {
+    font-size: 1.2vmax;
+    color: #555;
+  }
+  
+  .error {
+    font-size: 1.2vmax;
+    color: red;
+  }
+  
+  /* Results Container */
+  .results-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2vmax;
+  }
+  
+  /* Card */
+  .card {
+    width: 25vmax;
+    padding: 2vmax;
+    border-radius: 1vmax;
+    box-shadow: 0 0 1.5vmax rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-1vmax);
+    box-shadow: 0 0 2vmax rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Name */
+  .name {
+    font-size: 1.5vmax;
+    color: #007BFF;
+    margin-bottom: 1vmax;
+  }
+  
+  /* Fields */
+  .field {
+    font-size: 1.2vmax;
+    color: #333;
+    margin-bottom: 0.8vmax;
+  }
+  

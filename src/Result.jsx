@@ -6,7 +6,7 @@ import './result.css'
 
 const Result = () => {
   const { formId } = useParams();
-  const { loading, luckyDraws, error, message } = useSelector((state) => state.result);
+  const { loading, luckyDraws, error, message, companyForms } = useSelector((state) => state.result);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -48,7 +48,8 @@ const Result = () => {
                 <h3 className="lucky-draw-name">{luckyDraw.name}</h3>
                 <p className="lucky-draw-info">Father's Name: {luckyDraw.fatherName}</p>
                 <p className="lucky-draw-info">ID: {luckyDraw._id}</p>
-                <p className="lucky-draw-info">allotment: {luckyDraw.allotment}</p>
+                <p className="lucky-draw-info">Allotment: {luckyDraw.allotment}</p>
+                <p className="lucky-draw-info">Gift: {luckyDraw.gift}</p>
 
               </div>
 
@@ -57,6 +58,31 @@ const Result = () => {
         </div>
       ) : (
         !message && <div className="no-results">No lucky draw results available.</div>
+      )}
+
+
+
+{companyForms && companyForms.length > 0 ? (
+        <div className="company-forms-grid">
+          {companyForms.map((companyForm) => (
+            <div key={companyForm._id} className="lucky-draw-card">
+                <img
+                src={companyForm.passportPhoto}
+                alt="Lucky Draw"
+                className="lucky-draw-image"
+                onClick={() => openModal(companyForm.passportPhoto)} // Open modal on image click
+              />
+              <div className="lucky-draw-details">
+                <h3 className="lucky-draw-info">{companyForm.companyName}</h3>
+                <p className="lucky-draw-info">Authorized Signatory: {companyForm.authorizedSignatory}</p>
+                <p className="lucky-draw-info">Allotment: {companyForm.allotment}</p>
+                <p className="lucky-draw-info">Gift: {companyForm.gift || 'No gift specified'}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        !message && <div className="no-results">No company form results available.</div>
       )}
     </div>
   );

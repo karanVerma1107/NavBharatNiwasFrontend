@@ -30,3 +30,8 @@
   .cookie-consent button:last-child:hover {
     background-color: #e53935; /* Darker red */
   }
+
+
+  .Chatbot-header{
+    background-color: #4CAF50;
+  }

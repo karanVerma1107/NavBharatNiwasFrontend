@@ -48,7 +48,7 @@ const Header = () => {
     <>
       <div className="header">
         <div className="logo">
-          <img src={pic} alt="Logo" className="logo-img" style={{ height: '5.7vmax', width: '16vmax' }} />
+          <img src={pic} alt="Logo" className="logo-img" style={{ height: '5.7vmax', width: '16vmax' , marginTop: '1.8vmax'}} />
         </div>
 
         <div className="rightSide">
@@ -62,7 +62,7 @@ const Header = () => {
           <div className="vertical-line"></div>
           <div className="login-container">
             {auth ? (
-              <FaUser className="user-icon" style={{ fontSize: '1.9vmax', cursor: 'pointer' }} onClick={toggleUserShow} />
+              <FaUser className="userr-icon" style={{ fontSize: '1.9vmax', cursor: 'pointer' , color:'#2e3c52'}} onClick={toggleUserShow} />
             ) : (
               <button className="login-button" onClick={openLogin}>Login</button>
             )}
