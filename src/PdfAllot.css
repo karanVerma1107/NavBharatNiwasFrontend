@@ -1,0 +1,65 @@
+.pdf-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vmax;
+    margin-top: 6.7vmax;
+}
+
+.pdf-page {
+    width: 210mm;
+    height: 297mm;
+    background: white;
+    margin: 1vmax auto;
+    border: 1px solid #333;
+    padding: 2vmax;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.pdf-page3{
+    width: 210mm;
+    height: 297mm;
+    background: white;
+    margin: 1vmax auto;
+    border: 1px solid #333;
+    padding: 2vmax;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    
+}
+.header {
+    text-align: center;
+}
+
+.logo {
+    width: 17.8vmax;
+    height: 7vmax;
+}
+
+.download-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 1vmax 2vmax;
+    border: none;
+    cursor: pointer;
+    font-size: 1vmax;
+    border-radius: 5px;
+    margin-top: 2vmax;
+}
+
+.download-btn:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+    .pdf-page {
+        width: 100%;
+        height: auto;
+        padding: 3vmax;
+    }
+}

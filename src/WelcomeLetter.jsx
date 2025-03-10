@@ -161,10 +161,10 @@ const WelcomeLetter = () => {
                     />
                 </div>
 
-                <div className='welcome-content'>
-                <p>
+                <div className='welcome-content' style={{marginTop:'6vmax'}}>
+                <p style={{ fontSize: "0.8vmax", fontWeight: "bolder", color: "#2e3c52" }}>
         Dear Mr/Mrs/Ms. <strong>{name}</strong>,
-        <br /><br />
+       <br/>
         Congratulations on your new investment in <strong>{project}</strong> at 
         <strong> Navbharat Niwas</strong>. You are among the fortunate few to secure 
         a unit at a <strong>reasonable rate</strong>, and we are honored to be part of 
@@ -187,22 +187,37 @@ const WelcomeLetter = () => {
     <tbody>
         <tr>
             <td><strong>Client Name</strong></td>
-            <td><input type="text" className="table-input" placeholder="Name" /></td>
+            <td><input type="text" className="table-input" placeholder="Name" style={{fontSize: '0.9vmax', 
+    minHeight: '1.9vmax',  
+    padding: '2px',      
+    boxSizing: 'border-box' }} /></td>
         </tr>
         <tr>
             <td><strong>Allotted Area (Sq. Yd)</strong></td>
-            <td><input type="text" className="table-input" placeholder="Area" /></td>
+            <td><input type="text" className="table-input" placeholder="Area" style={{fontSize: '0.9vmax', 
+    minHeight: '1.9vmax',  
+    padding: '2px',      
+    boxSizing: 'border-box' }} /></td>
         </tr>
         <tr>
             <td><strong>Payment Plan</strong></td>
-            <td><input type="text" className="table-input" placeholder="Plan" /></td>
+            <td><input type="text" className="table-input" placeholder="Plan" style={{fontSize: '0.9vmax', 
+    minHeight: '1.9vmax',  
+    padding: '2px',      
+    boxSizing: 'border-box' }} /></td>
         </tr>
         <tr>
             <td><strong>Basic Sales Price (Per Sq. Yd.)</strong></td>
             <td>
                 <>
-                    <input type="text" className="table-input small-input" placeholder="unit" />
-                    <input type="text" className="table-input small-input" placeholder="total" />
+                    <input type="text" className="table-input small-input" placeholder="unit" style={{fontSize: '0.9vmax', 
+    minHeight: '1.9vmax',  
+    padding: '2px',      
+    boxSizing: 'border-box' }} />
+                    <input type="text" className="table-input small-input" placeholder="total" style={{fontSize: '0.9vmax', 
+    minHeight: '1.9vmax',  
+    padding: '2px',      
+    boxSizing: 'border-box' }} />
                 </>
             </td>
         </tr>
@@ -210,31 +225,43 @@ const WelcomeLetter = () => {
             <td><strong>EDC/IDC (Per Sq. Yd.)</strong></td>
             <td>
                 <>
-                    <input type="text" className="table-input small-input" placeholder="unit" />
-                    <input type="text" className="table-input small-input" placeholder="total" />
+                    <input type="text" className="table-input small-input" placeholder="unit" style={{fontSize: '0.9vmax', 
+    minHeight: '1.9vmax',  
+    padding: '2px',      
+    boxSizing: 'border-box' }}/>
+                    <input type="text" className="table-input small-input" placeholder="total" style={{fontSize: '0.9vmax', 
+    minHeight: '1.9vmax',  
+    padding: '2px',      
+    boxSizing: 'border-box' }} />
                 </>
             </td>
         </tr>
         <tr>
             <td><strong>PLC = 12%</strong></td>
-            <td><input type="text" className="table-input" placeholder="PLC" /></td>
+            <td><input type="text" className="table-input" placeholder="PLC" style={{fontSize: '0.9vmax', 
+    minHeight: '1.9vmax',  
+    padding: '2px',      
+    boxSizing: 'border-box' }} /></td>
         </tr>
         <tr>
             <td><strong>Total Cost</strong></td>
-            <td><input type="text" className="table-input" placeholder="Total" /></td>
+            <td><input type="text" className="table-input" placeholder="Total" style={{fontSize: '0.9vmax', 
+    minHeight: '1.9vmax',  
+    padding: '2px',      
+    boxSizing: 'border-box' }} /></td>
         </tr>
     </tbody>
 </table>
 
-<div className="mini-excel-container">
+<div className="mini-excel-container"  >
       <table className="mini-excel">
         <thead>
           <tr>
-            <th>Installment No</th>
-            <th>Time</th>
-            <th>Payment %</th>
-            <th>Amount</th>
-            <th>Action</th>
+            <th style={{color:'black', fontSize:'0.9vmax'}}>Installment No |</th>
+            <th style={{color:'black',  fontSize:'0.9vmax'}}>Time |</th>
+            <th style={{color:'black',  fontSize:'0.9vmax'}}>Payment % |</th>
+            <th style={{color:'black' , fontSize:'0.9vmax'}}>Amount |</th>
+            <th style={{color:'black' , fontSize:'0.9vmax'}}>Action </th>
           </tr>
         </thead>
         <tbody>
@@ -317,7 +344,7 @@ const WelcomeLetter = () => {
                             <button onClick={handleConfirm}>Yes</button>
                         </div>
                     ) : (
-                        <p style={{color:"black", fontSize:"1vmax"}}>{text}</p>
+                        <p style={{ fontSize:"1vmax", fontWeight:'bolder', color:"#2e3c52" , alignSelf:'flex-start'}}>{text}</p>
                     )}
                 </div>
             </div>
@@ -330,31 +357,31 @@ const WelcomeLetter = () => {
         fontSize: "0.9vmax",
       }}
     >
-      <strong style={{ fontSize: "1.2vmax", display: "block" }}>Payment Details</strong>
+      <strong style={{ fontSize: "1.2vmax", display: "block", color:'black'}}>Payment Details</strong>
       <br />
-      <strong>Payment can be transferred online using the following details:</strong>
+      <strong style={{color:'black'}}> Payment can be transferred online using the following details:</strong>
       <br />
     
-      <strong>Account Name:</strong> NAVBHARAT NIWAS PRIVATE LIMITED
+      <strong style={{color:'black'}}>Account Name: <strong style={{color:"#2e3c52"}}>NAVBHARAT NIWAS PRIVATE LIMITED </strong>  </strong>
       <br />
-      <strong>Account Number:</strong> 924020056702191
+      <strong style={{color:'black'}}>Account Number:  <strong style={{color:"#2e3c52"}}> 924020056702191 </strong></strong> 
       <br />
-      <strong>Bank:</strong> AXIS BANK
+      <strong style={{color:'black'}}>Bank: <strong style={{color:"#2e3c52"}}> AXIS BANK</strong> </strong> 
       <br />
-      <strong>Branch:</strong> Mayur Vihar Phase-1
+      <strong style={{color:'black'}}>Branch: <strong style={{color:"#2e3c52"}}> Mayur Vihar Phase-1 </strong></strong> 
       <br />
-      <strong>IFSC Code:</strong> UTIB0001540
+      <strong style={{color:'black'}}>IFSC Code: <strong style={{color:"#2e3c52"}}>  UTIB0001540 </strong></strong> 
       <br />
       
-      <strong>Note:</strong> For credit card transactions, an additional 2% processing fee will be applied.
+      <strong style={{color:'black'}}>Note: For credit card transactions, an additional 2% processing fee will be applied. </strong>
       <br />
       <br />
-      <strong style={{ fontSize: "1.1vmax", display: "block" }}>Account Manager</strong>
+      <strong style={{ fontSize: "1.1vmax", display: "block", color:'black' }}>Account Manager</strong>
       
       {isConfirmed ? (
         <>
-          Your personal account manager is <strong>{managerName}</strong> and will be reachable at{" "}
-          <strong>
+         <strong style={{color:'black'}}>Your personal account manager is <strong style={{color:'black'}}>{managerName}</strong> and will be reachable at{" "}</strong> 
+          <strong style={{color:'black'}}>
             <a href={`tel:${phoneNumber}`}>{phoneNumber}</a>
           </strong>
           <br />
@@ -401,16 +428,16 @@ const WelcomeLetter = () => {
         </>
       )}
       <hr />
-      <strong>With Best Regards,</strong>
+      <strong style={{color:'black'}}>With Best Regards,</strong>
       <br />
-      Gaurav Gupta
+      <strong style={{color:'black'}}>Gaurav Gupta</strong>
       <br />
-      Accounts Manager
+      <strong style={{color:'black'}}>Accounts Manager</strong>
       <br />
-      Navbharat Niwas Private Limited
+      <strong style={{color:'black'}}> Navbharat Niwas Private Limited </strong>
       <br />
       
-      <strong>Website:</strong>{" "}
+      <strong style={{color:'black'}}>Website:</strong>{" "}
       <strong>
         <a href="http://www.navbharatniwas.in" target="_blank" rel="noopener noreferrer">
           www.navbharatniwas.in
@@ -418,16 +445,21 @@ const WelcomeLetter = () => {
       </strong>
       <br />
       <br />
-      <strong style={{ fontSize: "1.1vmax", display: "block" }}>Corporate Office</strong>
-      
+      <strong style={{ fontSize: "1.1vmax", display: "block", color:'black'}}>Corporate Office</strong>
+      <strong style={{color:'black'}}>
       Shyama Building, 3rd Floor, B-92
+      </strong>
       <br />
+      <strong style={{color:'black'}}>
       Sector 63, Noida, Gautam Buddh Nagar,
+      </strong>
       <br />
+      <strong style={{color:'black'}}>
       Uttar Pradesh, 201301
+      </strong>
       <br />
       
-      <strong>Contact No:</strong>{" "}
+      <strong style={{color:'black'}}>Contact No:</strong>{" "}
       <strong>
         <a href="tel:+919971488477">+91 9971488477</a>
       </strong>

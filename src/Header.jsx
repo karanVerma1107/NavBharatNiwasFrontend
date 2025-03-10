@@ -47,8 +47,8 @@ const Header = () => {
   return (
     <>
       <div className="header">
-        <div className="logo">
-          <img src={pic} alt="Logo" className="logo-img" style={{ height: '5.7vmax', width: '16vmax' , marginTop: '1.8vmax'}} />
+        <div className="logo" >
+          <img src={pic} alt="Logo" className="logo-img" style={{ height: '5.7vmax', width: '16vmax' , marginTop: '6.8vmax'}} />
         </div>
 
         <div className="rightSide">

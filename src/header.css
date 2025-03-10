@@ -103,9 +103,9 @@
 
 /* Dropdown Menu */
 .dropdown-menu {
-    position: absolute;
+    position:fixed;
     top: 60px; /* Adjust this value depending on your header's height */
-    right: 10px;
+    right:10px ;
     background-color: #fff;
     border: 1px solid #ddd;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);

@@ -1,16 +1,16 @@
 .applications-container {
     background-color: #dfe9f7;  /* Whitish blue */
-    min-height: 13vmax;  /* Minimum height */
+    height: 25vmax;  /* Minimum height */
     min-width: 32vmax;   /* Minimum width */
     padding: 1.5vmax;
     border-radius: 10px;  /* Rounded corners */
-    position: fixed;     /* Fixed position on screen */
+         position: fixed;/* Fixed position on screen */
     top: 50%;            /* Center vertically */
     left: 50%;           /* Center horizontally */
     transform: translate(-50%, -50%);  /* Exact center alignment */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);  /* Shadow for a cute effect */
     z-index: 1001;       /* Ensure it's above other content */
-    overflow-y: auto;    /* Make the content scrollable if needed */
+       overflow-y: auto; /* Make the content scrollable if needed */
   }
   
   .applications-heading {
@@ -23,12 +23,15 @@
     font-size: 1.5vmax;
     color: #333;
     padding: 1vmax;
+    
   }
   
   .applications-list {
     display: flex;
     flex-direction: column; /* Stack items vertically */
     gap: 1vmax;  /* Space between each item */
+    overflow-y: auto;
+  
   }
   
   .application-item {

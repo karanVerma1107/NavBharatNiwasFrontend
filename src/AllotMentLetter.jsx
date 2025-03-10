@@ -31,7 +31,7 @@ const AllotMentLetter = () => {
         uniqueId, // Unique ID
         // Property Details
         bookingAmount,
-        project,
+        Project,
         developmentCharge,
         area,
         unitNo,
@@ -141,7 +141,7 @@ const AllotMentLetter = () => {
                         <div className="info">
                             {developmentCharge && <p><strong>Development Charge:</strong> {developmentCharge}</p>}
                             {bookingAmount && <p><strong>Boooking Amount:</strong> {bookingAmount}</p>}
-                            {project && <p><strong>Project:</strong> {project}</p>}
+                            {Project && <p><strong>Project:</strong> {Project}</p>}
                             {area && <p><strong>Area:</strong> {area}</p>}
                             {unitNo && <p><strong>Unit Number:</strong> {unitNo}</p>}
                             {plc && <p><strong>Preferential Location Charges:</strong> {plc}</p>}
@@ -283,6 +283,8 @@ const AllotMentLetter = () => {
                     </div>
                 )}
             </div>
+
+           { _id ? <h4 style={{margin:'auto', display:'flex'}}><a href={`allot-pdf/${_id}`} target='_blank'>SET Item For Pdf</a></h4> : <h4 style={{margin:'auto', display:'flex'}}>Please Wait...</h4> }
         </>
     );
 };

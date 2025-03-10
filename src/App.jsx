@@ -20,6 +20,7 @@ import WelcomeCletter from './WelcomeCletter';
 import CompanyAllotment from './CompanyAllotment';
 import AllotMentLetter from './AllotMentLetter';
 import AllotmentIndiLetter from './AllotmentIndiLetter';
+import PdfAllot from './PdfAllot';
 
 
 
@@ -82,6 +83,7 @@ function App() {
           <Route path='/AllotmentIndiForm/:id' element={<AllotmentIndiLetter />} />
           <Route path='/getar/:id' element={<ResIsallow />} />
           <Route path='/Allotment/:id' element={<AllotMentLetter />} />
+          <Route path='Allotment/allot-pdf/:id' element={<PdfAllot />} />
           
           <Route path='/T' element={<T />} />
         </Routes>

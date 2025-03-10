@@ -69,7 +69,7 @@
   height: 17vmax;
   display: flex;
   justify-content: center;
-  border-bottom: 1.6px solid gray;
+  
   align-items: center;
   flex-direction: row;
   
@@ -78,13 +78,14 @@
 .overviewText{
   width: 21vmax;
   height: 17vmax;
-  margin: 1vmax 1.3vmax;
+  margin: 1vmax 0.6vmax;
 
 }
 
 .overviewText img{
-  width:15vmax;
-  height: 15vmax;
+  width:20vmax;
+  height: 17vmax;
+  border: 1.2px solid #2c3e50;
 }
 
 
@@ -166,8 +167,8 @@ height: 15vmax;
     height: 14vmax;
   }
   .overviewText img{
-    width: 10.2vmax;
-    height: 10.2vmax;
+    width: 11.2vmax;
+    height: 12.2vmax;
   }
 }
 

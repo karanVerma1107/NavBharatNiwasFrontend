@@ -10,6 +10,10 @@ import pay from './payment.jpeg';
 import aff from './afford.jpg';
 import { toast } from 'react-toastify';
 import grow from './growth.png';
+import p1 from './pox1.jpg';
+import p2 from './pox2.webp';
+import p3 from './pox3.webp';
+import p4 from './pox4.webp';
 import app from './app.png';
 import Searching from './Searching';
 import { Chatbot } from 'aibotchat'
@@ -140,17 +144,17 @@ const Home = () => {
       </div>
 
       <div className="overview">
-        <div className="overviewText" style={{ borderRight: '1.5px solid gray' }}>
-          <img src={aff} alt="Affordable" />
+        <div className="overviewText" >
+          <img src={p1} alt="Affordable" />
         </div>
         <div className="overviewText">
-          <img src={pay} alt="Payment" />
+          <img src={p2} alt="Payment" />
         </div>
-        <div className="overviewText" style={{ borderLeft: '1.5px solid gray' }}>
-          <img src={app} alt="App" />
+        <div className="overviewText" >
+          <img src={p3} alt="App" />
         </div>
-        <div className="overviewText" style={{ borderLeft: '1.5px solid gray' }}>
-          <img src={grow} alt="Growth" />
+        <div className="overviewText" >
+          <img src={p4} alt="Growth" />
         </div>
       </div>
 
