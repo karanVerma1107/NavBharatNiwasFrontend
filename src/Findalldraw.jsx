@@ -28,9 +28,7 @@ const Findalldraw = () => {
         dispatch(passToresult(id, allot, gift)); // Passing allot and gift
 
 
-        setTimeout(() => {
-            window.location.reload();
-        }, 2000);
+       
     };
 
     const handleReject = (id) => {

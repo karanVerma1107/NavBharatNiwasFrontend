@@ -16,7 +16,7 @@ import p3 from './pox3.webp';
 import p4 from './pox4.webp';
 import app from './app.png';
 import Searching from './Searching';
-import { Chatbot } from 'aibotchat'
+
 import { faqform } from './Actions/formAction';
 import LuckyDrawForm from './LuckyDrawForm';
 import CompanyFillForm from './CompanyFillForm'; // Import the CompanyFillForm
