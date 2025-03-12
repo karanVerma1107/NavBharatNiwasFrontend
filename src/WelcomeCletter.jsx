@@ -26,6 +26,7 @@ const WelcomeLetter = () => {
     const [typedText, setTypedText] = useState('');
     const [imageSize, setImageSize] = useState({ width: 'auto', height: 'auto' });
     const [dateText, setDateText] = useState(''); // State for manually entering the date
+    const [totalCost, setTotalCost] = useState(0);
 
     const letterRef = useRef(); // Ref for capturing the first page
     const secondPageRef = useRef(); // Ref for capturing the second page
@@ -68,12 +69,28 @@ const WelcomeLetter = () => {
     };
     
     const handleChange = (index, field, value) => {
-        const updatedRows = rows.map((row, i) =>
-            i === index ? { ...row, [field]: value } : row
-        );
-        setRows(updatedRows);
-    };
+      const updatedRows = rows.map((row, i) => {
+          if (i === index) {
+              const updatedRow = { ...row, [field]: value };
+              if (field === "percentage") {
+                  const percentage = parseFloat(value.replace('%', '')) || 0;
+                  updatedRow.amount = ((percentage / 100) * totalCost).toFixed(2);
+              }
+              return updatedRow;
+          }
+          return row;
+      });
+      setRows(updatedRows);
+  };
 
+  const handleTotalCostChange = (e) => {
+    const value = e.target.value;
+    // Extract numeric part from the string
+    const numericValue = parseFloat(value.replace(/[^0-9.-]+/g, '')) || 0;
+    setTotalCost(numericValue);
+};
+
+    
     const [text, setText] = useState("");
     const [showParagraph, setShowParagraph] = useState(false);
     const textAreaRef = useRef(null);
@@ -163,7 +180,7 @@ const WelcomeLetter = () => {
                 <p>
                 Dear Mr./Mrs./Ms. <strong>{companyName}</strong>,
   <br />
-  <br />
+  
   Congratulations on your investment in <strong>{project}</strong> at
   <strong> Navbharat Niwas</strong>. We are delighted to have you as part of our community.
   <br />
@@ -175,21 +192,19 @@ const WelcomeLetter = () => {
   <br />
   Below are the details you have provided for your company:
   <br />
-  <strong>Company Name:</strong> {companyName}
+  <strong style={{color:'black'}}>Company Name:</strong> {companyName}
   <br />
-  <strong>GST Number:</strong> {gstNumber}
+  <strong style={{color:'black'}}>GST Number:</strong> {gstNumber}
   <br />
-  <strong>PAN Number:</strong> {panNumber}
+  <strong style={{color:'black'}}>PAN Number:</strong> {panNumber}
   <br />
-  <strong>Payment Plan:</strong> {paymentPlan}
+  <strong style={{color:'black'}}>Payment Plan:</strong> {paymentPlan}
   <br/>
-  <strong>Authorized Signatory:</strong> {authorizedSignatory}
+  <strong style={{color:'black'}}>Authorized Signatory:</strong> {authorizedSignatory}
   <br />
   <br />
   We appreciate your trust in <strong>Navbharat Niwas</strong> and look forward to assisting you at every step of this journey.
-  <br />
-  <br />
-  <strong>Navbharat Niwas Team</strong>
+  
         <br /><br/>
         Basic Details:
     </p>
@@ -197,19 +212,19 @@ const WelcomeLetter = () => {
                 <table className="details-table">
     <tbody>
         <tr>
-            <td><strong>Client Name</strong></td>
+            <td><strong style={{color: "black", fontSize:"0.8vmax"}}>Client Name</strong></td>
             <td><input type="text" className="table-input" placeholder="Name" /></td>
         </tr>
         <tr>
-            <td><strong>Allotted Area (Sq. Yd)</strong></td>
+            <td><strong style={{color: "black" , fontSize:"0.8vmax"}}>Allotted Area (Sq. Yd)</strong></td>
             <td><input type="text" className="table-input" placeholder="Area" /></td>
         </tr>
         <tr>
-            <td><strong>Payment Plan</strong></td>
+            <td><strong style={{color: "black" , fontSize:"0.8vmax"}}>Payment Plan</strong></td>
             <td><input type="text" className="table-input" placeholder="Plan" /></td>
         </tr>
         <tr>
-            <td><strong>Basic Sales Price (Per Sq. Yd.)</strong></td>
+            <td><strong style={{color: "black" , fontSize:"0.8vmax"}}>Basic Sales Price (Per Sq. Yd.)</strong></td>
             <td>
                 <>
                     <input type="text" className="table-input small-input" placeholder="unit" />
@@ -218,7 +233,7 @@ const WelcomeLetter = () => {
             </td>
         </tr>
         <tr>
-            <td><strong>EDC/IDC (Per Sq. Yd.)</strong></td>
+            <td><strong style={{color: "black" , fontSize:"0.8vmax"}}>EDC/IDC (Per Sq. Yd.)</strong></td>
             <td>
                 <>
                     <input type="text" className="table-input small-input" placeholder="unit" />
@@ -227,12 +242,12 @@ const WelcomeLetter = () => {
             </td>
         </tr>
         <tr>
-            <td><strong>PLC = 12%</strong></td>
+            <td><strong style={{color: "black" , fontSize:"0.8vmax"}}>PLC = 12%</strong></td>
             <td><input type="text" className="table-input" placeholder="PLC" /></td>
         </tr>
         <tr>
-            <td><strong>Total Cost</strong></td>
-            <td><input type="text" className="table-input" placeholder="Total" /></td>
+            <td><strong style={{color: "black" , fontSize:"0.8vmax"}}>Total Cost</strong></td>
+            <td><input type="text" className="table-input" placeholder="Total" onChange={handleTotalCostChange} /></td>
         </tr>
     </tbody>
 </table>
@@ -270,6 +285,7 @@ const WelcomeLetter = () => {
                 />
               </td>
               <td>
+                
                 <input
                   type="text"
                    className="table-iinput"
@@ -328,7 +344,7 @@ const WelcomeLetter = () => {
                             <button onClick={handleConfirm}>Yes</button>
                         </div>
                     ) : (
-                        <p style={{color:"black", fontSize:"1vmax"}}>{text}</p>
+                      <p style={{ fontSize:"1vmax", fontWeight:'bolder', color:"#2e3c52" , alignSelf:'flex-start',  marginTop:'4vmax'}}>{text}</p>
                     )}
                 </div>
             </div>

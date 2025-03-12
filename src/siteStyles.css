@@ -11,6 +11,10 @@
     font-family: 'Arial', sans-serif;
 }
 
+.siteframe{
+    min-height: 30vmax;
+}
+
 /* Flexbox layout for large screens, column layout for small screens */
 .site-content {
     width: 42vmax;

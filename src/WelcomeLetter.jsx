@@ -28,6 +28,10 @@ const WelcomeLetter = () => {
     const [typedText, setTypedText] = useState('');
     const [imageSize, setImageSize] = useState({ width: 'auto', height: 'auto' });
     const [dateText, setDateText] = useState(''); // State for manually entering the date
+     const [totalCost, setTotalCost] = useState(0);
+    
+
+
 
     const letterRef = useRef(); // Ref for capturing the first page
     const secondPageRef = useRef(); // Ref for capturing the second page
@@ -70,11 +74,27 @@ const WelcomeLetter = () => {
     };
     
     const handleChange = (index, field, value) => {
-        const updatedRows = rows.map((row, i) =>
-            i === index ? { ...row, [field]: value } : row
-        );
-        setRows(updatedRows);
-    };
+      const updatedRows = rows.map((row, i) => {
+          if (i === index) {
+              const updatedRow = { ...row, [field]: value };
+              if (field === "percentage") {
+                  const percentage = parseFloat(value.replace('%', '')) || 0;
+                  updatedRow.amount = ((percentage / 100) * totalCost).toFixed(2);
+              }
+              return updatedRow;
+          }
+          return row;
+      });
+      setRows(updatedRows);
+  };
+
+  const handleTotalCostChange = (e) => {
+    const value = e.target.value;
+    // Extract numeric part from the string
+    const numericValue = parseFloat(value.replace(/[^0-9.-]+/g, '')) || 0;
+    setTotalCost(numericValue);
+};
+
 
     const [text, setText] = useState("");
     const [showParagraph, setShowParagraph] = useState(false);
@@ -248,7 +268,7 @@ const WelcomeLetter = () => {
             <td><input type="text" className="table-input" placeholder="Total" style={{fontSize: '0.9vmax', 
     minHeight: '1.9vmax',  
     padding: '2px',      
-    boxSizing: 'border-box' }} /></td>
+    boxSizing: 'border-box' }} onChange={handleTotalCostChange} /></td>
         </tr>
     </tbody>
 </table>
@@ -344,7 +364,7 @@ const WelcomeLetter = () => {
                             <button onClick={handleConfirm}>Yes</button>
                         </div>
                     ) : (
-                        <p style={{ fontSize:"1vmax", fontWeight:'bolder', color:"#2e3c52" , alignSelf:'flex-start'}}>{text}</p>
+                        <p style={{ fontSize:"1vmax", fontWeight:'bolder', color:"#2e3c52" , alignSelf:'flex-start',  marginTop:'4vmax', textAlign:'left'}}>{text}</p>
                     )}
                 </div>
             </div>

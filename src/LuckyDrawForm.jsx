@@ -33,7 +33,7 @@ const LuckyDrawForm = () => {
     const [searchQuery, setSearchQuery] = useState('');
     
     const { sites, isLoading } = useSelector((state) => state.search);
-
+const [charges, setCharges] = useState(null);
     const [modalImage, setModalImage] = useState(null);
     const [adhaarPreview, setAdhaarPreview] = useState(null);
     const [panPreview, setPanPreview] = useState(null);
@@ -97,9 +97,10 @@ const LuckyDrawForm = () => {
         }
     };
 
-    const handleSiteClick = (siteName) => {
+    const handleSiteClick = (siteName, charges) => {
         setFormData({ ...formData, project: siteName });
         setSearchQuery('');
+        setCharges(charges);
     };
 
     return (
@@ -244,7 +245,7 @@ const LuckyDrawForm = () => {
                                 <div
                                     key={index}
                                     className="site-item"
-                                    onClick={() => handleSiteClick(site.name)}
+                                    onClick={() => handleSiteClick(site.name , site.charges)}
                                     style={{ color: 'black', cursor: 'pointer' }}
                                 >
                                     {site.name}
@@ -350,7 +351,7 @@ const LuckyDrawForm = () => {
                     </div>
                 )}
 
-                <p style={{ color: 'black' }}><span>Note: </span>The amount of ₹5,100 is refundable in case of no allotment under this scheme.</p>
+               {charges && <p style={{ color: 'black' }}><span>Note: </span>The amount of {charges} is refundable in case of no allotment under this scheme.</p>}
 
                 <div className="form-actions">
                     <button type="submit" className="submit-btn">

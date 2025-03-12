@@ -27,6 +27,7 @@ const CompanyFillForm = () => {
     });
 
     const [searchQuery, setSearchQuery] = useState('');
+    const [charges, setCharges] = useState(null);
     const { sites, isLoading } = useSelector(state => state.search);
 
     // Handle input field change
@@ -67,9 +68,10 @@ const CompanyFillForm = () => {
         }
     };
 
-    const handleSiteClick = (siteName) => {
+    const handleSiteClick = (siteName, charges) => {
         setFormData({ ...formData, project: siteName });
         setSearchQuery('');
+        setCharges(charges);
     };
 
     // Handle form submission
@@ -198,7 +200,7 @@ const CompanyFillForm = () => {
                                 <div
                                     key={index}
                                     className="site-item"
-                                    onClick={() => handleSiteClick(site.name)}
+                                    onClick={() => handleSiteClick(site.name, site.charges)}
                                     style={{ color: 'black', cursor: 'pointer' }}
                                 >
                                     {site.name}
@@ -285,6 +287,8 @@ const CompanyFillForm = () => {
                         className="input-field"
                     />
                 </div>
+
+                {charges && <p style={{ color: 'black' }}><span>Note: </span>The amount of {charges} is refundable in case of no allotment under this scheme.</p>}
 
                 <div className="form-actions">
                     <button type="submit" className="submit-btn">

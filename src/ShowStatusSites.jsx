@@ -104,15 +104,15 @@ const ShowStatusSites = ({ status }) => {
 
 
 <div className="pagination" >
-        <button onClick={() => setPage(page - 1)} disabled={page === 1}>
+        <button onClick={() => setPage(page - 1)} disabled={page === 1} style={{padding:'0.3vmax 1.3vmax'}}>
           Previous
         </button>
         {Array.from({ length: pages }, (_, index) => (
-          <button key={index + 1} onClick={() => setPage(index + 1)} className={page === index + 1 ? 'active' : ''}>
+          <button key={index + 1} onClick={() => setPage(index + 1)} className={page === index + 1 ? 'active' : ''} style={{padding:'0.3vmax 1.3vmax'}}>
             {index + 1}
           </button>
         ))}
-        <button onClick={() => setPage(page + 1)} disabled={page === pages}>
+        <button onClick={() => setPage(page + 1)} disabled={page === pages} style={{padding:'0.3vmax 1.3vmax'}}>
           Next
         </button>
       </div>

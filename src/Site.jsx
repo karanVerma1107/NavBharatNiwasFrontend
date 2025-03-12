@@ -96,19 +96,39 @@ const Site = () => {
       </div>
 
 
-  
+      {site.ytlink && (() => {
+  try {
+    const url = new URL(site.ytlink);
+    let videoID = "";
 
-      <div className="video-container" style={{margin:'2vmax 0.5vmax'}}>
-          <iframe
-            width="100%"
-            height="26vmax"
-            src="https://www.youtube-nocookie.com/embed/M24wQL4BV88?si=e568rA8WMXPMYIfg?rel=0$autoplay=1&controls=1&showinfo=0"
-            title="How to Apply - YouTube"
-            frameBorder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
-        </div>
+    if (url.pathname.includes("/shorts/")) {
+      // Extract video ID from Shorts URL
+      videoID = url.pathname.split("/shorts/")[1].split("?")[0];
+    } else {
+      // Extract video ID from regular YouTube URL (watch?v=xyz)
+      videoID = url.searchParams.get("v");
+    }
+
+    return videoID ? (
+      <iframe
+        width="100%"
+        className='siteframe'
+        height="40vmax"
+        src={`https://www.youtube-nocookie.com/embed/${videoID}`}
+        title="YouTube Video"
+        frameBorder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      ></iframe>
+    ) : null;
+  } catch (error) {
+    console.error("Invalid YouTube URL:", error);
+    return null;
+  }
+})()}
+
+
+     
     </>
   );
 };

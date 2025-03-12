@@ -122,7 +122,7 @@ background-color:#e2e3e4;
     background-color: white;
     color: black;
     border: 1px solid black;
-    padding: 0.5vmax 1vmax;
+    padding: 0.3vmax 0.8vmax;
     margin: 0 0.5vmax;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
