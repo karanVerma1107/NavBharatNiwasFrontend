@@ -10,6 +10,8 @@ import './Addsite.css';
 
 const Addsite = () => {
   const [name, setName] = useState('');
+  const [ytlink, setYtlink] = useState('');
+  const [charges, setCharges] = useState('');
   const [description, setDescription] = useState('');
   const [current, setCurrent] = useState('ongoing');
   const [formYes, setFormYes] = useState(false);
@@ -44,6 +46,7 @@ const Addsite = () => {
     e.preventDefault();
     const siteData = {
       name,
+
       description,
       current,
       formYes,
@@ -74,6 +77,28 @@ const Addsite = () => {
             required
           />
         </div>
+        <div className="form-group">
+          <label htmlFor="name">YouTube Link</label>
+          <input
+            type="text"
+            id="ytlink"
+            value={ytlink}
+            onChange={(e) => setYtlink(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="name">Draw Charges</label>
+          <input
+            type="text"
+            id="charges"
+            value={charges}
+            onChange={(e) => setCharges(e.target.value)}
+            required
+          />
+        </div>
+
         <div className="form-group">
           <label htmlFor="description">Description</label>
           <textarea

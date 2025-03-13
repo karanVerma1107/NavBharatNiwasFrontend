@@ -33,6 +33,8 @@ export const addSite = (siteData) => async (dispatch) => {
         // Create FormData object to handle file uploads and other form data
         const formData = new FormData();
         formData.append('name', siteData.name);
+        formData.append('ytlink', siteData.ytlink);
+        formData.append('charges', siteData.charges);
         formData.append('description', siteData.description);
         formData.append('current', siteData.current);
         formData.append('formYes', siteData.formYes);
