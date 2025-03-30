@@ -285,6 +285,7 @@ const [charges, setCharges] = useState(null);
         style={{ backgroundColor: 'white' }}
     >
         <option value="">Select Plot Size</option>
+        <option value='50 SQY  - 125 SQY'>50 SQY  - 125 SQY</option>
         <option value="125 SQY - 150 SQY">125 SQY - 150 SQY</option>
         <option value="150 SQY - 200 SQY">150 SQY - 200 SQY</option>
         <option value="ABOVE 200 SQY">ABOVE 200 SQY</option>

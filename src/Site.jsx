@@ -114,7 +114,7 @@ const Site = () => {
         width="100%"
         className='siteframe'
         height="40vmax"
-        src={`https://www.youtube-nocookie.com/embed/${videoID}`}
+        src={`https://www.youtube-nocookie.sssswxddscom/embed/${videoID}`}
         title="YouTube Video"
         frameBorder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
