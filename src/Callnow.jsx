@@ -12,12 +12,9 @@ const Callnow = () => {
   };
 
   return (
-    <div className="call-now-container" onClick={handleCall}>
+    <div className="call-now-container" onClick={handleCall} >
       <FaPhoneAlt className="call-icon" />
-      <div>
-        <h3 style={{color:'white'}}>Enquiry Now   <TbClock24/></h3>
-        <h3 style={{color:'white'}}>{phoneNumber}</h3>
-      </div>
+     
     </div>
   );
 };

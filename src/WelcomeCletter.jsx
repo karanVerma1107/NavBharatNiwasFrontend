@@ -27,6 +27,75 @@ const WelcomeLetter = () => {
     const [imageSize, setImageSize] = useState({ width: 'auto', height: 'auto' });
     const [dateText, setDateText] = useState(''); // State for manually entering the date
     const [totalCost, setTotalCost] = useState(0);
+     const [allottedArea, setAllottedArea] = useState("");  
+         const [basicSalesPricePerUnit, setBasicSalesPricePerUnit] = useState("");  
+         const [basicSalesPriceTotal, setBasicSalesPriceTotal] = useState("");  
+         const [edcIdcPerUnit, setEdcIdcPerUnit] = useState("");  
+         const [edcIdcTotal, setEdcIdcTotal] = useState("");  
+         const [plcPercentage, setPlcPercentage] = useState(0); // Default 12%
+         const [plcAmount, setPlcAmount] = useState("");  
+
+
+
+         const[unitRent, setunitRent] = useState(180);
+         const [pic , setPic] = useState(null);
+         
+         
+             
+               const [isRental, setIsRental] = useState(null);
+             
+
+         // Function to extract numeric value from input
+         const extractNumber = (value) => {
+           const match = value.match(/\d+/);  
+           return match ? parseInt(match[0], 10) : "";  
+         };
+         
+         // Format numbers with ₹ and commas
+         const formatCurrency = (value) => {
+           return value ? `₹${Number(value).toLocaleString()}` : "";
+         };
+         
+         useEffect(() => {
+           const area = extractNumber(allottedArea);  
+         
+           if (area && basicSalesPricePerUnit) {
+               const basicTotal = area * parseInt(basicSalesPricePerUnit, 10);
+               setBasicSalesPriceTotal(basicTotal);
+           } else {
+               setBasicSalesPriceTotal("");
+           }
+         
+           if (area && edcIdcPerUnit) {
+               const edcTotal = area * parseInt(edcIdcPerUnit, 10);
+               setEdcIdcTotal(edcTotal);
+           } else {
+               setEdcIdcTotal("");
+           }
+         
+           if (basicSalesPriceTotal) {
+               const plcAmt = (parseFloat(plcPercentage) / 100) * basicSalesPriceTotal;
+               setPlcAmount(plcAmt);
+           } else {
+               setPlcAmount("");
+           }
+         
+           if (basicSalesPriceTotal && edcIdcTotal && plcAmount) {
+               setTotalCost(basicSalesPriceTotal + edcIdcTotal + plcAmount);
+           } else {
+               setTotalCost("");
+           }
+         
+         }, [allottedArea, basicSalesPricePerUnit, edcIdcPerUnit, plcPercentage, basicSalesPriceTotal, edcIdcTotal, plcAmount]);
+
+
+         const inputStyle = {
+          fontSize: '0.9vmax',
+          minHeight: '1.9vmax',
+          padding: '2px',
+          boxSizing: 'border-box'
+      };
+  
 
     const letterRef = useRef(); // Ref for capturing the first page
     const secondPageRef = useRef(); // Ref for capturing the second page
@@ -135,30 +204,38 @@ const WelcomeLetter = () => {
     };
 
     const handleDownloadPDF = () => {
-        replaceInputsWithText();
-        document.querySelectorAll('.add-btn, .delete-btn, .edt-btn').forEach(btn => btn.classList.add('hidden'));
-        
-        const firstPage = letterRef.current;
-        const secondPage = secondPageRef.current;
-
-        html2canvas(firstPage, { scale: 2 }).then(canvas1 => {
-            const imgData1 = canvas1.toDataURL('image/png');
-            const pdf = new jsPDF('p', 'mm', 'a4');
-            const imgWidth = 210;
-            const imgHeight = (canvas1.height * imgWidth) / canvas1.width;
-
-            pdf.addImage(imgData1, 'PNG', 0, 0, imgWidth, imgHeight);
-
-            html2canvas(secondPage, { scale: 2 }).then(canvas2 => {
-                const imgData2 = canvas2.toDataURL('image/png');
-                pdf.addPage();
-                pdf.addImage(imgData2, 'PNG', 0, 0, imgWidth, imgHeight);
-                pdf.save('Welcome_Letter.pdf');
-                restoreInputs();
-                document.querySelectorAll('.add-btn, .delete-btn').forEach(btn => btn.classList.remove('hidden'));
-            });
-        });
-    };
+      replaceInputsWithText();
+      document.querySelectorAll('.add-btn, .delete-btn, .edt-btn, .rental-toggle, .rental-input, .rental-sub').forEach(btn => btn.classList.add('hidden'));
+  
+      const firstPage = letterRef.current;
+      const middlePage = middlepageRef.current;
+      const secondPage = secondPageRef.current;
+  
+      html2canvas(firstPage, { scale: 2 }).then(canvas1 => {
+          const imgData1 = canvas1.toDataURL('image/png');
+          const pdf = new jsPDF('p', 'mm', 'a4');
+          const imgWidth = 210;
+          const imgHeight = (canvas1.height * imgWidth) / canvas1.width;
+  
+          pdf.addImage(imgData1, 'PNG', 0, 0, imgWidth, imgHeight);
+  
+          html2canvas(middlePage, { scale: 2 }).then(canvas2 => {
+              const imgData2 = canvas2.toDataURL('image/png');
+              pdf.addPage();
+              pdf.addImage(imgData2, 'PNG', 0, 0, imgWidth, imgHeight);
+  
+              html2canvas(secondPage, { scale: 2 }).then(canvas3 => {
+                  const imgData3 = canvas3.toDataURL('image/png');
+                  pdf.addPage();
+                  pdf.addImage(imgData3, 'PNG', 0, 0, imgWidth, imgHeight);
+  
+                  pdf.save('Welcome_Letter.pdf');
+                  restoreInputs();
+                  document.querySelectorAll('.add-btn, .delete-btn').forEach(btn => btn.classList.remove('hidden'));
+              });
+          });
+      });
+  };
 
     return (
         <div className="welcome-container">
@@ -209,48 +286,100 @@ const WelcomeLetter = () => {
         Basic Details:
     </p>
                 </div>   
-                <table className="details-table">
-    <tbody>
-        <tr>
-            <td><strong style={{color: "black", fontSize:"0.8vmax"}}>Client Name</strong></td>
-            <td><input type="text" className="table-input" placeholder="Name" /></td>
-        </tr>
-        <tr>
-            <td><strong style={{color: "black" , fontSize:"0.8vmax"}}>Allotted Area (Sq. Yd)</strong></td>
-            <td><input type="text" className="table-input" placeholder="Area" /></td>
-        </tr>
-        <tr>
-            <td><strong style={{color: "black" , fontSize:"0.8vmax"}}>Payment Plan</strong></td>
-            <td><input type="text" className="table-input" placeholder="Plan" /></td>
-        </tr>
-        <tr>
-            <td><strong style={{color: "black" , fontSize:"0.8vmax"}}>Basic Sales Price (Per Sq. Yd.)</strong></td>
-            <td>
-                <>
-                    <input type="text" className="table-input small-input" placeholder="unit" />
-                    <input type="text" className="table-input small-input" placeholder="total" />
-                </>
-            </td>
-        </tr>
-        <tr>
-            <td><strong style={{color: "black" , fontSize:"0.8vmax"}}>EDC/IDC (Per Sq. Yd.)</strong></td>
-            <td>
-                <>
-                    <input type="text" className="table-input small-input" placeholder="unit" />
-                    <input type="text" className="table-input small-input" placeholder="total" />
-                </>
-            </td>
-        </tr>
-        <tr>
-            <td><strong style={{color: "black" , fontSize:"0.8vmax"}}>PLC = 12%</strong></td>
-            <td><input type="text" className="table-input" placeholder="PLC" /></td>
-        </tr>
-        <tr>
-            <td><strong style={{color: "black" , fontSize:"0.8vmax"}}>Total Cost</strong></td>
-            <td><input type="text" className="table-input" placeholder="Total" onChange={handleTotalCostChange} /></td>
-        </tr>
-    </tbody>
-</table>
+                <table className='details-table'>
+            <tbody>
+                <tr>
+                    <td><strong>Allotted Area (Sq. Yd)</strong></td>
+                    <td>
+                        <input 
+                            type="text" 
+                            className="table-input small-input" 
+                            placeholder="Area" 
+                            value={allottedArea} 
+                            onChange={(e) => setAllottedArea(e.target.value)} 
+                            style={inputStyle} 
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Basic Sales Price (Per Sq. Yd.)</strong></td>
+                    <td>
+                        <input 
+                            type="text" 
+                            className="table-input small-input" 
+                            placeholder="unit" 
+                            value={basicSalesPricePerUnit} 
+                            onChange={(e) => setBasicSalesPricePerUnit(e.target.value)} 
+                            style={inputStyle} 
+                        />
+                        <input 
+                            type="text" 
+                            className="table-input small-input" 
+                            placeholder="total" 
+                            value={formatCurrency(basicSalesPriceTotal)} 
+                            readOnly 
+                            style={inputStyle} 
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>EDC/IDC (Per Sq. Yd.)</strong></td>
+                    <td>
+                        <input 
+                            type="text" 
+                            className="table-input small-input" 
+                            placeholder="unit" 
+                            value={edcIdcPerUnit} 
+                            onChange={(e) => setEdcIdcPerUnit(e.target.value)} 
+                            style={inputStyle} 
+                        />
+                        <input 
+                            type="text" 
+                            className="table-input small-input" 
+                            placeholder="total" 
+                            value={formatCurrency(edcIdcTotal)} 
+                            readOnly 
+                            style={inputStyle} 
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>PLC</strong></td>
+                    <td>
+                        <input 
+                            type="text" 
+                            className="table-input small-input" 
+                            placeholder="PLC%" 
+                            value={plcPercentage} 
+                            onChange={(e) => setPlcPercentage(e.target.value)} 
+                            style={inputStyle} 
+                        />
+                        <input 
+                            type="text" 
+                            className="table-input small-input" 
+                            placeholder="Amount" 
+                            value={formatCurrency(plcAmount)} 
+                            readOnly 
+                            style={inputStyle} 
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Total Cost</strong></td>
+                    <td>
+                        <input 
+                            type="text" 
+                            className="table-input small-input" 
+                            placeholder="Total" 
+                            value={formatCurrency(totalCost)} 
+                            readOnly 
+                            style={inputStyle} 
+                        />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
 
 <div className="mini-excel-container">
       <table className="mini-excel">
@@ -316,6 +445,101 @@ const WelcomeLetter = () => {
     </div>
 
             </div>
+
+
+
+            <div ref={middlepageRef} className="a4-paper" style={{ width: imageSize.width, height: imageSize.height }}>
+
+
+<table style={{ width: "53vmax", borderCollapse: "collapse", backgroundColor: "transparent", marginTop: "5vmax"}}>
+<thead>
+<tr>
+<th style={{ border: "0.2vmax solid black", padding: "1vmax", backgroundColor: "rgba(242, 242, 242, 0.5)" }}>Alloted Area</th>
+<th style={{ border: "0.2vmax solid black", padding: "1vmax", backgroundColor: "rgba(242, 242, 242, 0.5)" }}>Total Cost</th>
+<th style={{ border: "0.2vmax solid black", padding: "1vmax", backgroundColor: "rgba(242, 242, 242, 0.5)" }}>Gift</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style={{ border: "0.2vmax solid black", padding: "1vmax" }}>{allottedArea}</td>
+<td style={{ border: "0.2vmax solid black", padding: "1vmax" }}>{formatCurrency(totalCost)}</td>
+<td style={{ border: "0.2vmax solid black", padding: "1vmax" }}>{gift}</td>
+</tr>
+
+</tbody>
+</table>
+<p style={{fontSize:'1vmax', color:'black', textAlign:'center', alignSelf:'center'}}>Upon allotment, you will receive your gift.</p>
+
+
+<div style={{ textAlign: "center", fontSize: "1.5vmax", marginTop: "2vmax" }} className='rental-toggle'>
+<label>Rental: </label>
+<button style={{ margin: "0 1vmax" }} onClick={() => setIsRental(true)}>Yes</button>
+<button onClick={() => setIsRental(false)}>No</button>
+</div>
+
+{isRental === true && <div style={{ marginTop: "1vmax", alignSelf:'center' }}>
+
+<input className='rental-input' placeholder='enter unit rental' value={unitRent} onChange={(e)=>setunitRent(e.target.value)}/>
+<p style={{fontSize:'1vmax', color:'black', textAlign:'center', alignSelf:'center'}}>Your rent for 24 months, based on the following rental scheme, is shown below.</p>
+<div style={{ display: "flex", gap: "1vmax", alignItems: "center", fontSize: "1.4vmax" }}>
+
+
+<div style={{ display: "flex", gap: "1vmax" }}>
+{/* First Table */}
+<table style={{ borderCollapse: "collapse", fontSize: "1.1vmax" }}>
+<tbody>
+{months.slice(0, 12).map((month, index) => (
+  <tr key={index}>
+    <td style={{ border: "0.1vmax solid black", padding: "0.4vmax 1.2vmax" }}>{month}</td>
+    <td style={{ border: "0.1vmax solid black", padding: "0.4vmax 1.2vmax", fontStyle:'italic' }}>{formatCurrency(unitRent*extractNumber(allottedArea))}</td>
+  </tr>
+))}
+</tbody>
+</table>
+
+{/* Second Table */}
+<table style={{ borderCollapse: "collapse", fontSize: "1.1vmax" }}>
+<tbody>
+{months.slice(12, 24).map((month, index) => (
+  <tr key={index}>
+    <td style={{ border: "0.1vmax solid black", padding: "0.4vmax 1.2vmax" }}>{month}</td>
+    <td style={{ border: "0.1vmax solid black", padding: "0.4vmax 1.2vmax" ,  fontStyle:'italic'}}>{formatCurrency(unitRent*extractNumber(allottedArea))}</td>
+  </tr>
+))}
+</tbody>
+</table>
+</div>
+</div>
+</div>}
+{isRental === false && <div style={{ marginTop: "1vmax" , alignSelf:'center', alignItems:'center', display:'flex', justifyContent:'center', flexDirection:'column'}}>
+<input 
+type="file" 
+className="rental-sub" 
+accept="image/*" 
+onChange={(e) => setPic(URL.createObjectURL(e.target.files[0]))} 
+/>
+
+{pic && (
+<img 
+src={pic} 
+style={{
+width: '44vmax', 
+height: '27vmax', 
+marginTop: '1vmax', 
+alignSelf: 'center',
+alignItems: 'center',
+
+}} 
+alt="Uploaded" 
+/>
+)}
+
+</div>}
+
+
+</div>
+
+
 
             <div ref={secondPageRef} className="a4-paper" style={{ width: imageSize.width, height: imageSize.height }}>
             <div className="createCard"  style={{
