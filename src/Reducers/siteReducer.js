@@ -22,9 +22,27 @@ import {
     GET_FORM_BY_ID_FAIL,
     GET_SEARCHED_SITE_SUCCESS,
     GET_SEARCHED_SITE_REQ,
-    GET_SEARCHED_SITE_FAIL
+    GET_SEARCHED_SITE_FAIL,
+    GET_SITE_BY_STATE_CITY_REQ,
+    GET_SITE_BY_STATE_CITY_SUCCESS,
+    GET_SITE_BY_STATE_CITY_FAIL
 
 } from "../Constant/siteConstant";
+
+
+export const siteByStateCityReducer = (state = { fetchedSites: [] }, action) => {
+  switch (action.type) {
+    case GET_SITE_BY_STATE_CITY_REQ:
+      return { isFetching: true, fetchedSites: [] };
+    case GET_SITE_BY_STATE_CITY_SUCCESS:
+      return { isFetching: false, fetchedSites: action.payload };
+    case GET_SITE_BY_STATE_CITY_FAIL:
+      return { isFetching: false, fetchError: action.payload };
+    default:
+      return state;
+  }
+};
+
 
 const initialAddSiteState = {
     loading: false,

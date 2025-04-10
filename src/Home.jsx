@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './home.css';
 import Loading from './Loading';
-import { getImages } from './Actions/siteActions';
+import { getImages, getSitesByStateCity } from './Actions/siteActions';
 import { useDispatch, useSelector } from 'react-redux';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
@@ -16,10 +16,28 @@ import p3 from './pox3.webp';
 import p4 from './pox4.webp';
 import app from './app.png';
 import Searching from './Searching';
-
+import cvpic from './coverpic.webp'
+import cloud from './cloud3.png'
+import qq from './enq2.png'
 import { faqform } from './Actions/formAction';
 import LuckyDrawForm from './LuckyDrawForm';
 import CompanyFillForm from './CompanyFillForm'; // Import the CompanyFillForm
+import Siteshows from './Siteshows';
+
+
+
+
+const statsData = [
+  { label: 'States Covered', value: 4 },
+  { label: 'Trusted Clients', value: 200 },
+  { label: 'Our Team', value: 25 },
+  { label: 'Experience', value: 7, suffix: ' years' },
+];
+
+
+
+
+
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -40,7 +58,10 @@ const Home = () => {
   const [showLuckyDrawOptions, setShowLuckyDrawOptions] = useState(false); // State to show options
   const [showLuckyDrawForm, setShowLuckyDrawForm] = useState(false); // State to show LuckyDrawForm
   const [showCompanyFillForm, setShowCompanyFillForm] = useState(false); // State to show CompanyFillForm
+  const [formVisible, setFormVisible] = useState(false);
 
+  const [othersiteVisible, setothersiteVisible] = useState(false);
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -48,6 +69,51 @@ const Home = () => {
       [name]: value,
     });
   };
+
+
+
+
+
+  const [counters, setCounters] = useState(statsData.map(() => 0));
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCounters((prev) =>
+        prev.map((count, i) => {
+          const target = statsData[i].value;
+          if (count < target) {
+            const step = Math.ceil(target / 80); // adjust speed here
+            return Math.min(count + step, target);
+          }
+          return count;
+        })
+      );
+    }, 50); // every 50ms
+
+    return () => clearInterval(interval);
+  }, []);
+
+
+  const [stateInput, setStateInput] = useState('');
+  const [cityInput, setCityInput] = useState('');
+
+  const { isFetching, fetchedSites, fetchError } = useSelector(
+    state => state.appsu
+  );
+
+  const handleStateChange = (e) => {
+    const value = e.target.value;
+    setStateInput(value);
+    dispatch(getSitesByStateCity(value, cityInput));
+  };
+
+  
+  const handleCityChange = (e) => {
+    const value = e.target.value;
+    setCityInput(value);
+    dispatch(getSitesByStateCity(stateInput, value));
+  };
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -107,55 +173,166 @@ const Home = () => {
         ) : error ? (
           <p>{error}</p>
         ) : (
-          <Carousel
-            showThumbs={false}
-            infiniteLoop={true}
-            autoPlay={true}
-            interval={2500}
-            showArrows={true}
-            showIndicators={false}
-          >
-            {data &&
-              data.length > 0 &&
-              data.map((site, index) =>
-                site.images.map((image, imgIndex) => (
-                  <div key={`${index}-${imgIndex}`} className="carousel-slide">
+         
+                  <div  className="carousel-slide" style={{ backgroundColor:'white' }}>
                     <img
-                      src={image}
-                      alt={`Slide ${index}-${imgIndex}`}
-                      style={{ width: '100%', height: '35vmax' }}
+                      src={cvpic}
+                      
+                      style={{ width: '100%', height: '35vmax', opacity: '0.79' }}
                     />
-                    <div className="carousel-caption">
-                      <h1>{site.name}</h1>
-                      <h2 style={{ color: 'white' }}>{site.current}</h2>
-                      <p>Exclusively by Nav Bharat Niwas</p>
-                      <button
-                        className="view-details-button"
-                        onClick={() => goto(site._id)}
-                      >
-                        View Details
-                      </button>
+                    <div className="carousel-caption" style={{backgroundColor:'none'}}>
+                      
+                      
+                     
+                      <p style={{fontWeight:'bolder', textShadow: '0 0 11px white', fontSize:'2vmax'}}>Exclusively by Nav Bharat Niwas</p>
+                     
+                      <div
+    style={{
+      width: '60%',
+      height: '2px',
+      backgroundColor: 'white',
+      boxShadow: '0 0 10px white',
+      margin: '1rem auto'
+    }}
+  />
+
+                      <p style={{fontWeight:'bolder', textShadow: '0 0 11px white', fontSize:'2vmax'}}>Your Trust Our Commitment</p>
+
+                      <div className="input-wrapper">
+      <input type="text" placeholder="Enter State" className="location-input"  value={stateInput}
+         onChange={handleStateChange}/>
+      <input type="text" placeholder="Enter City" className="location-input"      value={cityInput}
+            onChange={handleCityChange}/>
+    </div>
+                      
+
+
                     </div>
                   </div>
-                ))
-              )}
-          </Carousel>
+               
         )}
       </div>
 
+
+      <div className='overview'>
+      {isFetching && <p>Loading...</p>}
+      {fetchError && <p style={{ color: 'red' }}>{fetchError}</p>}
+      {!isFetching && !fetchError && fetchedSites.length === 0 && (
+        <p></p>
+      )}
+
+      {fetchedSites && <Siteshows sites={fetchedSites} />}
+      </div>
+
+      <p className="overview-intro">
+    We are proud to serve across multiple states with a trusted clientele and a passionate team. <br />
+    With years of experience in real estate, we deliver value and trust.
+  </p>
+
+<div className='overview1'>
+
+
+{statsData.map((stat, index) => (
+        <div key={index} className="stat-box">
+          <h2 className="stat-number">
+            {counters[index]}+{stat.suffix || ''}
+          </h2>
+          <p className="stat-label">{stat.label}</p>
+        </div>
+      ))}
+</div>
+
+
       <div className="overview">
-        <div className="overviewText" >
-          <img src={p1} alt="Affordable" />
+      <img
+    src={qq}
+    alt="Overview"
+  />
+  <button
+
+    className='enquire-btn'
+    onClick={() => setFormVisible(true)}
+  >
+    Enquire Now ➡
+  </button>
+
+
+  {formVisible && (
+        <div className="modal-overlay">
+          <div className="call-form-container">
+            <button className="close-btn" onClick={() => setFormVisible(false)}>
+              &times;
+            </button>
+
+            <div className="call-form-container animated-glass-form">
+  <h2 className="form-title" style={{color:'white'}}>Get a Call from Us</h2>
+  <form onSubmit={handleSubmit}>
+    <div className="input-group animated-group">
+      <label htmlFor="name" style={{color:'white'}}>Name</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        value={formData.name}
+        onChange={handleChange}
+        required
+        placeholder="Enter your name"
+        style={{width:'30vmax'}}
+      />
+    </div>
+
+    <div className="input-group animated-group">
+      <label htmlFor="phoneNo" style={{color:'white'}}>Phone Number</label>
+      <input
+        type="tel"
+        id="phoneNo"
+        name="phoneNo"
+        value={formData.phoneNo}
+        onChange={handleChange}
+        required
+        placeholder="Enter your phone number"
+      />
+    </div>
+
+    <div className="input-group animated-group">
+      <label htmlFor="city" style={{color:'white'}}>City</label>
+      <input
+        type="text"
+        id="city"
+        name="city"
+        value={formData.city}
+        onChange={handleChange}
+        required
+        placeholder="Enter your city"
+      />
+    </div>
+
+    <div className="input-group animated-group">
+      <label htmlFor="budget" style={{color:'white'}}>Budget</label>
+      <select
+        id="budget"
+        name="budget"
+        value={formData.budget}
+        onChange={handleChange}
+        required
+      >
+        <option value="">Select your budget</option>
+        <option value="10 lakh to 20 lakh">10 lakh to 20 lakh</option>
+        <option value="30 lakh to 40 lakh">30 lakh to 40 lakh</option>
+        <option value="3 crore to 4 crore">3 crore and Above</option>
+      </select>
+    </div>
+
+    <button type="submit" className="submit-btn animated-submit">
+      Submit
+    </button>
+  </form>
+</div>
+
+          </div>
         </div>
-        <div className="overviewText">
-          <img src={p2} alt="Payment" />
-        </div>
-        <div className="overviewText" >
-          <img src={p3} alt="App" />
-        </div>
-        <div className="overviewText" >
-          <img src={p4} alt="Growth" />
-        </div>
+      )}
+
       </div>
 
       
@@ -163,69 +340,7 @@ const Home = () => {
       <div className="how">
        
 
-        <div className="call-form-container">
-          <h2>Get a Call from Us</h2>
-          <form onSubmit={handleSubmit}>
-            <div className="input-group">
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                placeholder="Enter your name"
-              />
-            </div>
-
-            <div className="input-group">
-              <label htmlFor="phoneNo">Phone Number</label>
-              <input
-                type="tel"
-                id="phoneNo"
-                name="phoneNo"
-                value={formData.phoneNo}
-                onChange={handleChange}
-                required
-                placeholder="Enter your phone number"
-              />
-            </div>
-
-            <div className="input-group">
-              <label htmlFor="city">City</label>
-              <input
-                type="text"
-                id="city"
-                name="city"
-                value={formData.city}
-                onChange={handleChange}
-                required
-                placeholder="Enter your city"
-              />
-            </div>
-
-            <div className="input-group">
-              <label htmlFor="budget">Budget</label>
-              <select
-                id="budget"
-                name="budget"
-                value={formData.budget}
-                onChange={handleChange}
-                required
-              >
-                <option value="">Select your budget</option>
-                <option value="10 lakh to 20 lakh">10 lakh to 20 lakh</option>
-                <option value="30 lakh to 40 lakh">30 lakh to 40 lakh</option>
-                <option value="3 crore to 4 crore">3 crore and Above</option>
-              </select>
-            </div>
-
-            <button type="submit" className="submit-btn">
-              Submit
-            </button>
-          </form>
-        </div>
+       
       </div>
 
       <div
@@ -247,44 +362,9 @@ const Home = () => {
         <ShowStatusSites status="ongoing" />
       </div>
 
-      <div
-        className="ongoing"
-        style={{
-          margin: '1vmax 0vmax',
-          width: '100%',
-          height: 'auto',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          padding: '1vmax',
-        }}
-      >
-        <h2 style={{ fontSize: '2.3vmax', textDecoration: 'underline' }}>
-          Upcoming projects
-        </h2>
-        <ShowStatusSites status="upcoming" />
-      </div>
+    
 
-      <div
-        className="ongoing"
-        style={{
-          margin: '1vmax 0vmax',
-          width: '100%',
-          height: 'auto',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          padding: '1vmax',
-        }}
-      >
-        <h2 style={{ fontSize: '2.3vmax', textDecoration: 'underline' }}>
-          Delivered projects
-        </h2>
-        <ShowStatusSites status="testimonial" />
-      </div>
-
+   
       <div className="about-us-container">
         <div className="about-us-content">
           <h4 className="about-us-title">About Us</h4>
@@ -298,8 +378,75 @@ const Home = () => {
             potential. Join us at Nav Bharat Niwas and take the first step towards
             building a secure future with prime land investments.
           </p>
+
+          <h2 style={{color:'#2e3c52'}}>
+            We Serve 
+          </h2>
+         
+           <ul>
+            <li style={{fontSize:'1.4vmax', margin:'1vmax', color:'#2e3c52'}}>End-to-end real estate consultancy for investors and homebuyers.</li>
+            <li style={{fontSize:'1.4vmax', margin:'1vmax', color:'#2e3c52'}}>No hidden charges – full disclosure of pricing, layout, and specifications.</li>
+            <li style={{fontSize:'1.4vmax', margin:'1vmax', color:'#2e3c52'}}>Land titles that are verified and legally acquired with proper documentation.</li>
+           </ul>
+
+           <button className="read-blog-btn" onClick={() => setothersiteVisible(true)}>
+  See Delivered and Upcoming projects
+</button>
+          
+
+
         </div>
       </div>
+
+      {othersiteVisible && (
+  <>
+    <div className="overview">
+      <button className="close-btn" onClick={() => setothersiteVisible(false)}>
+        &times;
+      </button>
+      <p>Delivered and upcoming project content here.</p>
+    </div>
+
+    <div
+      className="ongoing"
+      style={{
+        margin: '1vmax 0vmax',
+        width: '100%',
+        height: 'auto',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '1vmax',
+      }}
+    >
+      <h2 style={{ fontSize: '2.3vmax', textDecoration: 'underline' }}>
+        Ongoing projects
+      </h2>
+      <ShowStatusSites status="upcoming" />
+    </div>
+
+    <div
+      className="ongoing"
+      style={{
+        margin: '1vmax 0vmax',
+        width: '100%',
+        height: 'auto',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '1vmax',
+      }}
+    >
+      <h2 style={{ fontSize: '2.3vmax', textDecoration: 'underline' }}>
+        Testimonials
+      </h2>
+      <ShowStatusSites status="testimonial" />
+    </div>
+  </>
+)}
+
 
       {/* Lucky Draw Button */}
       <div className="lucky-draw-btn-container">

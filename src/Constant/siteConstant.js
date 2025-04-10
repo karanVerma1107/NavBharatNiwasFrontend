@@ -36,3 +36,11 @@ export const GET_FORM_BY_ID_FAIL = 'GET_FORM_BY_ID_FAIL';
 export const GET_SEARCHED_SITE_REQ = 'GET_SEARCHED_SITE_REQ'; // Request initiated
 export const GET_SEARCHED_SITE_SUCCESS = 'GET_SEARCHED_SITE_SUCCESS'; // Request succeeded
 export const GET_SEARCHED_SITE_FAIL = 'GET_SEARCHED_SITE_FAIL'; // Request failed
+
+
+
+
+// Constants for getting sites by state and city
+export const GET_SITE_BY_STATE_CITY_REQ = 'GET_SITE_BY_STATE_CITY_REQ';     // Request initiated
+export const GET_SITE_BY_STATE_CITY_SUCCESS = 'GET_SITE_BY_STATE_CITY_SUCCESS'; // Request succeeded
+export const GET_SITE_BY_STATE_CITY_FAIL = 'GET_SITE_BY_STATE_CITY_FAIL';   // Request failed

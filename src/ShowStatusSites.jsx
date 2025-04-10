@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getOngoingSites, getUpcomingSites, getTestimonialSites } from './Actions/siteActions';
-import './showStatusSites.css';
+
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Import carousel styles
 import { Carousel } from 'react-responsive-carousel';
 import ImageShowFull from './ImageShowFull';
@@ -73,50 +73,64 @@ const ShowStatusSites = ({ status }) => {
   return (
     <>
   
-      <div className='parent' style={{borderBottom:'1px solid gray'}} >
-        {sites.map((site) => (
-          <div key={site._id} className="status-sites"   >
-            <div className="site-card">
-              <div className='imgSite'>
-                <Carousel showThumbs={false} infiniteLoop={true} autoPlay={true} interval={2500} showArrows={true} showStatus={false} showIndicators={false} >
-                  {site.images.map((image, index) => (
-                    <div key={index} onClick={() => openModal(image)}>
-                      <img src={image} alt={`Slide ${index}`}  style={{width: '39vmax', height: '28vmax'}}/>
-                    </div>
-                  ))}
-                </Carousel>
-              </div>
-              <div className='details' >
-                <h1>{site.name}</h1>
-                <h3><FaStarOfLife style={{fontSize:'0.9vmax'}}/> {site.current}</h3>
-                {site.formYes && <h3>  <TiTick/>  lucky draw</h3>}
-                <button className="unique-button"><a href={`/site/${site._id}`} target="_blank" rel="noopener noreferrer" style={{ color: 'white' }}>
-  View portfolio
-</a>
-</button>
-                <p >Posted on: {formatDate(site.createdAt)}</p>
-               
-              </div>
+  <div className="amazon-style-container">
+  {sites.map((site) => (
+    <div key={site._id} className="amazon-site-card">
+      <div className="image-container">
+        <Carousel showThumbs={false} infiniteLoop autoPlay interval={3000} showArrows={false} showStatus={false} showIndicators={false}>
+          {site.images.map((image, index) => (
+            <div key={index} onClick={() => openModal(image)}>
+              <img src={image} alt={`Site ${index}`} />
             </div>
-          
-          </div>
-             ))}
+          ))}
+        </Carousel>
+      </div>
+      
+      <div className="site-info">
+        <h2 className="site-name">{site.name}</h2>
+        
+        <p className={`site-status ${site.formYes ? 'luckydraw' : 'premium'}`}>
+          {site.formYes ? '🎉 Lucky Draw Available' : '🌟 Premium'}
+        </p>
+
+        <p className="site-unit">🏠 Units: {site.unit}</p>
+        <p className="site-location">📍 {site.city}, {site.state}</p>
+        <p className="site-posted">Posted on: {formatDate(site.createdAt)}</p>
+
+        <Link to={`/site/${site._id}`} target="_blank" rel="noopener noreferrer">
+          <button className="view-button">View Portfolio</button>
+        </Link>
+      </div>
+    </div>
+  ))}
+</div>
 
 
-<div className="pagination" >
-        <button onClick={() => setPage(page - 1)} disabled={page === 1} style={{padding:'0.3vmax 1.3vmax'}}>
-          Previous
+
+<div className="pagination-container">
+        <button
+          onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+          disabled={page === 1}
+          className="pagination-btn"
+        >
+          ⬅ Prev
         </button>
-        {Array.from({ length: pages }, (_, index) => (
-          <button key={index + 1} onClick={() => setPage(index + 1)} className={page === index + 1 ? 'active' : ''} style={{padding:'0.3vmax 1.3vmax'}}>
-            {index + 1}
+        {Array.from({ length: pages }, (_, i) => (
+          <button
+            key={i}
+            onClick={() => setPage(i + 1)}
+            className={`pagination-number ${page === i + 1 ? 'active' : ''}`}
+          >
+            {i + 1}
           </button>
         ))}
-        <button onClick={() => setPage(page + 1)} disabled={page === pages} style={{padding:'0.3vmax 1.3vmax'}}>
-          Next
+        <button
+          onClick={() => setPage((prev) => Math.min(prev + 1, pages))}
+          disabled={page === pages}
+          className="pagination-btn"
+        >
+          Next ➡
         </button>
-      </div>
-
       </div>
      
       {modalImage && (

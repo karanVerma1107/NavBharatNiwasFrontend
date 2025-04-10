@@ -19,9 +19,50 @@ import { ADD_SITE_FAIL, ADD_SITE_REQUEST, ADD_SITE_SUCCESS,
     GET_FORM_BY_ID_FAIL,
     GET_SEARCHED_SITE_REQ,
     GET_SEARCHED_SITE_SUCCESS,
-    GET_SEARCHED_SITE_FAIL
+    GET_SEARCHED_SITE_FAIL,
+    GET_SITE_BY_STATE_CITY_REQ,
+    GET_SITE_BY_STATE_CITY_FAIL,
+    GET_SITE_BY_STATE_CITY_SUCCESS
  } from "../Constant/siteConstant";
 import axiosInstance from "../../axiosInstance";
+
+
+
+export const getSitesByStateCity = (state ,city ) => async (dispatch) => {
+    try {
+      dispatch({ type: GET_SITE_BY_STATE_CITY_REQ });
+  
+      const queryParams = new URLSearchParams();
+
+      if (state) queryParams.append('state', state);
+      if (city) queryParams.append('city', city);
+  
+      const { data } = await axiosInstance.get(`/api/v1/sites?${queryParams.toString()}`);
+  
+      dispatch({
+        type: GET_SITE_BY_STATE_CITY_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: GET_SITE_BY_STATE_CITY_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+
+
+
+
+
+
+
+
+
+
 
 // Action to add a site
 export const addSite = (siteData) => async (dispatch) => {
@@ -38,6 +79,9 @@ export const addSite = (siteData) => async (dispatch) => {
         formData.append('description', siteData.description);
         formData.append('current', siteData.current);
         formData.append('formYes', siteData.formYes);
+        formData.append('state', siteData.state);
+        formData.append('city', siteData.city);
+        formData.append('unit', siteData.unit);
 
         // Append each image to the FormData object
         siteData.images.forEach((image) => {

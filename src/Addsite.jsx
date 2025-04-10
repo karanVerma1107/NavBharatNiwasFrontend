@@ -18,7 +18,9 @@ const Addsite = () => {
   const [images, setImages] = useState([]);
   const [imageError, setImageError] = useState('');
   const [modalImage, setModalImage] = useState(null);
-
+const [state, setstate] = useState('');
+const [city, setCity] = useState('');
+const [unit, setUnit] = useState('');
   const dispatch = useDispatch();
   const { loading, site, error, message } = useSelector(state => state.addsite);
 
@@ -46,11 +48,15 @@ const Addsite = () => {
     e.preventDefault();
     const siteData = {
       name,
-
+charges,
+      ytlink,
       description,
       current,
       formYes,
       images,
+      city,
+      state,
+      unit
     };
     dispatch(addSite(siteData));
   };
@@ -95,6 +101,38 @@ const Addsite = () => {
             id="charges"
             value={charges}
             onChange={(e) => setCharges(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="name">state</label>
+          <input
+            type="text"
+            id="state"
+            value={state}
+            onChange={(e) => setstate(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="name">city</label>
+          <input
+            type="text"
+            id="city"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="name">Units</label>
+          <input
+            type="text"
+            id="unit"
+            value={unit}
+            onChange={(e) => setUnit(e.target.value)}
             required
           />
         </div>
