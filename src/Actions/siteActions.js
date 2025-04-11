@@ -22,11 +22,88 @@ import { ADD_SITE_FAIL, ADD_SITE_REQUEST, ADD_SITE_SUCCESS,
     GET_SEARCHED_SITE_FAIL,
     GET_SITE_BY_STATE_CITY_REQ,
     GET_SITE_BY_STATE_CITY_FAIL,
-    GET_SITE_BY_STATE_CITY_SUCCESS
+    GET_SITE_BY_STATE_CITY_SUCCESS,
+     ADD_BLOG_SUCCESS,
+        ADD_BLOG_REQ,
+        ADD_BLOG_FAIL,
+        GET_BLOG_REQ,
+        GET_BLOG_SUCCESS,
+        GET_BLOG_FAIL,
+        GET_ALL_BLOGS_REQ,
+        GET_ALL_BLOGS_SUCCESS,
+        GET_ALL_BLOGS_FAIL
  } from "../Constant/siteConstant";
 import axiosInstance from "../../axiosInstance";
 
 
+
+
+
+
+// Get Blog by ID
+export const getBlogById = (id) => async (dispatch) => {
+    try {
+      dispatch({ type: GET_BLOG_REQ });
+  
+      const { data } = await axiosInstance.get(`/api/v1/blog/${id}`);
+  
+      dispatch({
+        type: GET_BLOG_SUCCESS,
+        payload: data.data
+      });
+    } catch (error) {
+      dispatch({
+        type: GET_BLOG_FAIL,
+        payload: error.response?.data?.message || error.message
+      });
+    }
+  };
+  
+  // Create a Blog (Admin only)
+  export const addBlog = (blogData) => async (dispatch) => {
+    try {
+      dispatch({ type: ADD_BLOG_REQ });
+  
+  
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          
+        }
+      };
+  
+      const { data } = await axiosInstance.post('/api/v1/blogpost', blogData, config);
+  
+      dispatch({
+        type: ADD_BLOG_SUCCESS,
+        payload: data
+      });
+    } catch (error) {
+      dispatch({
+        type: ADD_BLOG_FAIL,
+        payload: error.response?.data?.message || error.message
+      });
+    }
+  };
+  
+  // Get All Blogs in Reverse Order
+  export const getAllBlogs = () => async (dispatch) => {
+    try {
+      dispatch({ type: GET_ALL_BLOGS_REQ });
+  
+      const { data } = await axiosInstance.get('/api/v1/allblogs');
+  
+      dispatch({
+        type: GET_ALL_BLOGS_SUCCESS,
+        payload: data.data // assuming { success, count, data }
+      });
+    } catch (error) {
+      dispatch({
+        type: GET_ALL_BLOGS_FAIL,
+        payload: error.response?.data?.message || error.message
+      });
+    }
+  };
 
 export const getSitesByStateCity = (state ,city ) => async (dispatch) => {
     try {

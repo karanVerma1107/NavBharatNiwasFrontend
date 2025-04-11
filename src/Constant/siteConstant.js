@@ -44,3 +44,24 @@ export const GET_SEARCHED_SITE_FAIL = 'GET_SEARCHED_SITE_FAIL'; // Request faile
 export const GET_SITE_BY_STATE_CITY_REQ = 'GET_SITE_BY_STATE_CITY_REQ';     // Request initiated
 export const GET_SITE_BY_STATE_CITY_SUCCESS = 'GET_SITE_BY_STATE_CITY_SUCCESS'; // Request succeeded
 export const GET_SITE_BY_STATE_CITY_FAIL = 'GET_SITE_BY_STATE_CITY_FAIL';   // Request failed
+
+
+// Add Blog
+export const ADD_BLOG_REQ = 'ADD_BLOG_REQ';             // Request initiated
+export const ADD_BLOG_SUCCESS = 'ADD_BLOG_SUCCESS';     // Blog added successfully
+export const ADD_BLOG_FAIL = 'ADD_BLOG_FAIL';           // Blog addition failed
+
+// Get Blog By ID
+export const GET_BLOG_REQ = 'GET_BLOG_REQ';             // Request initiated
+export const GET_BLOG_SUCCESS = 'GET_BLOG_SUCCESS';     // Successfully fetched blog
+export const GET_BLOG_FAIL = 'GET_BLOG_FAIL';           // Fetching blog failed
+
+
+
+// Get All Blogs
+export const GET_ALL_BLOGS_REQ = 'GET_ALL_BLOGS_REQ';         // Request initiated
+export const GET_ALL_BLOGS_SUCCESS = 'GET_ALL_BLOGS_SUCCESS'; // Successfully fetched all blogs
+export const GET_ALL_BLOGS_FAIL = 'GET_ALL_BLOGS_FAIL';       // Failed to fetch blogs
+
+
+

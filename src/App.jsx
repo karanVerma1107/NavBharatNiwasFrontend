@@ -21,6 +21,8 @@ import CompanyAllotment from './CompanyAllotment';
 import AllotMentLetter from './AllotMentLetter';
 import AllotmentIndiLetter from './AllotmentIndiLetter';
 import PdfAllot from './PdfAllot';
+import AllBlogs from './AllBlogs';
+import BlogOne from './BlogOne';
 
 
 
@@ -84,7 +86,8 @@ function App() {
           <Route path='/getar/:id' element={<ResIsallow />} />
           <Route path='/Allotment/:id' element={<AllotMentLetter />} />
           <Route path='Allotment/allot-pdf/:id' element={<PdfAllot />} />
-          
+          <Route path='/allblogs' element={<AllBlogs/>}/>
+          <Route path='/blog/:id' element={<BlogOne/>}/>
           <Route path='/T' element={<T />} />
         </Routes>
 

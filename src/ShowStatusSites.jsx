@@ -77,13 +77,21 @@ const ShowStatusSites = ({ status }) => {
   {sites.map((site) => (
     <div key={site._id} className="amazon-site-card">
       <div className="image-container">
-        <Carousel showThumbs={false} infiniteLoop autoPlay interval={3000} showArrows={false} showStatus={false} showIndicators={false}>
-          {site.images.map((image, index) => (
-            <div key={index} onClick={() => openModal(image)}>
-              <img src={image} alt={`Site ${index}`} />
-            </div>
-          ))}
-        </Carousel>
+      <Carousel
+  showThumbs={false}
+  infiniteLoop
+  autoPlay
+  interval={3000}
+  showArrows={false}
+  showStatus={false}
+  showIndicators={false}
+>
+  {site.images.length > 0 && (
+    <div onClick={() => openModal(site.images[0])}>
+      <img src={site.images[0]} alt="Site 0" />
+    </div>
+  )}
+</Carousel>
       </div>
       
       <div className="site-info">

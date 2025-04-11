@@ -2,7 +2,7 @@ import {legacy_createStore as createStore, combineReducers, applyMiddleware} fro
 import { thunk }  from 'redux-thunk';
 import {composeWithDevTools}from 'redux-devtools-extension'
 import { authReducer, userReducer } from './src/Reducers/authReducer';
-import { AddsiteReducer, formAPPReducer, getImagesReducer, getOngoingSiteReducer, getTestimonialSiteReducer, getUpcomingSiteReducer, siteByStateCityReducer, siteReducer, siteSearchReducer } from './src/Reducers/siteReducer';
+import { addBlogReducer, AddsiteReducer, formAPPReducer, getAllBlogsReducer, getBlogReducer, getImagesReducer, getOngoingSiteReducer, getTestimonialSiteReducer, getUpcomingSiteReducer, siteByStateCityReducer, siteReducer, siteSearchReducer } from './src/Reducers/siteReducer';
 import { allotmentbyIDReducer, allotmentReducer, applicationsReducer, CapplicationsReducer, companyAllotmentReducer, companyFillByIdReducer, CstatusUpdateReducer, faqFormReducer, fillCompanyFormReducer, fillLuckyDrawReducer,  formAndResultsReducer,  formReducer, getCompanyFillsReducer, getcompanyFormReducer, getIsAllowReducer, getluckyDrawReducer, IndiAllotmentReducer, isAllowHandler, isAllowResultsReducer, luckydrawReducer, passtoresult, pushCompanyToResultReducer, resultReducer, searchAllotmentReducer, seeAllFAQsReducer, signatureReducer, statusUpdateReducer } from './src/Reducers/formreducer';
 
 
@@ -44,7 +44,10 @@ sign:signatureReducer,
 createAllotL: IndiAllotmentReducer,
 searchAllotments: searchAllotmentReducer,
 getFaq: seeAllFAQsReducer,
-appsu:siteByStateCityReducer
+appsu:siteByStateCityReducer,
+getblog:getBlogReducer,
+addblog:addBlogReducer,
+getallblog: getAllBlogsReducer
 });
 
 // learn what thunk actually do

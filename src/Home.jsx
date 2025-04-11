@@ -23,6 +23,7 @@ import { faqform } from './Actions/formAction';
 import LuckyDrawForm from './LuckyDrawForm';
 import CompanyFillForm from './CompanyFillForm'; // Import the CompanyFillForm
 import Siteshows from './Siteshows';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -61,6 +62,9 @@ const Home = () => {
   const [formVisible, setFormVisible] = useState(false);
 
   const [othersiteVisible, setothersiteVisible] = useState(false);
+
+
+  const navigate = useNavigate();
   
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -446,6 +450,30 @@ const Home = () => {
     </div>
   </>
 )}
+
+
+
+
+<button
+  style={{
+    fontSize: '1.6vmax',
+    backgroundColor: '#ffccbc',
+    color: '#4e342e',
+    border: 'none',
+    padding: '0.8vmax 2vmax',
+    borderRadius: '2vmax',
+    cursor: 'pointer',
+    boxShadow: '0 0.4vmax 1vmax rgba(0, 0, 0, 0.2)',
+    transition: 'all 0.3s ease-in-out',
+    display: 'block',
+    margin: '1.1vmax auto'
+  }}
+  onMouseOver={(e) => e.target.style.backgroundColor = '#ffe0b2'}
+  onMouseOut={(e) => e.target.style.backgroundColor = '#ffccbc'}
+  onClick={() => navigate('/allblogs')}
+>
+  📚 Read Our Blogs
+</button>
 
 
       {/* Lucky Draw Button */}

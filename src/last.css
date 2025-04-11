@@ -1,0 +1,42 @@
+.popup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1vmax;
+    margin-top: 1vmax;
+  }
+
+  .popup-form input,
+  .popup-form textarea {
+    padding: 1vmax;
+    font-size: 1vmax;
+    border: 1px solid #ccc;
+    border-radius: 0.5vmax;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .popup-form input:focus,
+  .popup-form textarea:focus {
+    border-color: #4caf50;
+    box-shadow: 0 0 0.4vmax rgba(76, 175, 80, 0.2);
+  }
+
+  .popup-form textarea {
+    min-height: 10vmax;
+    resize: vertical;
+  }
+
+  .popup-form button {
+    padding: 1vmax;
+    font-size: 1.2vmax;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 0.5vmax;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .popup-form button:hover {
+    background-color: #43a047;
+  }

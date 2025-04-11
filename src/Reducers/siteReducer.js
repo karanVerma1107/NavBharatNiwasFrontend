@@ -25,10 +25,88 @@ import {
     GET_SEARCHED_SITE_FAIL,
     GET_SITE_BY_STATE_CITY_REQ,
     GET_SITE_BY_STATE_CITY_SUCCESS,
-    GET_SITE_BY_STATE_CITY_FAIL
+    GET_SITE_BY_STATE_CITY_FAIL,
+    ADD_BLOG_SUCCESS,
+    ADD_BLOG_REQ,
+    ADD_BLOG_FAIL,
+    GET_BLOG_REQ,
+    GET_BLOG_SUCCESS,
+    GET_BLOG_FAIL,
+    GET_ALL_BLOGS_REQ,
+    GET_ALL_BLOGS_SUCCESS,
+    GET_ALL_BLOGS_FAIL
 
 } from "../Constant/siteConstant";
 
+
+export const getAllBlogsReducer = (state = { article: [] }, action) => {
+  switch (action.type) {
+    case GET_ALL_BLOGS_REQ:
+      return { ...state, busy: true };
+
+    case GET_ALL_BLOGS_SUCCESS:
+      return {
+        busy: false,
+        article: action.payload
+      };
+
+    case GET_ALL_BLOGS_FAIL:
+      return {
+        busy: false,
+        mistake: action.payload
+      };
+
+    default:
+      return state;
+  }
+};
+
+
+export const addBlogReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ADD_BLOG_REQ:
+      return { loading: true };
+
+    case ADD_BLOG_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        blog: action.payload
+      };
+
+    case ADD_BLOG_FAIL:
+      return {
+        loading: false,
+        error: action.payload
+      };
+
+    default:
+      return state;
+  }
+};
+
+
+export const getBlogReducer = (state = { entry: {} }, action) => {
+  switch (action.type) {
+    case GET_BLOG_REQ:
+      return { ...state, processing: true };
+
+    case GET_BLOG_SUCCESS:
+      return {
+        processing: false,
+        entry: action.payload
+      };
+
+    case GET_BLOG_FAIL:
+      return {
+        processing: false,
+        problem: action.payload
+      };
+
+    default:
+      return state;
+  }
+};
 
 export const siteByStateCityReducer = (state = { fetchedSites: [] }, action) => {
   switch (action.type) {
