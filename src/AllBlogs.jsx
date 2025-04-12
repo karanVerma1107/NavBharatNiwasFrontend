@@ -67,7 +67,7 @@ const AllBlogs = () => {
             <div
               key={index}
               style={{
-                width: '49vmax',
+                width: '42vmax',
                 backgroundColor: 'peachpuff',
                 margin: '2vmax auto',
                 borderRadius: '1vmax',
@@ -80,7 +80,7 @@ const AllBlogs = () => {
                 gap: '1vmax',
               }}
             >
-              <h2 style={{ margin: 0, color: '#4e342e', fontSize: '2vmax' }}>
+              <h2 style={{ margin: 0, color: '#4e342e', fontSize: '1.7vmax' }}>
                 {blog.heading}
               </h2>
 
