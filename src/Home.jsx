@@ -119,6 +119,19 @@ const Home = () => {
   };
 
 
+
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://static.elfsight.com/platform/platform.js";
+    script.async = true;
+    document.body.appendChild(script);
+  }, []);
+
+
+
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const { name, phoneNo, city, budget } = formData;
@@ -452,7 +465,9 @@ const Home = () => {
 )}
 
 
-
+<div style={{width:'100%', height:'auto', margin:'2.7vmax 0vmax'}}>
+<div className="elfsight-app-59056ef6-6aa8-4aa1-9b7c-d0a0c5b3e2ac" data-elfsight-app-lazy></div>
+</div>
 
 <button
   style={{
