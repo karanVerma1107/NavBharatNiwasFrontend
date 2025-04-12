@@ -192,7 +192,7 @@
   max-width: 900px;
   margin: 0 auto;
   padding: 3vmax;
-  background-color: 	#FFFD54;
+  background-color: rgb(255, 227, 203);
   border-radius: 10px; /* Rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); /* Subtle shadow */
   margin-top: 3vmax; /* Spacing from the top */
