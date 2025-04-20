@@ -58,33 +58,57 @@ export const getBlogById = (id) => async (dispatch) => {
       });
     }
   };
-  
-  // Create a Blog (Admin only)
-  export const addBlog = (blogData) => async (dispatch) => {
+
+
+
+  export const addBlog = (blogData, blocksData) => async (dispatch) => {
     try {
       dispatch({ type: ADD_BLOG_REQ });
   
+      console.log("blogData", blogData);
+      console.log("blocksData", blocksData);
+  
+      // Create FormData instance
+      const formData = new FormData();
+      formData.append('heading', blogData.heading);
+  
+      // Append blocksData (properly formatted as JSON)
+      formData.append('block', JSON.stringify(blocksData));
+  
+      if (Array.isArray(blocksData)) {
+        blocksData.forEach((block, index) => {
+          if (block.pic) {
+            formData.append(`blockImage${index}`, block.pic);
+          }
+        });
+      } else {
+        console.error("blocksData is undefined or not an array:", blocksData);
+      }
+      
   
       const config = {
         headers: {
-          'Content-Type': 'application/json',
-          
+          'Content-Type': 'multipart/form-data',
         }
       };
   
-      const { data } = await axiosInstance.post('/api/v1/blogpost', blogData, config);
+      const { data } = await axiosInstance.post('/api/v1/blogpost', formData, config);
   
       dispatch({
         type: ADD_BLOG_SUCCESS,
         payload: data
       });
     } catch (error) {
+      console.error("Error adding blog:", error);
       dispatch({
         type: ADD_BLOG_FAIL,
         payload: error.response?.data?.message || error.message
       });
     }
   };
+  
+
+
   
   // Get All Blogs in Reverse Order
   export const getAllBlogs = () => async (dispatch) => {

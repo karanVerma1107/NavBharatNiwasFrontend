@@ -30,6 +30,47 @@ const AllBlogs = () => {
     dispatch(getAllBlogs());
   }, [dispatch]);
 
+
+
+  const [blocks, setBlocks] = useState([{ content: '', pic: '' }]); // Initial block structure
+
+  
+
+  const handleAddBlock = () => {
+    setBlocks([...blocks, { content: '', pic: '' }]);
+  };
+
+  const handleRemoveBlock = (index) => {
+    const updatedBlocks = blocks.filter((_, i) => i !== index);
+    setBlocks(updatedBlocks);
+  };
+
+  const handleBlockChange = (e, index) => {
+    const updatedBlocks = [...blocks];
+    if (e.target.name === 'pic') {
+      updatedBlocks[index].pic = e.target.files[0]; // Store actual File object
+    } else {
+      updatedBlocks[index][e.target.name] = e.target.value;
+    }
+    setBlocks(updatedBlocks);
+  };
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const heading = e.target.heading.value;
+  
+    const blockData = blocks.map(block => ({
+      content: block.content,
+      pic: block.pic, // This is a File object or undefined
+    }));
+  
+    dispatch(addBlog({ heading }, blockData));
+    setShowPopup(false); // close popup after submit
+  };
+
+
+
+
   // Load Instagram embed script once
   useEffect(() => {
     const script = document.createElement('script');
@@ -46,6 +87,8 @@ const AllBlogs = () => {
   }, [article]);
 
   const togglePopup = () => setShowPopup(!showPopup);
+
+
 
   return (
     <>
@@ -143,7 +186,8 @@ const AllBlogs = () => {
             transform: 'translate(-50%, -50%)',
             backgroundColor: '#fff',
             width: '45vmax',
-            height: 'auto',
+            height: '40vmax',  // Set a fixed height for the popup
+            overflowY: 'auto', // Enables scrolling when content exceeds height
             padding: '2vmax',
             borderRadius: '1vmax',
             boxShadow: '0 0 1vmax rgba(0,0,0,0.2)',
@@ -167,22 +211,38 @@ const AllBlogs = () => {
           </button>
           <p style={{ fontSize: '1.6vmax', marginBottom: '1vmax' }}>Post a Blog</p>
 
-          <form
-            className="popup-form"
-            onSubmit={(e) => {
-              e.preventDefault();
-              const heading = e.target.heading.value;
-              const content = e.target.content.value;
-              const instagramEmbedLink = e.target.instagramEmbedLink.value;
-              dispatch(addBlog({ heading, content, instagramEmbedLink }));
-              setShowPopup(false);
-            }}
-          >
-            <input name="heading" placeholder="Heading" required />
-            <textarea name="content" placeholder="Content" required />
-            <input name="instagramEmbedLink" placeholder="Instagram Embed Link (optional)" />
-            <button type="submit">Submit Blog</button>
-          </form>
+          <form className="popup-form" onSubmit={handleSubmit}>
+
+        <input name="heading" placeholder="Heading" required />
+        
+        {blocks.map((block, index) => (
+          <div key={index} style={{ marginBottom: '1vmax' }}>
+            <textarea
+              name="content"
+              placeholder="Content"
+              value={block.content}
+              onChange={(e) => handleBlockChange(e, index)}
+              required
+            />
+           
+           <input
+  type="file"
+  name="pic"
+  accept="image/*"
+  onChange={(e) => handleBlockChange(e, index)}
+/>
+
+            <button type="button" onClick={() => handleRemoveBlock(index)}  style={{ marginTop: '0.5vmax', backgroundColor: '#ffccbc', color: '#4e342e', border: 'none', padding: '0.5vmax 1vmax', borderRadius: '1vmax', cursor: 'pointer' }}>
+              Remove Block
+            </button>
+          </div>
+        ))}
+
+        <button type="button" onClick={handleAddBlock} style={{backgroundColor:'blueviolet'}}>
+          Add Another Block
+        </button>
+        <button type="submit">Submit Blog</button>
+      </form>
         </div>
       )}
 
@@ -193,7 +253,7 @@ const AllBlogs = () => {
           style={{
             position: 'fixed',
             bottom: '2vmax',
-            left: '50%',
+            right:'2vmax',
             transform: 'translateX(-50%)',
             fontSize: '1.6vmax',
             backgroundColor: '#ffccbc',

@@ -61,8 +61,7 @@ export const getAllBlogsReducer = (state = { article: [] }, action) => {
   }
 };
 
-
-export const addBlogReducer = (state = {}, action) => {
+export const addBlogReducer = (state = { blocksData: [] }, action) => {
   switch (action.type) {
     case ADD_BLOG_REQ:
       return { loading: true };
@@ -71,7 +70,8 @@ export const addBlogReducer = (state = {}, action) => {
       return {
         loading: false,
         success: true,
-        blog: action.payload
+        blog: action.payload.data,
+        blocksData: [...state.blocksData, action.payload.data], // Add the new blog to blocksData
       };
 
     case ADD_BLOG_FAIL:
