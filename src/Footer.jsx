@@ -37,6 +37,7 @@ const Footer = () => {
         <p><FaSquareXTwitter /> <a href="http://www.youtube.com/@NavBharatNiwas" style={{ color: 'white' }}>YouTube</a></p>
 
         <p><a href="/T" target="_blank" style={{ color: 'white' }}>Terms and Conditions</a></p>
+        <p><a href="/PP" target="_blank" style={{ color: 'white' }}>privacy and policy</a></p>
       </div>
     </div>
   );
