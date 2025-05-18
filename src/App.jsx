@@ -9,7 +9,6 @@ import Footer from './Footer';
 import FormRelated from './FormRelated';
 import Site from './Site';
 import Form from './Form';
-
 import Result from './Result';
 import T from './T';
 import CompanyFormFull from './CompanyFormFull';
@@ -23,6 +22,7 @@ import AllotmentIndiLetter from './AllotmentIndiLetter';
 import PdfAllot from './PdfAllot';
 import AllBlogs from './AllBlogs';
 import BlogOne from './BlogOne';
+import PP from './PP';
 
 
 
@@ -89,6 +89,7 @@ function App() {
           <Route path='/allblogs' element={<AllBlogs/>}/>
           <Route path='/blog/:id' element={<BlogOne/>}/>
           <Route path='/T' element={<T />} />
+          <Route path='/PP' element={<PP />} />
         </Routes>
 
         <Footer />
