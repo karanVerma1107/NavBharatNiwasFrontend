@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUserFromToken } from './Actions/authActions';
 import { addBlog, getBlogById, getAllBlogs } from './Actions/siteActions';
 import { Link } from 'react-router-dom';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+
 
 import './last.css'
 import ErrorBoundary from './Boundary';
@@ -60,7 +59,6 @@ const AllBlogs = () => {
   };
   
 
-  
   const handleSubmit = (e) => {
   e.preventDefault();
 
@@ -70,27 +68,27 @@ const AllBlogs = () => {
   const metaDescription = e.target.metaDescription.value;
   const metaKeywords = e.target.metaKeywords.value.split(',').map(keyword => keyword.trim());
 
-  const blockData = blocks.map(block => ({
-    content: block.content,
-    pic: block.pic, // This should be handled as FormData or URL in backend
-  }));
-
+  // Prepare blogData (excluding blocks)
   const blogData = {
     heading,
     permalink,
     metaTitle,
     metaDescription,
     metaKeywords,
-    blocks: blockData,
   };
 
-  dispatch(addBlog(blogData)); // Send the entire object as a single argument
-  setShowPopup(false); // Close popup after submit
+  // Prepare blocksData separately
+  const blocksData = blocks.map(block => ({
+    content: block.content,
+    pic: block.pic, // Image File object (should be from an input type="file")
+  }));
+
+  // Dispatch with both arguments
+  dispatch(addBlog(blogData, blocksData));
+
+  // Close popup after submission
+  setShowPopup(false);
 };
-
-
-
-
 
   // Load Instagram embed script once
   useEffect(() => {
