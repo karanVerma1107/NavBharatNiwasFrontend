@@ -34,10 +34,10 @@ const Footer = () => {
         <p  style={{ color: 'white' }}>Follow Us</p>
         <p><FaInstagramSquare /><a href="https://www.instagram.com/navbharatniwas/" style={{ color: 'white' }}>Instagram</a></p>
         <p><FaFacebook /> <a href="https://www.facebook.com/people/NavBharat-Niwas/61572183777309/" style={{ color: 'white' }}>Facebook</a></p>
-        <p><FaSquareXTwitter /> <a href="http://www.youtube.com/@NavBharatNiwas" style={{ color: 'white' }}>YouTube</a></p>
+        <p><FaYoutube /> <a href="http://www.youtube.com/@NavBharatNiwas" style={{ color: 'white' }}>YouTube</a></p>
 
         <p><a href="/T" target="_blank" style={{ color: 'white' }}>Terms and Conditions</a></p>
-        <p><a href="/PP" target="_blank" style={{ color: 'white' }}>privacy and policy</a></p>
+        <p><a href="/PP" target="_blank" style={{ color: 'white' }}>Privacy and Policy</a></p>
       </div>
     </div>
   );

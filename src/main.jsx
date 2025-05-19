@@ -24,5 +24,5 @@ createRoot(document.getElementById('root')).render(
       pauseOnHover
     />
     </Provider>
-  </StrictMode>,
+  </StrictMode>
 )
