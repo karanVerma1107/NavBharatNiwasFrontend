@@ -13,54 +13,72 @@ const Siteshows = ({sites}) => {
       };
     
     
-       // Display a message if there are no sites available
-       if (sites.length === 0) {
-        return <p className="no-sites-message"> Welcome</p>;
-      }
+
   return (
     <>
      
-     <div className="amazon-style-container">
-     {sites && sites.map((site) => (
-       <div key={site._id} className="amazon-site-card">
-         <div className="image-container">
-         <Carousel
-  showThumbs={false}
-  infiniteLoop
-  autoPlay
-  interval={3000}
-  showArrows={false}
-  showStatus={false}
-  showIndicators={false}
->
-  {site.images.length > 0 && (
-    <div onClick={() => openModal(site.images[0])}>
-      <img src={site.images[0]} alt="Site 0" />
-    </div>
-  )}
-</Carousel>
+        <div className="sites-grid-container">
+             {sites.map((site) => (
+               <div key={site._id} className="site-card">
+                 <div className="image-container">
+                   <Carousel
+       showThumbs={false}
+       infiniteLoop={false}
+       autoPlay={false}
+       interval={3000}
+       showArrows={false}
+       showStatus={false}
+       showIndicators={false}
+       selectedItem={0} // Always show first slide
+       swipeable={false} // Optional: disables swipe
+       emulateTouch={false} // Optional: disables touch gestures
+     >
+       {site.images.length > 0 && (
+         <div onClick={() => openModal(site.images[0])}>
+           <img src={site.images[0]} alt="Site 0" />
          </div>
-         
-         <div className="site-info">
-           <h2 className="site-name">{site.name}</h2>
-           
-           <p className={`site-status ${site.formYes ? 'luckydraw' : 'premium'}`}>
-             {site.formYes ? '🎉 Lucky Draw Available' : '🌟 Premium'}
-           </p>
-   
-           <p className="site-unit">🏠 Units: {site.unit}</p>
-           <p className="site-location">📍 {site.city}, {site.state}</p>
-           <p className="site-posted">Posted on: {formatDate(site.createdAt)}</p>
-   
-           <Link to={`/site/${site._id}`} target="_blank" rel="noopener noreferrer">
-             <button className="view-button">View Portfolio</button>
-           </Link>
-         </div>
-       </div>
-     ))}
-   </div>
-   
-   
+       )}
+     </Carousel>
+     
+                 </div>
+     
+                 <div className="site-content">
+                   <div>
+                     
+                     <h3 className="site-name">{site.name}</h3>
+                     
+                     <div className="site-details">
+                       <div className="detail-item">
+                         🏠
+                         <span> {site.unit} Units</span>
+                       </div>
+                       <div className="detail-item">
+                         📍
+                         <span>{site.city}, {site.state}</span>
+                       </div>
+                        <span className={`status-badge ${site.formYes ? 'luckydraw' : 'premium'}`}>
+                       {site.formYes ? '🎉 Lucky Draw' : '🌟 Premium'}
+                     </span>
+                       <div className="detail-item">
+                         📅 {formatDate(site.createdAt)}
+                       </div>
+                        
+                     </div>
+                    <Link 
+       to={`/site/${site._id}`} 
+       className="view-portfolio-btn"
+       
+     >
+       View Portfolio
+     </Link>
+                   </div>
+     
+     
+                 </div>
+               </div>
+             ))}
+           </div>
+     
    
    
         

@@ -62,7 +62,7 @@
   left: 0;
   width: 98.8%;
   height: 95.8%;
-  background: rgba(0, 0, 0, 0.46); /* Black background with opacity */
+  
   color: white;
   display: flex;
   flex-direction: column;
@@ -73,6 +73,140 @@
   border-radius: 1vmax;
   font-family: 'Arvo', serif; /* Apply Arvo font */
 }
+
+
+.hover-video-wrapper {
+  position: relative;
+  width: 100%;
+  height: 35vmax;
+  overflow: hidden;
+}
+
+.hover-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.89;
+}
+
+.hover-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0); /* transparent initially */
+  transition: background 0.4s ease;
+  z-index: 1;
+}
+
+.carousel-caption {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+
+.bottom-left-text {
+  position: absolute;
+  bottom: 0;
+  height: 18vmax;
+  width: 37vmax;
+  left: 0;
+  
+  color: white;
+ text-align: left;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  font-size: 1.2vmax;
+  text-shadow: 0 0 5px black;
+}
+
+.caption-text {
+  font-weight: bolder;
+  text-shadow: 0 0 11px white;
+  font-size: 2vmax;
+}
+
+.caption-line {
+  width: 60%;
+  height: 2px;
+  background-color: white;
+  box-shadow: 0 0 10px white;
+  margin: 1rem auto;
+}
+
+.hover-video-wrapper:hover .hover-overlay {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.hover-video-wrapper:hover .carousel-caption {
+  opacity: 1;
+}
+
+.custom-height-div {
+  width: 100%;
+  height: 8vmax;
+  background-color: white;
+  position: absolute;
+  z-index: 500;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content:center;
+  align-items: center; /* Align children to bottom */
+ 
+}
+
+
+
+.form-container {
+  width: 100%;
+  margin: 1vmax auto;
+  height: 7vmax;
+  padding-bottom: 1.7vmax; /* Add bottom padding */
+  display: flex;
+  align-self: center;
+  gap: 1vmax;
+  justify-content: center;
+}
+
+.form-group {
+  flex: 1;
+  max-width: 25vmax;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5vmax;
+}
+
+.form-group label {
+  font-size: 1.2vmax;
+  color: #2d3436;
+  font-weight: 500;
+}
+
+.form-group input, 
+.form-group select {
+  padding: 0.8vmax;
+  border: 0.15vmax solid #c8e6c9;
+  border-radius: 0.4vmax;
+  font-size: 1.1vmax;
+  background-color: #e8f5e9;
+}
+
+.form-group select {
+  background-color: #e3f2fd;
+  border-color: #90caf9;
+}
+
+
+
 
 .carousel-caption h1{
   font-family: 'Arvo', serif; /* Apply Arvo font */
@@ -422,12 +556,10 @@ iframe {
 
 
 
-
-
 .overview1 {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 2vmax;
+  gap: 1vmax;
   padding: 3rem 2rem;
   background: #f0f4f8;
   text-align: center;
