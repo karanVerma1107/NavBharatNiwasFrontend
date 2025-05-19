@@ -31,21 +31,45 @@ import { ADD_SITE_FAIL, ADD_SITE_REQUEST, ADD_SITE_SUCCESS,
         GET_BLOG_FAIL,
         GET_ALL_BLOGS_REQ,
         GET_ALL_BLOGS_SUCCESS,
-        GET_ALL_BLOGS_FAIL
+        GET_ALL_BLOGS_FAIL,
+          GET_BLOG_BY_PERMALINK_REQ,
+          GET_BLOG_BY_PERMALINK_SUCCESS,
+          GET_BLOG_BY_PERMALINK_FAIL,
+        
  } from "../Constant/siteConstant";
 import axiosInstance from "../../axiosInstance";
 
 
 
+export const getBlogsByPermalink = (permalink) => async (dispatch) => {
+  try {
+    dispatch({ type: GET_BLOG_BY_PERMALINK_REQ });
 
+    const { data } = await axios.get(`/api/v1/getBlogsbyPermalink/${permalink}`);
+
+    dispatch({
+      type: GET_BLOG_BY_PERMALINK_SUCCESS,
+      payload: data.data, // Assuming backend responds with { success: true, data: [...] }
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_BLOG_BY_PERMALINK_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
 
 
 // Get Blog by ID
-export const getBlogById = (id) => async (dispatch) => {
+export const getBlogById = (permalink) => async (dispatch) => {
     try {
       dispatch({ type: GET_BLOG_REQ });
+      console.log("permalink", permalink);
   
-      const { data } = await axiosInstance.get(`/api/v1/blog/${id}`);
+      const { data } = await axiosInstance.get(`/api/v1/blog/${permalink}`);
   
       dispatch({
         type: GET_BLOG_SUCCESS,

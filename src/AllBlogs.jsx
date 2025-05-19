@@ -3,8 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUserFromToken } from './Actions/authActions';
 import { addBlog, getBlogById, getAllBlogs } from './Actions/siteActions';
 import { Link } from 'react-router-dom';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 import './last.css'
+import ErrorBoundary from './Boundary';
+import TiptapEditor from './Tiptap';
 
 
 
@@ -55,18 +59,35 @@ const AllBlogs = () => {
     setBlocks(updatedBlocks);
   };
   
+
+  
   const handleSubmit = (e) => {
-    e.preventDefault();
-    const heading = e.target.heading.value;
-  
-    const blockData = blocks.map(block => ({
-      content: block.content,
-      pic: block.pic, // This is a File object or undefined
-    }));
-  
-    dispatch(addBlog({ heading }, blockData));
-    setShowPopup(false); // close popup after submit
+  e.preventDefault();
+
+  const heading = e.target.heading.value;
+  const permalink = e.target.permalink.value;
+  const metaTitle = e.target.metaTitle.value;
+  const metaDescription = e.target.metaDescription.value;
+  const metaKeywords = e.target.metaKeywords.value.split(',').map(keyword => keyword.trim());
+
+  const blockData = blocks.map(block => ({
+    content: block.content,
+    pic: block.pic, // This should be handled as FormData or URL in backend
+  }));
+
+  const blogData = {
+    heading,
+    permalink,
+    metaTitle,
+    metaDescription,
+    metaKeywords,
+    blocks: blockData,
   };
+
+  dispatch(addBlog(blogData)); // Send the entire object as a single argument
+  setShowPopup(false); // Close popup after submit
+};
+
 
 
 
@@ -145,7 +166,7 @@ const AllBlogs = () => {
 )}
 
 <Link
-  to={`/blog/${blog._id}`}
+  to={`/blog/${blog.permalink}`}
   style={{
     display: 'inline-block',
     textDecoration: 'none',
@@ -214,29 +235,48 @@ const AllBlogs = () => {
           <form className="popup-form" onSubmit={handleSubmit}>
 
         <input name="heading" placeholder="Heading" required />
+        <input name="permalink" placeholder="Permalink" required />
+        <input name="metaTitle" placeholder="Meta Title" />
+        <input name="metaDescription" placeholder="Meta Description" />
+        <input name="metaKeywords" placeholder="Meta Keywords (comma separated)" />
         
-        {blocks.map((block, index) => (
-          <div key={index} style={{ marginBottom: '1vmax' }}>
-            <textarea
-              name="content"
-              placeholder="Content"
-              value={block.content}
-              onChange={(e) => handleBlockChange(e, index)}
-              required
-            />
-           
-           <input
-  type="file"
-  name="pic"
-  accept="image/*"
-  onChange={(e) => handleBlockChange(e, index)}
-/>
-
-            <button type="button" onClick={() => handleRemoveBlock(index)}  style={{ marginTop: '0.5vmax', backgroundColor: '#ffccbc', color: '#4e342e', border: 'none', padding: '0.5vmax 1vmax', borderRadius: '1vmax', cursor: 'pointer' }}>
-              Remove Block
-            </button>
-          </div>
-        ))}
+       {blocks.map((block, index) => (
+  <div key={index} style={{ marginBottom: '1vmax' }}>
+     <input
+      type="file"
+      name="pic"
+      accept="image/*"
+      onChange={(e) => handleBlockChange(e, index)}
+      style={{margin:"1.1vmax"}}
+    />
+    <ErrorBoundary>
+     <TiptapEditor
+        content={block.content}
+        onUpdate={(html) => {
+          const updatedBlocks = [...blocks];
+          updatedBlocks[index].content = html;
+          setBlocks(updatedBlocks);
+        }}
+      />
+    </ErrorBoundary>
+   
+    <button
+      type="button"
+      onClick={() => handleRemoveBlock(index)}
+      style={{
+        marginTop: '0.5vmax',
+        backgroundColor: '#ffccbc',
+        color: '#4e342e',
+        border: 'none',
+        padding: '0.5vmax 1vmax',
+        borderRadius: '1vmax',
+        cursor: 'pointer',
+      }}
+    >
+      Remove Block
+    </button>
+  </div>
+))}
 
         <button type="button" onClick={handleAddBlock} style={{backgroundColor:'blueviolet'}}>
           Add Another Block
@@ -268,7 +308,37 @@ const AllBlogs = () => {
         >
           ⬆️ Add Blog
         </button>
+        
+
+        
       )}
+      {user && user.role === 'executive' && (
+     <a 
+  href="/EditBlog" 
+  style={{
+    position: 'fixed',
+    top: '7vmax',
+    right: '2vmax',
+    textDecoration: 'none',
+    color: '#007bff',
+    fontSize: '2vmax',
+    fontWeight: '600',
+    background: 'rgba(199, 252, 225, 0.8)',
+    padding: '0.5vmax 1vmax',
+    borderRadius: '0.5vmax',
+    boxShadow: '0 0.2vmax 0.5vmax rgba(0,0,0,0.1)',
+    transition: 'color 0.3s ease',
+  }}
+  onMouseOver={e => e.currentTarget.style.color = '#0056b3'}
+  onMouseOut={e => e.currentTarget.style.color = '#007bff'}
+>
+  Edit a Blog
+</a>
+
+        
+      )}
+      
+      
     </>
   );
 };

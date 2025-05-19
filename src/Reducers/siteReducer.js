@@ -34,9 +34,48 @@ import {
     GET_BLOG_FAIL,
     GET_ALL_BLOGS_REQ,
     GET_ALL_BLOGS_SUCCESS,
-    GET_ALL_BLOGS_FAIL
+    GET_ALL_BLOGS_FAIL,
+    GET_BLOG_BY_PERMALINK_REQ,
+  GET_BLOG_BY_PERMALINK_SUCCESS,
+  GET_BLOG_BY_PERMALINK_FAIL,
 
 } from "../Constant/siteConstant";
+
+
+
+
+const initialState2211 = {
+  loading: false,
+  blogs: [],
+  error: null,
+};
+
+export const blogByPermalinkReducer = (state = initialState2211, action) => {
+  switch (action.type) {
+    case GET_BLOG_BY_PERMALINK_REQ:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case GET_BLOG_BY_PERMALINK_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        blogs: action.payload, // Assuming payload is an array of blogs
+        error: null,
+      };
+    case GET_BLOG_BY_PERMALINK_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload, // error message
+        blogs: [],
+      };
+    default:
+      return state;
+  }
+};
 
 
 export const getAllBlogsReducer = (state = { article: [] }, action) => {
