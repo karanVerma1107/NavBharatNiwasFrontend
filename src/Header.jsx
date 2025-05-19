@@ -9,6 +9,7 @@ import UserShow from './userShow'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom' // Importing Link for navigation
 
+
 const Header = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [showUserShow, setShowUserShow] = useState(false); // State to toggle UserShow
@@ -44,13 +45,34 @@ const Header = () => {
     setIsMenuOpen(!isMenuOpen); // Toggle the hamburger menu open/close state
   }
 
+
+  const isMobile = window.innerWidth < 600;
+const spanStyle = {
+  margin: '0 auto',
+  fontSize: isMobile ? '1vmax' : '1.2vmax',
+  cursor: 'pointer',
+};
+
+const handleScroll = () => {
+    const section = document.getElementById('about-section');
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <>
       <div className="header">
         <div className="logo" >
           <img src={pic} alt="Logo" className="logo-img" style={{ height: '5.7vmax', width: '16vmax' , marginTop: '6.8vmax'}} />
         </div>
-
+          <div style={{display:'flex', flexDirection:'row', width:'49vmax', justifyContent:'center',  alignItems:'center'}}>
+            <span style={spanStyle} onClick={handleScroll}>About Us</span>
+             <span style={spanStyle}><a href='/allblogs' style={{textDecoration:'none', color:'black'}}>Blogs</a></span>
+              <span style={spanStyle}><a href="https://wa.me/919971488477" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'black'}}>
+  Contact Us
+</a></span>
+          </div>
         <div className="rightSide">
           <div className="hamburger-container" onClick={toggleMenu}>
             {isMenuOpen ? (

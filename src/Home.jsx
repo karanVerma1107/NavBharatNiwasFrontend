@@ -16,7 +16,7 @@ import p3 from './pox3.webp';
 import p4 from './pox4.webp';
 import app from './app.png';
 import Searching from './Searching';
-import cvpic from './coverpic.webp'
+import cvpic from './introvideo.mp4'
 import cloud from './cloud3.png'
 import qq from './enq2.png'
 import { faqform } from './Actions/formAction';
@@ -191,46 +191,108 @@ const Home = () => {
           <p>{error}</p>
         ) : (
          
-                  <div  className="carousel-slide" style={{ backgroundColor:'white' }}>
-                    <img
-                      src={cvpic}
-                      
-                      style={{ width: '100%', height: '35vmax', opacity: '0.79' }}
-                    />
-                    <div className="carousel-caption" style={{backgroundColor:'none'}}>
-                      
-                      
-                     
-                      <p style={{fontWeight:'bolder', textShadow: '0 0 11px white', fontSize:'2vmax'}}>Exclusively by Nav Bharat Niwas</p>
-                     
-                      <div
+                  <div className="carousel-slide hover-video-wrapper" style={{ width: '100%', height: '39vmax', position: 'relative' }}>
+ <video
+    src={cvpic}
+    autoPlay
+    muted
+    loop
+    playsInline
+    className="hover-video"
     style={{
-      width: '60%',
-      height: '2px',
-      backgroundColor: 'white',
-      boxShadow: '0 0 10px white',
-      margin: '1rem auto'
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover', // Or use 'fill' if you want full stretch even if it distorts
     }}
   />
+  
+  <div className="hover-overlay" />
+  
+  <div className="carousel-caption">
+    <p className="caption-text" style={{fontSize:'1.8vmax'}}>Exclusively by Nav Bharat Niwas</p>
 
-                      <p style={{fontWeight:'bolder', textShadow: '0 0 11px white', fontSize:'2vmax'}}>Your Trust Our Commitment</p>
+    <div className="caption-line" />
 
-                      <div className="input-wrapper">
-      <input type="text" placeholder="Enter State" className="location-input"  value={stateInput}
-         onChange={handleStateChange}/>
-      <input type="text" placeholder="Enter City" className="location-input"      value={cityInput}
-            onChange={handleCityChange}/>
+    <p className="caption-text" style={{fontSize:'1.8vmax'}}>Your Trust Our Commitment</p>
+<button 
+
+  style={{ 
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    border: '0.15vmax solid rgba(255, 255, 255, 0.7)',
+    borderRadius: '0.4vmax',
+    color: 'rgba(255, 255, 255, 0.9)',
+    fontSize: '1.5vmax',
+    padding: '0.8vmax 1.5vmax',
+    cursor: 'pointer',
+    transition: 'all 0.2s ease-in-out',
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+    letterSpacing: '0.05vmax',
+    textTransform: 'uppercase',
+    backdropFilter: 'blur(0.3vmax)'
+  }}
+  onMouseOver={(e) => {
+    e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.3)';
+    e.target.style.color = 'rgba(255, 255, 255, 1)';
+    e.target.style.borderColor = 'rgba(255, 255, 255, 1)';
+  }}
+  onMouseOut={(e) => {
+    e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+    e.target.style.color = 'rgba(255, 255, 255, 0.9)';
+    e.target.style.borderColor = 'rgba(255, 255, 255, 0.7)';
+  }}
+  onClick={() => window.location.href = '#target-section'}
+>
+  View Properties
+</button>
+
+  </div>
+   <div class="custom-height-div">
+
+   <div className="form-container" style={{width:'100%', borderRadius:'none', padding:'1vmax', backdropFilter:'blur(0.3vmax)', backgroundColor:'whitesmoke', border:'0.1vmax solid rgba(255, 255, 255, 0.7)'}}>
+    <div className="form-group">
+      <label htmlFor="propertyType" style={{fontSize:"1vmax"}}>Property Type</label>
+      <input
+        type="text"
+        id="propertyType"
+        placeholder="Plot, Villa, etc."
+        style={{ fontSize: '1vmax' }}
+      />
     </div>
-                      
 
+    <div className="form-group">
+      <label htmlFor="budget" style={{fontSize:"1vmax"}}>Budget</label>
+      <select
+        id="budget"
+        style={{ fontSize: '1vmax' }}
+      >
+        <option value="">Select Budget</option>
+        <option value="10-20">10-20 Lakh</option>
+        <option value="30-40">30-40 Lakh</option>
+        <option value="3cr+">3 Crore+</option>
+      </select>
+    </div>
 
-                    </div>
-                  </div>
-               
+    <div className="form-group">
+      <label htmlFor="location" style={{fontSize:"1vmax"}}>Location</label>
+      <input
+  type="text"
+  id="location"
+  placeholder="Enter Location"
+  value={cityInput} // optional but good for controlled input
+  onChange={handleCityChange}
+  style={{ fontSize: '1vmax' }}
+/>
+    </div>
+  </div>
+   </div>
+</div>
+ 
         )}
+       
       </div>
 
 
+      
       <div className='overview'>
       {isFetching && <p>Loading...</p>}
       {fetchError && <p style={{ color: 'red' }}>{fetchError}</p>}
@@ -240,11 +302,29 @@ const Home = () => {
 
       {fetchedSites && <Siteshows sites={fetchedSites} />}
       </div>
+     
+<p
+  style={{
+    fontSize: '1.3vmax',
+    fontWeight: 600,
+    color: 'black',
+    textShadow: '0 0 8px rgba(0, 0, 0, 0.7)',
+    padding: '1.5rem',
+    lineHeight: 1.8,
+    
+    borderRadius: '1vmax',
+    maxWidth: '90%',
+    margin: '2vmax auto',
+    backdropFilter: 'blur(4px)',
+  }}
+>
+  We at NavBharat Niwas 🏡 are proud to serve you with the best and most affordable plots and homes across India 🇮🇳. Whether you're looking for residential, commercial, or investment opportunities — we’ve got you covered! ✅
+  Our properties are government-verified, legally clear, and delivered with trust and transparency 🤝.
+  Join hands with one of the top builders in India and take a confident step toward your dream home today! 🌟
+</p>
 
-      <p className="overview-intro">
-    We are proud to serve across multiple states with a trusted clientele and a passionate team. <br />
-    With years of experience in real estate, we deliver value and trust.
-  </p>
+
+    
 
 <div className='overview1'>
 
@@ -362,6 +442,7 @@ const Home = () => {
 
       <div
         className="ongoing"
+        id="target-section"
         style={{
           margin: '1vmax 0vmax',
           width: '100%',
@@ -382,7 +463,7 @@ const Home = () => {
     
 
    
-      <div className="about-us-container">
+      <div className="about-us-container" id="about-section">
         <div className="about-us-content">
           <h4 className="about-us-title">About Us</h4>
           <p className="about-us-description">
