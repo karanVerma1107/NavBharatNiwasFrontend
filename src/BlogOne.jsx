@@ -66,34 +66,84 @@ const styles = {
 
 const BlogOne = () => {
   const dispatch = useDispatch();
-  const { id } = useParams();
+  const { permalink } = useParams();
   const { processing, entry, problem } = useSelector((state) => state.getblog);
 
   useEffect(() => {
-    dispatch(getBlogById(id));
-  }, [dispatch, id]);
+    dispatch(getBlogById(permalink));
+  }, [dispatch, permalink]);
+
+  const addAlignmentToParagraphs = (htmlContent) => {
+    return htmlContent.replace(/<p>/g, '<p style="text-align: left;">');
+  };
 
   return (
-    <div style={styles.container}>
+    <div
+      style={{
+        maxWidth: '70vmax',
+        margin: '5vmax auto',
+        display: 'flex',
+        alignItems: 'flex-start',
+        flexDirection: 'column',
+        padding: '3vmax',
+        backgroundColor: '#f8f9fa',
+        borderRadius: '1.5vmax',
+        boxShadow: '0 0.5vmax 1.5vmax rgba(0,0,0,0.08)',
+        fontFamily: 'Segoe UI, sans-serif',
+        textAlign: 'left',
+      }}
+    >
       {processing ? (
-        <p style={styles.loadingText}>⏳ Loading...</p>
+        <p style={{ fontSize: '1.8vmax', textAlign: 'center', color: '#555' }}>⏳ Loading...</p>
       ) : problem ? (
-        <p style={styles.errorText}>⚠️ {problem}</p>
+        <p style={{ fontSize: '1.8vmax', color: 'red', textAlign: 'center' }}>⚠️ {problem}</p>
       ) : entry ? (
         <>
-          <h2 style={styles.heading}>{entry.heading}</h2>
+          <h2
+            style={{
+              fontSize: '2.6vmax',
+              marginBottom: '2vmax',
+              color: '#222',
+              borderBottom: '0.3vmax solid #ddd',
+              paddingBottom: '1vmax',
+            }}
+          >
+            {entry.heading}
+          </h2>
+
           {entry.block?.map((item, index) => (
-            <div key={index} style={styles.block}>
-              {item.pic && (
-                <img
-                  src={item.pic}
-                  alt={`block-img-${index}`}
-                  style={styles.image}
-                />
-              )}
+            <div
+              key={index}
+              style={{
+                marginBottom: '4vmax',
+                padding: '2vmax',
+                backgroundColor: '#ffffff',
+                borderRadius: '1.2vmax',
+                boxShadow: '0 0.4vmax 1.2vmax rgba(0,0,0,0.05)',
+                textAlign: 'left',
+              }}
+            >
+              <img
+                src={item.pic}
+                alt={`block-img-${index}`}
+                style={{
+                  width: '100%',
+                  borderRadius: '1vmax',
+                  marginBottom: '2vmax',
+                  objectFit: 'cover',
+                  boxShadow: '0 0.3vmax 0.8vmax rgba(0,0,0,0.04)',
+                }}
+              />
+
               <div
-                style={styles.content}
-                dangerouslySetInnerHTML={{ __html: item.content }}
+                style={{
+                  fontSize: '1.4vmax',
+                  lineHeight: '2.4vmax',
+                  color: '#333',
+                }}
+                dangerouslySetInnerHTML={{
+                  __html: addAlignmentToParagraphs(item.content),
+                }}
               />
             </div>
           ))}

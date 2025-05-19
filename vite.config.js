@@ -9,7 +9,7 @@ export default defineConfig({
     host: '0.0.0.0',
     proxy:{
       '/api':{
-        target: '',
+        target: 'https://navbharatniwas.in:3008',
         changeOrigin: true,
         rewrite: (path)=>path.replace(/^\/api/,'/api')
       }
