@@ -67,6 +67,7 @@ export const getBlogsByPermalink = (permalink) => async (dispatch) => {
 export const getBlogById = (permalink) => async (dispatch) => {
     try {
       dispatch({ type: GET_BLOG_REQ });
+      console.log("permalink", permalink);
   
       const { data } = await axiosInstance.get(`/api/v1/blog/${permalink}`);
   
