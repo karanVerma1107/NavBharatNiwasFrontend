@@ -22,6 +22,7 @@ import AllotmentIndiLetter from './AllotmentIndiLetter';
 import PdfAllot from './PdfAllot';
 import AllBlogs from './AllBlogs';
 import BlogOne from './BlogOne';
+import EditBlog from './EditBlog';
 import PP from './PP';
 
 
@@ -87,7 +88,8 @@ function App() {
           <Route path='/Allotment/:id' element={<AllotMentLetter />} />
           <Route path='Allotment/allot-pdf/:id' element={<PdfAllot />} />
           <Route path='/allblogs' element={<AllBlogs/>}/>
-          <Route path='/blog/:id' element={<BlogOne/>}/>
+          <Route path='/blog/:permalink' element={<BlogOne/>}/>
+          <Route path='/editblog' element={<EditBlog/>}/>
           <Route path='/T' element={<T />} />
           <Route path='/PP' element={<PP />} />
         </Routes>

@@ -1,0 +1,50 @@
+/* Container for the editor */
+.ProseMirror {
+  min-height: 200px;
+  padding: 1rem;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #333;
+  background-color: #fff;
+  outline: none;
+  transition: border-color 0.3s ease;
+  overflow-y: auto;
+  max-height: 400px; /* Optional max height with scroll */
+  box-sizing: border-box;
+}
+
+/* Focus state */
+.ProseMirror:focus {
+  border-color: #6b46c1; /* nice purple focus */
+  box-shadow: 0 0 5px rgba(107, 70, 193, 0.5);
+}
+
+/* Styling for links */
+.ProseMirror a {
+  color: #3182ce;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.ProseMirror a:hover {
+  color: #2c5282;
+  text-decoration: none;
+}
+
+/* Text color and style extensions */
+.ProseMirror [style*="color"] {
+  font-weight: 600;
+}
+
+/* Placeholder styling (if you add placeholder in Tiptap config) */
+.ProseMirror p.is-empty::before {
+  content: attr(data-placeholder);
+  color: #999;
+  float: left;
+  height: 0;
+  pointer-events: none;
+  user-select: none;
+}

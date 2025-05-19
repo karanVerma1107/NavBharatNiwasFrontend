@@ -65,3 +65,6 @@ export const GET_ALL_BLOGS_FAIL = 'GET_ALL_BLOGS_FAIL';       // Failed to fetch
 
 
 
+export const GET_BLOG_BY_PERMALINK_REQ = 'GET_BLOG_BY_PERMALINK_REQ';       // Request initiated
+export const GET_BLOG_BY_PERMALINK_SUCCESS = 'GET_BLOG_BY_PERMALINK_SUCCESS'; // Successfully fetched blog by permalink
+export const GET_BLOG_BY_PERMALINK_FAIL = 'GET_BLOG_BY_PERMALINK_FAIL';     // Failed to fetch blog by permalink
