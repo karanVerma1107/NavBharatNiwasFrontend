@@ -1,16 +1,34 @@
 /* showSiteStatus.css */
 
-/* Main Grid Container */
 .sites-grid-container {
   display: grid;
-  width: 100%;  
-  height: auto;
-  grid-template-columns: repeat(auto-fill, 24vmax);
+  grid-auto-flow: column; /* Arrange items in columns (horizontal) */
+  grid-auto-columns: 24vmax; /* Set column width same as original card width */
+  overflow-x: auto; /* Enable horizontal scrolling */
   gap: 2vmax;
   padding: 2vmax;
-  justify-content: center;
-  background-color: #f8f9fa;
-  
+  scroll-behavior: smooth; /* Smooth scrolling */
+  -webkit-overflow-scrolling: touch; /* Better scroll on mobile */
+  scrollbar-width: none; /* Hide scrollbar Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar IE/Edge */
+}
+
+/* Hide scrollbar for Chrome/Safari */
+.sites-grid-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Optional: Add space at the end for better scrolling */
+.sites-grid-container::after {
+  content: '';
+  padding-right: 2vmax;
+}
+
+/* Keep existing media queries, adjust as needed */
+@media screen and (max-width: 768px) {
+  .sites-grid-container {
+    grid-auto-columns: 70vw; /* Wider cards on mobile */
+  }
 }
 
 /* Site Card Container */
@@ -21,6 +39,8 @@
   border-radius: 1vmax;
   overflow: hidden;
   box-shadow: 0 0.4vmax 1.2vmax rgba(0, 0, 0, 0.08);
+  
+  scroll-snap-align: start; /* Optional for better scroll snapping */
   display: flex;
   flex-direction: column;
 }
