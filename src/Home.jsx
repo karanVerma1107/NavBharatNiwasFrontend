@@ -251,9 +251,9 @@ const Home = () => {
   </div>
    <div class="custom-height-div">
 
-   <div className="form-container" style={{width:'100%', borderRadius:'none', padding:'1vmax', backdropFilter:'blur(0.3vmax)', backgroundColor:'whitesmoke', border:'0.1vmax solid rgba(255, 255, 255, 0.7)'}}>
-    <div className="form-group">
-      <label htmlFor="propertyType" style={{fontSize:"1vmax"}}>Property Type</label>
+   <div className="form-container1" style={{width:'100%', borderRadius:'none', padding:'1vmax', backdropFilter:'blur(0.3vmax)', backgroundColor:'whitesmoke', border:'0.1vmax solid rgba(255, 255, 255, 0.7)'}}>
+    <div className="form-group1">
+      <label htmlFor="propertyType" style={{fontSize:"1vmax", color:"green" }}>Property Type</label>
       <input
         type="text"
         id="propertyType"
@@ -262,8 +262,8 @@ const Home = () => {
       />
     </div>
 
-    <div className="form-group">
-      <label htmlFor="budget" style={{fontSize:"1vmax"}}>Budget</label>
+    <div className="form-group1">
+      <label htmlFor="budget" style={{fontSize:"1vmax", color:"green" }}>Budget</label>
       <select
         id="budget"
         style={{ fontSize: '1vmax' }}
@@ -275,8 +275,8 @@ const Home = () => {
       </select>
     </div>
 
-    <div className="form-group">
-      <label htmlFor="location" style={{fontSize:"1vmax"}}>Location</label>
+    <div className="form-group1">
+      <label htmlFor="location" style={{fontSize:"1vmax", color:"green" }}>Location</label>
       <input
   type="text"
   id="location"

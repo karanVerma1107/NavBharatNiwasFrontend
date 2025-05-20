@@ -166,7 +166,7 @@
 
 
 
-.form-container {
+.form-container1 {
   width: 100%;
   margin: 1vmax auto;
   height: 7vmax;
@@ -177,7 +177,7 @@
   justify-content: center;
 }
 
-.form-group {
+.form-group1 {
   flex: 1;
   max-width: 25vmax;
   display: flex;

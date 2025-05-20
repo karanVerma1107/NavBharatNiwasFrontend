@@ -104,12 +104,12 @@ const [charges, setCharges] = useState(null);
     };
 
     return (
-        <div className="lucky-draw-form">
+        <div className="lucky-draw-form" style={{display:'flex', flexDirection:'column'}} >
             <h1 className="form-heading">
                 Lucky Draw Form {permit && <h2>{permit.formName}</h2>}
             </h1>
 
-            <form onSubmit={handleSubmit} className="form-container">
+            <form onSubmit={handleSubmit} className="form-container" style={{display:'flex', flexDirection:'column'}}>
                 <div className="form-group">
                     <label htmlFor="name" className="label">Name</label>
                     <input

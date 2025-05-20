@@ -1,88 +1,177 @@
-/* General form container styles */
+/* luckydrawform.css */
 .lucky-draw-form {
-    width:40vmax;  /* Increased the width of the form */
-    margin: 2vmax auto;
-    padding: 1vmax;
-    background-color: #c6cbd2;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    color: white;
-    font-family: Arial, sans-serif;
+   background: linear-gradient(135deg, rgba(160, 198, 251, 0.8) 0%, rgba(229, 238, 249, 0.8) 100%);
+
+    min-height: auto;
+    padding: 4vmax;
+width: 40vmax;
+margin: 1.1vmax auto;
+border-radius: 5vmax;
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .form-heading {
     text-align: center;
-    font-size: 1.75vmax; /* Main heading font size */
-    margin-bottom: 1vmax;
-    color: #090909;
+    font-size: 3vmax;
+    color: #313036;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+    margin-bottom: 3vmax;
 }
 
-/* Form label */
+.form-container {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    padding: 4vmax;
+    border-radius: 1.5vmax;
+    box-shadow: 0 0 2vmax rgba(214, 175, 55, 0.15);
+    width: 40vmax;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+}
+
+.form-group {
+    margin-bottom: 2vmax;
+    position: relative;
+}
+
 .label {
-    font-size: 1.4vmax;
-    margin-bottom: 0.5vmax;
     display: block;
-    color: #0d0d0d;
+    font-size: 1.5vmax;
+    margin-bottom: 1vmax;
+    color: #0a1f3d;
+    font-weight: 600;
 }
 
-/* Form input fields */
 .input-field {
-    width: 100%;  /* Keeps the input fields at 100% of the form's width */
-    padding: 0.8rem;
-    margin-bottom: 1vmax;
-    border: 1px solid #4a5c73;
-    border-radius: 5px;
-    background-color: #3d4f69;
-    color: rgb(9, 9, 9);
-    font-size: 1.25vmax;
+    width: 100%;
+    padding: 1.5vmax;
+    border: 1px solid #d4af37;
+    border-radius: 0.8vmax;
+    font-size: 1.4vmax;
+    background: #fff;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .input-field:focus {
-    border-color: #2e3c52;
     outline: none;
+    border-color: #0a1f3d;
+    box-shadow: 0 0 0.8vmax rgba(12, 35, 64, 0.3);
 }
 
-/* Submit Button */
-.submit-btn {
+.site-suggestions {
+    position: absolute;
     width: 100%;
-    padding: 1rem;
-    background-color: #2e3c52;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.3vmax;
+    max-height: 40vmax;
+    overflow-y: auto;
+    background: #ffffff;
+    z-index: 1000;
+    border-radius: 0.6vmax;
+    box-shadow: 0 0.5vmax 1vmax rgba(0, 0, 0, 0.1);
+}
+
+.site-item {
+    padding: 1.2vmax;
     cursor: pointer;
-    transition: background-color 0.3s;
+    color: #0a1f3d;
+    font-size: 1.3vmax;
+    transition: background 0.2s ease;
+}
+
+.site-item:hover {
+    background: #d4af37;
+    color: #ffffff;
+}
+
+.submit-btn {
+    background: #0a1f3d;
+    color: #ffffff;
+    padding: 1.5vmax 4vmax;
+    border: none;
+    border-radius: 0.6vmax;
+    font-size: 1.6vmax;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.1vmax;
+    margin-top: 2vmax;
 }
 
 .submit-btn:hover {
-    background-color: #1f2b3a;
+    background: #d4af37;
+    color: #0a1f3d;
+    transform: translateY(-2px);
+    box-shadow: 0 0.8vmax 2vmax rgba(0, 0, 0, 0.2);
 }
 
-/* Form Group container */
-.form-group {
-    margin-bottom: 1.5rem;
+.image-preview {
+    margin: 2vmax 0;
+    border: 2px solid #d4af37;
+    border-radius: 1vmax;
+    padding: 1vmax;
+    background: #ffffff;
 }
 
-/* Form actions (submit button container) */
-.form-actions {
-    text-align: center;
-}
-
-/* Error or Loading Message */
-.form-status {
-    text-align: center;
-    color: #e74c3c;
-    font-size: 1.25vmax;
-    margin-top: 1rem;
-}
-
-.form-status.success {
-    color: #2ecc71;
-}
-
-/* Modal Image styling (optional) */
-.modal-image {
+.image-preview-img {
+    display: block;
+    border-radius: 0.8vmax;
     max-width: 100%;
-    height: auto;
+    box-shadow: 0 0 1vmax rgba(0, 0, 0, 0.1);
+}
+
+/* Modal Overlay */
+.image-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(10, 31, 61, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .form-container {
+        width: 90%;
+        padding: 3vmax;
+    }
+
+    .label,
+    .input-field,
+    .submit-btn {
+        font-size: 2vmax;
+    }
+
+    .submit-btn {
+        padding: 2vmax 5vmax;
+    }
+}
+
+.form-actions {
+    display: flex;
+    justify-content: center;
+}
+
+/* Custom Scrollbar */
+.site-suggestions {
+    scrollbar-width: thin;
+    scrollbar-color: #d4af37 #f1f1f1;
+}
+
+.site-suggestions::-webkit-scrollbar {
+    width: 0.8vmax;
+}
+
+.site-suggestions::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.site-suggestions::-webkit-scrollbar-thumb {
+    background-color: #d4af37;
+    border-radius: 0.4vmax;
 }
