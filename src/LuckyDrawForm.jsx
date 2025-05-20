@@ -18,11 +18,13 @@ const LuckyDrawForm = () => {
         occupation: '',
         fatherName: '',
         AdhaarNo: '',
+        Executive:'',
         PANno: '',
+        adhaarPhoto2: null, // New field for Adhaar Photo 2
         DOB: '',               // New field for Date of Birth
         nationality: '',       // New field for nationality
         project: '',           // New field for project
-        paymentPlan: 'Down Payment Plan', // New field for Payment Plan
+        paymentPlan: '', // New field for Payment Plan
         plotSize: '125 SQY - 150 SQY', // Modified Plot Size
         preference: 'Corner', // Modified Preference
         image: null,
@@ -36,6 +38,7 @@ const LuckyDrawForm = () => {
 const [charges, setCharges] = useState(null);
     const [modalImage, setModalImage] = useState(null);
     const [adhaarPreview, setAdhaarPreview] = useState(null);
+     const [adhaarPreview2, setAdhaarPreview2] = useState(null);
     const [panPreview, setPanPreview] = useState(null);
     const [imagePreview, setImagePreview] = useState(null);
 
@@ -82,6 +85,28 @@ const [charges, setCharges] = useState(null);
         }
     };
 
+
+    const allPaymentPlans = [
+  "Down Payment Plan",
+  "Possession Link Payment Plan",
+  "Flexi Payment Plan",
+  "Self Funding Plan",
+  "Loan Payment Plan"
+];
+
+// Inside your component state
+const [currentPlans, setCurrentPlans] = useState(['']);
+
+
+const handlePaymentPlan = (plan) => {
+    console.log("Current Plans:", currentPlans);
+  if (!Array.isArray(currentPlans)) return "hidden1-option";
+  return currentPlans.includes(plan) ? "show-option" : "hidden1-option";
+};
+
+
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(createDraw(formData));
@@ -97,10 +122,14 @@ const [charges, setCharges] = useState(null);
         }
     };
 
-    const handleSiteClick = (siteName, charges) => {
+
+    const handleSiteClick = (siteName, charges, plan) => {
+         console.log("Received Payment Plan:", plan); // 👈 Check this
         setFormData({ ...formData, project: siteName });
         setSearchQuery('');
         setCharges(charges);
+        setCurrentPlans(plan);
+
     };
 
     return (
@@ -228,6 +257,19 @@ const [charges, setCharges] = useState(null);
                     />
                 </div>
 
+                 <div className="form-group">
+                    <label htmlFor="Executive" className="label">Executive</label>
+                    <input
+                        type="text"
+                        id="Executive"
+                        name="Executive"
+                        value={formData.Executive}
+                        onChange={handleChange}
+                        className="input-field"
+                        required
+                    />
+                </div>
+
                 <div className="form-group">
                     <label htmlFor="project" className="label">Project</label>
                     <input
@@ -245,7 +287,7 @@ const [charges, setCharges] = useState(null);
                                 <div
                                     key={index}
                                     className="site-item"
-                                    onClick={() => handleSiteClick(site.name , site.charges)}
+                                    onClick={() => handleSiteClick(site.name , site.charges, site.PaymentPlan)}
                                     style={{ color: 'black', cursor: 'pointer' }}
                                 >
                                     {site.name}
@@ -267,9 +309,15 @@ const [charges, setCharges] = useState(null);
                         required
                         style={{ backgroundColor: 'white' }}
                     >
-                        <option value="Down Payment Plan">Down Payment Plan</option>
-                        <option value="Possession Link Payment Plan">Possession Link Payment Plan</option>
-                        <option value="Flexi Payment Plan">Flexi Payment Plan</option>
+ {allPaymentPlans.map((plan, idx) => (
+      <option
+        key={idx}
+        value={plan}
+        className={handlePaymentPlan(plan)}
+      >
+        {plan}
+      </option>
+    ))}
                     </select>
                 </div>
 
@@ -317,6 +365,17 @@ const [charges, setCharges] = useState(null);
                         type="file"
                         id="adhaarPhoto"
                         name="adhaarPhoto"
+                        onChange={handleFileChange}
+                        className="input-field"
+                    />
+                </div>
+
+                 <div className="form-group">
+                    <label htmlFor="adhaarPhoto2" className="label">Adhaar Photo 2</label>
+                    <input
+                        type="file"
+                        id="adhaarPhoto2"
+                        name="adhaarPhoto2"
                         onChange={handleFileChange}
                         className="input-field"
                     />

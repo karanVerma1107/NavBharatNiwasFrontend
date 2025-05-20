@@ -8,7 +8,7 @@ import Loading from './Loading'
 import UserShow from './userShow'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom' // Importing Link for navigation
-
+import blck from './blcklogo.png'
 
 const Header = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -64,7 +64,7 @@ const handleScroll = () => {
     <>
       <div className="header">
         <div className="logo" >
-          <img src={pic} alt="Logo" className="logo-img" style={{ height: '5.7vmax', width: '16vmax' , marginTop: '6.8vmax'}} />
+          <img src={blck} alt="Logo" className="logo-img" style={{ height: '5.7vmax', width: '16vmax' , marginTop: '6.8vmax'}} />
         </div>
           <div style={{display:'flex', flexDirection:'row', width:'49vmax', justifyContent:'center',  alignItems:'center'}}>
             <span style={spanStyle} onClick={handleScroll}>About Us</span>

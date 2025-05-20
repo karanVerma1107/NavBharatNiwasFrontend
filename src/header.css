@@ -10,7 +10,7 @@
     right: 0;
     border-bottom: 1.5px solid black;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Denser and gray box shadow */
-    background-color: white; /* Ensure the header has a background color */
+    background-color: hsl(159, 91%, 87%); /* Ensure the header has a background color */
     z-index: 1000; /* Ensure the header is above other content */
 }
 

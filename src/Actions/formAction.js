@@ -664,11 +664,16 @@ export const createDraw = (formData) => async (dispatch) => {
         form.append('paymentPlan', formData.paymentPlan); // Added paymentPlan field
         // Add the new fields for plot size and preference
         form.append('plotSize', formData.plotSize); // Added plotSize field
-        form.append('preference', formData.preference); // Added preference field
+        form.append('preference', formData.preference); 
+        form.append('Executive', formData.Executive); // Added Executive field
 
         // Append the images (Aadhaar and PAN photos) if they exist
         if (formData.adhaarPhoto) {
             form.append('adhaarPhoto', formData.adhaarPhoto); // Append the Adhaar photo
+        }
+
+        if (formData.adhaarPhoto2) {
+            form.append('adhaarPhoto2', formData.adhaarPhoto2); // Append the Adhaar photo
         }
 
         if (formData.panPhoto) {
@@ -727,6 +732,7 @@ export const createCompanyFill = (formData) => async (dispatch) => {
         form.append('authorizedSignatory', formData.authorizedSignatory);
         form.append('gstNumber', formData.gstNumber);
         form.append('panNumber', formData.panNumber);
+        form.append('Executive', formData.Executive); // Added Executive field
         form.append('companyAddress', formData.companyAddress);
         form.append('authorizedSignatoryAddress', formData.authorizedSignatoryAddress);
         form.append('paymentPlan', formData.paymentPlan);

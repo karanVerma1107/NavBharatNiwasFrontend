@@ -207,10 +207,15 @@ export const addSite = (siteData) => async (dispatch) => {
         formData.append('state', siteData.state);
         formData.append('city', siteData.city);
         formData.append('unit', siteData.unit);
-
+        
         // Append each image to the FormData object
         siteData.images.forEach((image) => {
             formData.append('images', image); // Use 'images' as the field name
+        });
+
+        // Append each payment plan string
+        siteData.PaymentPlan.forEach((plan, index) => {
+            formData.append(`PaymentPlan[${index}]`, plan);
         });
 
         // Log FormData entries

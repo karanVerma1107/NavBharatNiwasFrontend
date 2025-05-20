@@ -15,10 +15,11 @@ const CompanyFillForm = () => {
         companyName: '',
         authorizedSignatory: '',
         gstNumber: '',
+        Executive:'',
         panNumber: '',
         companyAddress: '',
         authorizedSignatoryAddress: '',
-        paymentPlan: 'Down Payment Plan',
+        paymentPlan: '',
         plotSize: '125 SQY - 150 SQY', // Modified Plot Size
         preference: 'Corner', // Modified Preference
         panPhoto: null,
@@ -57,6 +58,27 @@ const CompanyFillForm = () => {
         }
     };
 
+
+ const allPaymentPlans = [
+  "Down Payment Plan",
+  "Possession Link Payment Plan",
+  "Flexi Payment Plan",
+  "Self Funding Plan",
+  "Loan Payment Plan"
+];
+
+// Inside your component state
+const [currentPlans, setCurrentPlans] = useState(['']);
+
+
+const handlePaymentPlan = (plan) => {
+    console.log("Current Plans:", currentPlans);
+  if (!Array.isArray(currentPlans)) return "hidden1-option";
+  return currentPlans.includes(plan) ? "show-option" : "hidden1-option";
+};
+
+
+
     // Handle project change for site suggestions
     const handleProjectChange = (e) => {
         const { value } = e.target;
@@ -68,10 +90,11 @@ const CompanyFillForm = () => {
         }
     };
 
-    const handleSiteClick = (siteName, charges) => {
+    const handleSiteClick = (siteName, charges, plan) => {
         setFormData({ ...formData, project: siteName });
         setSearchQuery('');
         setCharges(charges);
+        setCurrentPlans(plan);
     };
 
     // Handle form submission
@@ -182,6 +205,19 @@ const CompanyFillForm = () => {
                     />
                 </div>
 
+                 <div className="form-group">
+                    <label htmlFor="Executive" className="label">Executive</label>
+                    <input
+                        type="text"
+                        id="Executive"
+                        name="Executive"
+                        value={formData.Executive}
+                        onChange={handleChange}
+                        className="input-field"
+                        required
+                    />
+                </div>
+
                 {/* Project */}
                 <div className="form-group">
                     <label htmlFor="project" className="label">Project</label>
@@ -200,7 +236,7 @@ const CompanyFillForm = () => {
                                 <div
                                     key={index}
                                     className="site-item"
-                                    onClick={() => handleSiteClick(site.name, site.charges)}
+                                    onClick={() => handleSiteClick(site.name, site.charges, site.PaymentPlan)}
                                     style={{ color: 'black', cursor: 'pointer' }}
                                 >
                                     {site.name}
@@ -222,9 +258,15 @@ const CompanyFillForm = () => {
                         required
                         style={{ backgroundColor: 'white' }}
                     >
-                        <option value="Down Payment Plan">Down Payment Plan</option>
-                        <option value="Possession Link Payment Plan">Possession Link Payment Plan</option>
-                        <option value="Flexi Payment Plan">Flexi Payment Plan</option>
+                       {allPaymentPlans.map((plan, idx) => (
+      <option
+        key={idx}
+        value={plan}
+        className={handlePaymentPlan(plan)}
+      >
+        {plan}
+      </option>
+    ))}
                     </select>
                 </div>
 

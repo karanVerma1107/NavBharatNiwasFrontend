@@ -11,6 +11,11 @@ border-radius: 5vmax;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.hidden1-option {
+  display: none;
+}
+
+
 .form-heading {
     text-align: center;
     font-size: 3vmax;
