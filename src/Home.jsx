@@ -196,6 +196,7 @@ const Home = () => {
     src={cvpic}
     autoPlay
     muted
+    preload='auto'
     loop
     playsInline
     className="hover-video"
