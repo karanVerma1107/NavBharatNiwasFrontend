@@ -24,6 +24,7 @@ import LuckyDrawForm from './LuckyDrawForm';
 import CompanyFillForm from './CompanyFillForm'; // Import the CompanyFillForm
 import Siteshows from './Siteshows';
 import { useNavigate } from 'react-router-dom';
+import jojo from './jojo.jpg'
 
 
 
@@ -199,6 +200,7 @@ const Home = () => {
     preload='auto'
     loop
     playsInline
+    poster={jojo}
     className="hover-video"
     style={{
       width: '100%',
