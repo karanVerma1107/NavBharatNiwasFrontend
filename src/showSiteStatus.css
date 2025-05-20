@@ -18,18 +18,8 @@
   display: none;
 }
 
-/* Optional: Add space at the end for better scrolling */
-.sites-grid-container::after {
-  content: '';
-  padding-right: 2vmax;
-}
 
-/* Keep existing media queries, adjust as needed */
-@media screen and (max-width: 768px) {
-  .sites-grid-container {
-    grid-auto-columns: 70vw; /* Wider cards on mobile */
-  }
-}
+
 
 /* Site Card Container */
 .site-card {
